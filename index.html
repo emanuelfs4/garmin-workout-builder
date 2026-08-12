@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Garmin Workout Builder | Advanced Workout Creator</title>
+  <link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans:500,600,700,800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-app: #0f172a;
+      --bg-card: #1e293b;
+      --bg-input: #0f172a;
+      --border-color: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #06b6d4;
+      --accent-hover: #0891b2;
+      --accent-light: rgba(6, 182, 212, 0.1);
+      --danger: #f43f5e;
+      --danger-hover: #e11d48;
+    }
+
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      background: var(--bg-app); 
+      color: var(--text-main); 
+      margin: 0; 
+      padding: 30px 20px; 
+    }
+
+    .container { 
+      max-width: 960px; 
+      margin: 0 auto; 
+      background: var(--bg-card); 
+      border-radius: 24px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5); 
+      border: 1px solid var(--border-color);
+      padding: 36px 32px;
+    }
+
+    h1 { 
+      color: var(--text-main); 
+      text-align: center; 
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-top: 0;
+      margin-bottom: 24px;
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2, h3 { color: var(--text-main); font-weight: 700; }
+
+    .sport-tabs { 
+      display: flex; 
+      gap: 10px; 
+      margin-bottom: 28px; 
+      justify-content: center; 
+      border-bottom: 1px solid var(--border-color); 
+      padding-bottom: 16px; 
+    }
+
+    .sport-tab { 
+      padding: 12px 24px; 
+      border-radius: 12px; 
+      border: 1px solid var(--border-color); 
+      background: var(--bg-input); 
+      color: var(--text-muted);
+      cursor: pointer; 
+      font-weight: 600; 
+      font-size: 1em; 
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+
+    .sport-tab:hover {
+      border-color: var(--accent);
+      color: var(--text-main);
+    }
+
+    .sport-tab.active { 
+      background: var(--accent-light); 
+      border-color: var(--accent); 
+      color: var(--accent); 
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+    }
+
+    .form-group { margin-bottom: 18px; }
+    
+    label { 
+      display: block; 
+      font-weight: 600; 
+      margin-bottom: 6px; 
+      color: var(--text-muted); 
+      font-size: 0.85em; 
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input, select { 
+      width: 100%; 
+      padding: 12px 16px; 
+      border: 1px solid var(--border-color); 
+      border-radius: 12px; 
+      background: var(--bg-input); 
+      color: var(--text-main);
+      box-sizing: border-box; 
+      font-size: 0.95em; 
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, select:focus { 
+      border-color: var(--accent); 
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+      outline: none; 
+    }
+    
+    .step-builder-section { 
+      background: rgba(15, 23, 42, 0.6); 
+      border: 1px solid var(--border-color); 
+      padding: 20px; 
+      border-radius: 16px; 
+      margin-bottom: 16px; 
+      position: relative; 
+      transition: border-color 0.2s;
+    }
+
+    .step-builder-section:hover {
+      border-color: #475569;
+    }
+
+    .step-builder-section h4 { 
+      margin-top: 0; 
+      margin-bottom: 14px;
+      color: var(--text-main); 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      font-size: 1.05em;
+    }
+    
+    .row { display: flex; gap: 12px; }
+    .row > div { flex: 1; }
+
+    .modern-btn { 
+      background: var(--accent); 
+      color: #0f172a; 
+      font-weight: 700; 
+      font-size: 1em; 
+      border: 0; 
+      border-radius: 12px;
+      padding: 12px 20px; 
+      cursor: pointer; 
+      transition: all 0.2s; 
+    }
+
+    .modern-btn:hover { 
+      background: var(--accent-hover); 
+      transform: translateY(-1px);
+    }
+    
+    .btn-row { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 8px; 
+      margin-top: 14px; 
+    }
+
+    .btn-small { 
+      padding: 8px 14px !important; 
+      font-size: 0.85em !important; 
+      border-radius: 10px !important;
+      margin: 0 !important;
+    }
+
+    .btn-icon-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    
+    .btn-danger { 
+      background: rgba(244, 63, 94, 0.15); 
+      color: var(--danger); 
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+    
+    .btn-danger:hover { 
+      background: var(--danger); 
+      color: #fff; 
+    }
+
+    .btn-secondary { 
+      background: #334155; 
+      color: var(--text-main); 
+    }
+    
+    .btn-secondary:hover { 
+      background: #475569; 
+    }
+
+    .steps-preview { 
+      margin: 24px 0 16px; 
+      background: rgba(6, 182, 212, 0.05); 
+      border-radius: 16px; 
+      padding: 16px 20px; 
+      border: 1px solid rgba(6, 182, 212, 0.2); 
+    }
+
+    pre { 
+      background: #090d16; 
+      color: #38bdf8; 
+      padding: 20px; 
+      border-radius: 14px; 
+      overflow-x: auto; 
+      max-height: 400px; 
+      border: 1px solid var(--border-color);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9em;
+    }
+
+    hr { border: 0; border-top: 1px solid var(--border-color); margin: 24px 0; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Garmin Workout Builder</h1>
+  
+  <div class="sport-tabs">
+    <button type="button" class="sport-tab active" onclick="switchSport('running')">🏃 Running</button>
+    <button type="button" class="sport-tab" onclick="switchSport('cycling')">🚴 Cycling</button>
+    <button type="button" class="sport-tab" onclick="switchSport('swimming')">🏊 Swimming</button>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label for="workoutName">Workout Name</label>
+      <input type="text" id="workoutName" value="Threshold Intervals">
+    </div>
+    <div class="form-group">
+      <label for="workoutDesc">Description</label>
+      <input type="text" id="workoutDesc" value="Created with Garmin Workout Builder">
+    </div>
+  </div>
+
+  <div id="sportSpecificConfig" class="form-group"></div>
+
+  <hr>
+
+  <h3>Workout Structure</h3>
+  <div id="stepsContainer"></div>
+
+  <div class="btn-row">
+    <button type="button" class="modern-btn btn-secondary btn-small" onclick="addStepBlock('warmup')">+ Warmup</button>
+    <button type="button" class="modern-btn btn-secondary btn-small" onclick="addStepBlock('interval')">+ Interval</button>
+    <button type="button" class="modern-btn btn-secondary btn-small" onclick="addStepBlock('recovery')">+ Recovery</button>
+    <button type="button" class="modern-btn btn-secondary btn-small" onclick="addStepBlock('repeat')">+ Repeat Loop</button>
+    <button type="button" class="modern-btn btn-secondary btn-small" onclick="addStepBlock('cooldown')">+ Cooldown</button>
+  </div>
+
+  <br>
+  <button type="button" class="modern-btn" id="generateBtn" style="width: 100%; padding: 14px; font-size: 1.05em; letter-spacing: 0.02em;">Generate Garmin JSON</button>
+
+  <div class="steps-preview" id="stepsPreview" style="display:none"></div>
+  
+  <h2 style="margin-top: 32px; font-size: 1.25rem;">Generated Code Output</h2>
+  <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+    <button type="button" class="modern-btn btn-small" id="copyBtn">Copy JSON</button>
+    <button type="button" class="modern-btn btn-secondary btn-small" id="downloadBtn">Download .json</button>
+  </div>
+  <pre id="outputJson">Click 'Generate Garmin JSON' to render code layout.</pre>
+</div>
+
+<script>
+let currentSport = "running";
+let stepIdCounter = 7316001338;
+
+const SPORT_CONFIGS = {
+  running: {
+    sportObj: { sportTypeId: 1, sportTypeKey: 'running', displayOrder: 1 },
+    targets: [
+      { val: 'no target', label: 'No Target' },
+      { val: 'pace', label: 'Pace Range (min/km)' },
+      { val: 'heart rate', label: 'Heart Rate Zone' },
+      { val: 'cadence', label: 'Cadence (spm)' }
+    ]
+  },
+  cycling: {
+    sportObj: { sportTypeId: 2, sportTypeKey: 'cycling', displayOrder: 2 },
+    targets: [
+      { val: 'no target', label: 'No Target' },
+      { val: 'power', label: 'Power (Watts)' },
+      { val: 'heart rate', label: 'Heart Rate Zone' },
+      { val: 'speed', label: 'Speed (km/h)' }
+    ]
+  },
+  swimming: {
+    sportObj: { sportTypeId: 4, sportTypeKey: 'swimming', displayOrder: 5 },
+    poolLength: 25,
+    targets: [
+      { val: 'no target', label: 'No Target' },
+      { val: 'swim instruction', label: 'Swim Instruction / Stroke' }
+    ]
+  }
+};
+
+const stepTypeMap = {
+  warmup: { stepTypeId: 1, displayOrder: 1 },
+  cooldown: { stepTypeId: 2, displayOrder: 2 },
+  interval: { stepTypeId: 3, displayOrder: 3 },
+  recovery: { stepTypeId: 4, displayOrder: 4 },
+  repeat: { stepTypeId: 6, displayOrder: 6 }
+};
+
+const conditionTypeMap = {
+  lap: { conditionTypeId: 1, conditionTypeKey: "lap.button", displayOrder: 1 },
+  time: { conditionTypeId: 2, conditionTypeKey: "time", displayOrder: 2 },
+  'time (minutes)': { conditionTypeId: 2, conditionTypeKey: "time", displayOrder: 2 },
+  distance: { conditionTypeId: 3, conditionTypeKey: "distance", displayOrder: 3 },
+  iterations: { conditionTypeId: 7, conditionTypeKey: "iterations", displayOrder: 7 }
+};
+
+let stepsConfig = [
+  { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
+  { type: 'repeat', iterations: 4, steps: [
+      { type: 'interval', cond: 'time', duration: 120, target: 'pace', p1: '4:15', p2: '4:30' },
+      { type: 'recovery', cond: 'time', duration: 90, target: 'no target', p1: '', p2: '' }
+    ]
+  },
+  { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+];
+
+function switchSport(sportKey) {
+  currentSport = sportKey;
+  document.querySelectorAll('.sport-tab').forEach(tab => tab.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  
+  const specificContainer = document.getElementById('sportSpecificConfig');
+  if (sportKey === 'swimming') {
+    specificContainer.innerHTML = `
+      <div class="row">
+        <div>
+          <label for="poolLength">Pool Length (meters)</label>
+          <input type="number" id="poolLength" value="${SPORT_CONFIGS.swimming.poolLength}" onchange="SPORT_CONFIGS.swimming.poolLength = parseInt(this.value)">
+        </div>
+      </div>`;
+  } else {
+    specificContainer.innerHTML = '';
+  }
+  renderSteps();
+}
+
+function renderSteps() {
+  const container = document.getElementById('stepsContainer');
+  container.innerHTML = '';
+  stepsConfig.forEach((step, idx) => {
+    container.appendChild(createStepElement(step, idx));
+  });
+}
+
+function renderTargetOptions(selectedTarget) {
+  const targets = SPORT_CONFIGS[currentSport].targets;
+  return targets.map(t => `<option value="${t.val}" ${selectedTarget === t.val ? 'selected' : ''}>${t.label}</option>`).join('');
+}
+
+function createStepElement(step, idx) {
+  const div = document.createElement('div');
+  div.className = 'step-builder-section';
+  
+  let reorderButtons = `
+    <div class="btn-icon-group">
+      <button type="button" class="modern-btn btn-secondary btn-small" style="padding: 3px 6px !important;" ${idx === 0 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''} onclick="moveStep(${idx}, -1)" title="Move Up">▲</button>
+      <button type="button" class="modern-btn btn-secondary btn-small" style="padding: 3px 6px !important;" ${idx === stepsConfig.length - 1 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''} onclick="moveStep(${idx}, 1)" title="Move Down">▼</button>
+      <button type="button" class="modern-btn btn-danger btn-small" onclick="removeStep(${idx})">Delete</button>
+    </div>
+  `;
+
+  if (step.type === 'repeat') {
+    div.style.borderLeft = "4px solid #3b82f6";
+    let innerHtml = `
+      <h4>Repeat Loop [${idx+1}] ${reorderButtons}</h4>
+      <div class="row">
+        <div><label>Iterations</label><input type="number" value="${step.iterations}" onchange="stepsConfig[${idx}].iterations = parseInt(this.value)"></div>
+      </div>
+      <label style="margin-top:14px; margin-bottom:8px;">Sub-steps Inside Loop:</label>
+      <div style="padding-left: 12px; border-left: 2px solid var(--border-color);" id="subSteps_${idx}">
+    `;
+    
+    step.steps.forEach((subStep, subIdx) => {
+      const subDiv = document.createElement('div');
+      subDiv.style.background = "rgba(15, 23, 42, 0.4)";
+      subDiv.style.border = "1px solid var(--border-color)";
+      subDiv.style.padding = "12px";
+      subDiv.style.borderRadius = "12px";
+      subDiv.style.marginBottom = "10px";
+      subDiv.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <strong style="color:var(--accent); font-size: 0.9em; text-transform:uppercase;">${subStep.type}</strong>
+          <div class="btn-icon-group">
+            <button type="button" class="modern-btn btn-secondary btn-small" style="padding: 2px 5px !important;" ${subIdx === 0 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''} onclick="moveSubStep(${idx}, ${subIdx}, -1)">▲</button>
+            <button type="button" class="modern-btn btn-secondary btn-small" style="padding: 2px 5px !important;" ${subIdx === step.steps.length - 1 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''} onclick="moveSubStep(${idx}, ${subIdx}, 1)">▼</button>
+            <button type="button" class="modern-btn btn-danger btn-small" style="padding:4px 8px !important;" onclick="removeSubStep(${idx}, ${subIdx})">Remove</button>
+          </div>
+        </div>
+        <div class="row">
+          <div><label>Condition</label><select onchange="stepsConfig[${idx}].steps[${subIdx}].cond = this.value; renderSteps();">
+            <option value="time" ${subStep.cond==='time'?'selected':''}>Seconds</option>
+            <option value="time (minutes)" ${subStep.cond==='time (minutes)'?'selected':''}>Minutes</option>
+            <option value="distance" ${subStep.cond==='distance'?'selected':''}>Meters</option>
+            <option value="lap" ${subStep.cond==='lap'?'selected':''}>Lap Button</option>
+          </select></div>
+          ${subStep.cond !== 'lap' ? `<div><label>Value</label><input type="number" value="${subStep.duration}" onchange="stepsConfig[${idx}].steps[${subIdx}].duration = parseFloat(this.value)"></div>` : ''}
+          <div><label>Target</label><select onchange="stepsConfig[${idx}].steps[${subIdx}].target = this.value; renderSteps();">
+            ${renderTargetOptions(subStep.target)}
+          </select></div>
+        </div>
+        ${subStep.target === 'pace' ? `
+          <div class="row" style="margin-top:10px;">
+            <div><label>Fastest (min:sec)</label><input type="text" value="${subStep.p1}" placeholder="e.g. 4:00" onchange="stepsConfig[${idx}].steps[${subIdx}].p1 = this.value"></div>
+            <div><label>Slowest (min:sec)</label><input type="text" value="${subStep.p2}" placeholder="e.g. 4:30" onchange="stepsConfig[${idx}].steps[${subIdx}].p2 = this.value"></div>
+          </div>` : ''}
+        ${subStep.target === 'heart rate' || subStep.target === 'power' || subStep.target === 'cadence' || subStep.target === 'speed' ? `
+          <div class="row" style="margin-top:10px;">
+            <div><label>Min Target</label><input type="text" value="${subStep.p1}" onchange="stepsConfig[${idx}].steps[${subIdx}].p1 = this.value"></div>
+            <div><label>Max Target</label><input type="text" value="${subStep.p2}" onchange="stepsConfig[${idx}].steps[${subIdx}].p2 = this.value"></div>
+          </div>` : ''}
+      `;
+      innerHtml += subDiv.outerHTML;
+    });
+
+    innerHtml += `
+      </div>
+      <div class="btn-row" style="margin-top: 10px;">
+        <button type="button" class="modern-btn btn-secondary btn-small" onclick="addSubStep(${idx}, 'interval')">+ Interval</button>
+        <button type="button" class="modern-btn btn-secondary btn-small" onclick="addSubStep(${idx}, 'recovery')">+ Recovery</button>
+      </div>
+    `;
+    div.innerHTML = innerHtml;
+  } else {
+    div.style.borderLeft = "4px solid var(--accent)";
+    div.innerHTML = `
+      <h4>${step.type.toUpperCase()} ${reorderButtons}</h4>
+      <div class="row">
+        <div><label>Condition</label><select onchange="stepsConfig[${idx}].cond = this.value; renderSteps();">
+          <option value="time" ${step.cond==='time'?'selected':''}>Seconds</option>
+          <option value="time (minutes)" ${step.cond==='time (minutes)'?'selected':''}>Minutes</option>
+          <option value="distance" ${step.cond==='distance'?'selected':''}>Meters</option>
+          <option value="lap" ${step.cond==='lap'?'selected':''}>Lap Button</option>
+        </select></div>
+        ${step.cond !== 'lap' ? `<div><label>Value</label><input type="number" value="${step.duration}" onchange="stepsConfig[${idx}].duration = parseFloat(this.value)"></div>` : ''}
+        <div><label>Target</label><select onchange="stepsConfig[${idx}].target = this.value; renderSteps();">
+          ${renderTargetOptions(step.target)}
+        </select></div>
+      </div>
+      ${step.target === 'pace' ? `
+        <div class="row" style="margin-top:10px;">
+          <div><label>Fastest (min:sec)</label><input type="text" value="${step.p1}" placeholder="e.g. 4:00" onchange="stepsConfig[${idx}].p1 = this.value"></div>
+          <div><label>Slowest (min:sec)</label><input type="text" value="${step.p2}" placeholder="e.g. 4:30" onchange="stepsConfig[${idx}].p2 = this.value"></div>
+        </div>` : ''}
+      ${step.target === 'heart rate' || step.target === 'power' || step.target === 'cadence' || step.target === 'speed' ? `
+        <div class="row" style="margin-top:10px;">
+          <div><label>Min Target</label><input type="text" value="${step.p1}" onchange="stepsConfig[${idx}].p1 = this.value"></div>
+          <div><label>Max Target</label><input type="text" value="${step.p2}" onchange="stepsConfig[${idx}].p2 = this.value"></div>
+        </div>` : ''}
+    `;
+  }
+  return div;
+}
+
+function addStepBlock(type) {
+  const newBlock = type === 'repeat' 
+    ? { type: 'repeat', iterations: 3, steps: [{ type: 'interval', cond: 'time', duration: 60, target: 'no target', p1: '', p2: '' }] }
+    : { type: type, cond: 'time', duration: 300, target: 'no target', p1: '', p2: '' };
+  
+  stepsConfig.push(newBlock);
+  renderSteps();
+}
+
+function moveStep(idx, direction) {
+  const newIdx = idx + direction;
+  if (newIdx < 0 || newIdx >= stepsConfig.length) return;
+  const temp = stepsConfig[idx];
+  stepsConfig[idx] = stepsConfig[newIdx];
+  stepsConfig[newIdx] = temp;
+  renderSteps();
+}
+
+function moveSubStep(parentIdx, subIdx, direction) {
+  const subSteps = stepsConfig[parentIdx].steps;
+  const newIdx = subIdx + direction;
+  if (newIdx < 0 || newIdx >= subSteps.length) return;
+  const temp = subSteps[subIdx];
+  subSteps[subIdx] = subSteps[newIdx];
+  subSteps[newIdx] = temp;
+  renderSteps();
+}
+
+function removeStep(idx) {
+  stepsConfig.splice(idx, 1);
+  renderSteps();
+}
+
+function addSubStep(parentIdx, type) {
+  stepsConfig[parentIdx].steps.push({ type: type, cond: 'time', duration: 60, target: 'no target', p1: '', p2: '' });
+  renderSteps();
+}
+
+function removeSubStep(parentIdx, subIdx) {
+  stepsConfig[parentIdx].steps.splice(subIdx, 1);
+  renderSteps();
+}
+
+function paceToMps(paceStr) {
+  if (!paceStr || !paceStr.includes(':')) return null;
+  const parts = paceStr.split(':');
+  const mins = parseFloat(parts[0]);
+  const secs = parseFloat(parts[1]);
+  const totalMin = mins + (secs / 60);
+  if (totalMin <= 0) return null;
+  return 1000 / (totalMin * 60);
+}
+
+function buildExecutableStepDTO(s, order) {
+  const st = stepTypeMap[s.type] || stepTypeMap.interval;
+  const cond = conditionTypeMap[s.cond] || conditionTypeMap.time;
+  
+  let endVal = (s.cond === 'lap') ? null : (s.duration || 0);
+  if (s.cond === 'time (minutes)') {
+    endVal = endVal * 60;
+  }
+
+  let targetType = { workoutTargetTypeId: 1, workoutTargetTypeKey: "no.target", displayOrder: 1 };
+  let tVal1 = null, tVal2 = null;
+
+  if (s.target === 'pace' && s.p1 && s.p2) {
+    targetType = { workoutTargetTypeId: 6, workoutTargetTypeKey: "pace.zone", displayOrder: 6 };
+    const speed1 = paceToMps(s.p1);
+    const speed2 = paceToMps(s.p2);
+    tVal1 = Math.min(speed1, speed2);
+    tVal2 = Math.max(speed1, speed2);
+  } else if (s.target === 'heart rate') {
+    targetType = { workoutTargetTypeId: 4, workoutTargetTypeKey: "heart.rate.zone", displayOrder: 4 };
+    tVal1 = s.p1 ? parseInt(s.p1) : null;
+    tVal2 = s.p2 ? parseInt(s.p2) : null;
+  } else if (s.target === 'power') {
+    targetType = { workoutTargetTypeId: 2, workoutTargetTypeKey: "power.zone", displayOrder: 2 };
+    tVal1 = s.p1 ? parseInt(s.p1) : null;
+    tVal2 = s.p2 ? parseInt(s.p2) : null;
+  } else if (s.target === 'cadence') {
+    targetType = { workoutTargetTypeId: 3, workoutTargetTypeKey: "cadence.zone", displayOrder: 3 };
+    tVal1 = s.p1 ? parseInt(s.p1) : null;
+    tVal2 = s.p2 ? parseInt(s.p2) : null;
+  } else if (s.target === 'speed') {
+    targetType = { workoutTargetTypeId: 5, workoutTargetTypeKey: "speed.zone", displayOrder: 5 };
+    tVal1 = s.p1 ? parseFloat(s.p1) / 3.6 : null;
+    tVal2 = s.p2 ? parseFloat(s.p2) / 3.6 : null;
+  }
+
+  let unitPref = s.cond === 'distance' ? { unitId: 1, unitKey: "meter", factor: 100 } : null;
+
+  return {
+    type: "ExecutableStepDTO",
+    stepId: stepIdCounter++,
+    stepOrder: order,
+    stepType: { stepTypeId: st.stepTypeId, stepTypeKey: s.type, displayOrder: st.displayOrder },
+    childStepId: null,
+    description: null,
+    endCondition: { conditionTypeId: cond.conditionTypeId, conditionTypeKey: cond.conditionTypeKey, displayOrder: cond.displayOrder, displayable: true },
+    endConditionValue: endVal,
+    preferredEndConditionUnit: unitPref,
+    endConditionCompare: null,
+    targetType,
+    targetValueOne: tVal1,
+    targetValueTwo: tVal2,
+    zoneNumber: null,
+    secondaryTargetType: null,
+    secondaryTargetValueOne: null,
+    secondaryTargetValueTwo: null,
+    secondaryZoneNumber: null,
+    targetValueUnit: null,
+    secondaryTargetValueUnit: null,
+    endConditionZone: null,
+    strokeType: { strokeTypeId: 0, strokeTypeKey: null, displayOrder: 0 },
+    equipmentType: { equipmentTypeId: 0, equipmentTypeKey: null, displayOrder: 0 },
+    category: null,
+    exerciseName: null,
+    workoutProvider: null,
+    providerExerciseSourceId: null,
+    weightValue: null,
+    weightUnit: { unitId: 8, unitKey: "kilogram", factor: 1000 },
+    drillType: null
+  };
+}
+
+function generateGarminJson() {
+  stepIdCounter = 7316001338;
+  const sportConfig = SPORT_CONFIGS[currentSport];
+  const workoutName = document.getElementById('workoutName').value || "Workout";
+  const workoutDesc = document.getElementById('workoutDesc').value || "";
+
+  let parsedSteps = [];
+  let globalOrder = 1;
+
+  stepsConfig.forEach(block => {
+    if (block.type === 'repeat') {
+      let subParsed = [];
+      let subOrder = 1;
+      block.steps.forEach(sub => {
+        subParsed.push(buildExecutableStepDTO(sub, subOrder++));
+      });
+      parsedSteps.push({
+        type: "RepeatGroupDTO",
+        stepId: stepIdCounter++,
+        stepOrder: globalOrder++,
+        stepType: stepTypeMap.repeat,
+        childStepId: 1,
+        numberOfIterations: block.iterations,
+        workoutSteps: subParsed,
+        endConditionValue: block.iterations,
+        preferredEndConditionUnit: null,
+        endConditionCompare: null,
+        endCondition: { conditionTypeId: 7, conditionTypeKey: "iterations", displayOrder: 7, displayable: false },
+        skipLastRestStep: null,
+        smartRepeat: false
+      });
+    } else {
+      parsedSteps.push(buildExecutableStepDTO(block, globalOrder++));
+    }
+  });
+
+  const randomId = () => Math.floor(Math.random() * 900000000 + 100000000);
+
+  const finalWorkout = {
+    workoutId: randomId(),
+    ownerId: randomId(),
+    workoutName: workoutName,
+    description: workoutDesc,
+    updatedDate: new Date().toISOString().substring(0, 20).padEnd(21, 0),
+    createdDate: new Date().toISOString().substring(0, 20).padEnd(21, 0),
+    sportType: sportConfig.sportObj,
+    subSportType: "GENERIC",
+    trainingPlanId: null,
+    author: { userProfilePk: randomId(), displayName: "", fullName: "", userPro: false, vivokidUser: false },
+    workoutSegments: [{
+      segmentOrder: 1,
+      sportType: sportConfig.sportObj,
+      workoutSteps: parsedSteps
+    }],
+    shared: false
+  };
+
+  if (currentSport === 'swimming') {
+    finalWorkout.poolLength = SPORT_CONFIGS.swimming.poolLength;
+    finalWorkout.poolLengthUnit = { unitId: 1, unitKey: "meter", factor: 100 };
+  }
+
+  return JSON.stringify(finalWorkout, null, 2);
+}
+
+document.getElementById('generateBtn').addEventListener('click', () => {
+  const jsonString = generateGarminJson();
+  document.getElementById('outputJson').textContent = jsonString;
+});
+
+document.getElementById('copyBtn').addEventListener('click', () => {
+  const text = document.getElementById('outputJson').textContent;
+  navigator.clipboard.writeText(text);
+  const btn = document.getElementById('copyBtn');
+  btn.textContent = "Copied!";
+  setTimeout(() => btn.textContent = "Copy JSON", 1500);
+});
+
+document.getElementById('downloadBtn').addEventListener('click', () => {
+  const text = document.getElementById('outputJson').textContent;
+  const name = document.getElementById('workoutName').value.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+  const blob = new Blob([text], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${name || 'workout'}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+});
+
+renderSteps();
+</script>
+</body>
+</html>
