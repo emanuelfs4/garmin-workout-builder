@@ -118,6 +118,7 @@
       justify-content: center; 
       border-bottom: 1px solid var(--border-color); 
       padding-bottom: 16px; 
+      flex-wrap: wrap;
     }
 
     .sport-tab { 
@@ -357,7 +358,7 @@
       background: var(--accent-light);
     }
 
-    /* Visual Preview Graph Styles */
+    /* Visual Preview Graph Styles (Width = Duration/Distance, Height = Intensity/Pace) */
     .preview-graph-container {
       margin-bottom: 24px;
       background: var(--sub-card);
@@ -384,6 +385,7 @@
       gap: 12px;
       font-size: 0.9em;
       font-weight: 600;
+      flex-wrap: wrap;
     }
 
     .graph-summary-pill {
@@ -398,32 +400,29 @@
       display: flex;
       align-items: flex-end;
       gap: 4px;
-      height: 90px;
+      height: 140px;
       padding-top: 10px;
       border-bottom: 2px solid var(--border-color);
       overflow-x: auto;
     }
 
     .graph-bar-wrapper {
-      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       height: 100%;
       justify-content: flex-end;
-      min-width: 24px;
     }
 
     .graph-bar {
       width: 100%;
       border-radius: 4px 4px 0 0;
-      transition: height 0.3s ease;
+      transition: height 0.3s ease, width 0.3s ease;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 2px;
     }
-
-    .bar-warmup { background: #f43f5e; }
-    .bar-interval { background: #06b6d4; }
-    .bar-recovery { background: #64748b; }
-    .bar-cooldown { background: #10b981; }
 
     .graph-bar-label {
       font-size: 0.65em;
@@ -431,6 +430,11 @@
       margin-top: 4px;
       white-space: nowrap;
     }
+
+    .bar-warmup { background: #f43f5e; }
+    .bar-interval { background: #06b6d4; }
+    .bar-recovery { background: #64748b; }
+    .bar-cooldown { background: #10b981; }
 
     .form-group { margin-bottom: 18px; }
     
@@ -495,12 +499,15 @@
       justify-content: space-between; 
       align-items: center; 
       font-size: 1.05em;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .step-header-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .collapse-toggle {
@@ -529,8 +536,8 @@
       display: none;
     }
     
-    .row { display: flex; gap: 12px; }
-    .row > div { flex: 1; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .row > div { flex: 1; min-width: 140px; }
 
     .modern-btn { 
       background: var(--accent); 
@@ -567,6 +574,7 @@
       display: flex;
       gap: 6px;
       align-items: center;
+      flex-wrap: wrap;
     }
     
     .btn-danger { 
@@ -631,6 +639,46 @@
     }
 
     hr { border: 0; border-top: 1px solid var(--border-color); margin: 24px 0; }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 640px) {
+      body {
+        padding: 12px 8px;
+      }
+      .container {
+        padding: 20px 14px;
+        border-radius: 16px;
+      }
+      .theme-toggle-btn {
+        top: 16px;
+        right: 14px;
+        padding: 6px 10px;
+        font-size: 0.75em;
+      }
+      h1 {
+        font-size: 1.6rem;
+        margin-top: 12px;
+        padding-right: 60px;
+        text-align: left;
+      }
+      .sport-tabs {
+        gap: 6px;
+      }
+      .sport-tab {
+        padding: 8px 14px;
+        font-size: 0.9em;
+        flex: 1;
+        text-align: center;
+      }
+      .step-builder-section h4 {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .step-header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
   </style>
 </head>
 <body>
@@ -723,7 +771,7 @@
   <div class="steps-preview" id="stepsPreview" style="display:none"></div>
   
   <h2 style="margin-top: 32px; font-size: 1.25rem;">Generated Code Output</h2>
-  <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+  <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
     <button type="button" class="modern-btn btn-small" id="copyBtn">Copy JSON</button>
     <button type="button" class="modern-btn btn-secondary btn-small" id="downloadBtn">Download .json</button>
   </div>
@@ -1255,7 +1303,7 @@ function loadPreset(presetKey) {
       { type: 'warmup', cond: 'distance', duration: 300, target: 'no target', p1: '', p2: '', collapsed: false },
       { type: 'repeat', iterations: 10, collapsed: false, steps: [
           { type: 'interval', cond: 'distance', duration: 100, target: 'no target', p1: '', p2: '' },
-          { type: 'recovery', cond: 'time', duration: 20, target: 'no target', p1: '', p2: '' }
+          { type: 'recovery', cond: 'time (minutes)', duration: 0.5, target: 'no target', p1: '', p2: '' }
         ]
       },
       { type: 'cooldown', cond: 'distance', duration: 200, target: 'no target', p1: '', p2: '', collapsed: false }
@@ -1270,12 +1318,12 @@ function updateAutoDescription() {
   stepsConfig.forEach(s => {
     if (s.type === 'repeat') {
       let subParts = s.steps.map(sub => {
-        let u = sub.cond.includes('minute') ? 'm' : (sub.cond.includes('distance') ? (sub.cond.includes('kilometer') ? 'km' : (sub.cond.includes('mile') ? 'mi' : 'm')) : 's');
+        let u = sub.cond.includes('minute') ? 'm' : (sub.cond.includes('distance') ? 'm' : 's');
         return `${sub.duration}${u} ${sub.type}`;
       }).join('/');
       parts.push(`${s.iterations}x(${subParts})`);
     } else {
-      let u = s.cond.includes('minute') ? 'm' : (s.cond.includes('distance') ? (s.cond.includes('kilometer') ? 'km' : (s.cond.includes('mile') ? 'mi' : 'm')) : 's');
+      let u = s.cond.includes('minute') ? 'm' : (s.cond.includes('distance') ? 'm' : 's');
       parts.push(`${s.duration}${u} ${s.type}`);
     }
   });
@@ -1287,10 +1335,7 @@ function updateAutoDescription() {
 function calcStepSecs(sub) {
   if (sub.cond.includes('minute')) return sub.duration * 60;
   if (sub.cond === 'time') return sub.duration;
-  if (sub.cond.includes('kilometer')) return sub.duration * 300; 
-  if (sub.cond.includes('mile')) return sub.duration * 480;       
-  if (sub.cond === 'distance') return sub.duration * 1.2;          
-  return 60; 
+  return 30; // fallback for distance steps in time equivalence
 }
 
 function calcStepDistMeters(sub) {
@@ -1298,6 +1343,15 @@ function calcStepDistMeters(sub) {
   if (sub.cond.includes('mile')) return sub.duration * 1609.344;
   if (sub.cond === 'distance') return sub.duration;
   return 0; 
+}
+
+function parsePaceToSpeedScore(p1, p2) {
+  if (!p1 || !p1.includes(':')) return 50;
+  let parts = p1.split(':');
+  let sec = parseInt(parts[0]) * 60 + parseInt(parts[1] || 0);
+  if (sec <= 0) return 50;
+  let score = Math.max(20, Math.min(100, 300 - sec));
+  return score;
 }
 
 function updatePreviewGraph() {
@@ -1316,8 +1370,9 @@ function updatePreviewGraph() {
         s.steps.forEach(sub => {
           let secs = calcStepSecs(sub);
           let meters = calcStepDistMeters(sub);
-          let u = sub.cond.includes('minute') ? 'm' : (sub.cond.includes('distance') ? (sub.cond.includes('kilometer') ? 'km' : (sub.cond.includes('mile') ? 'mi' : 'm')) : 's');
-          flatSteps.push({ type: sub.type, secs: secs, label: `${sub.duration}${u}` });
+          let u = sub.cond.includes('minute') ? 'm' : (sub.cond.includes('distance') ? 'm' : 's');
+          let intensityScore = parsePaceToSpeedScore(sub.p1, sub.p2);
+          flatSteps.push({ type: sub.type, secs: secs, meters: meters, intensity: intensityScore, label: `${sub.duration}${u}` });
           totalSecs += secs;
           totalMeters += meters;
         });
@@ -1325,8 +1380,9 @@ function updatePreviewGraph() {
     } else {
       let secs = calcStepSecs(s);
       let meters = calcStepDistMeters(s);
-      let u = s.cond.includes('minute') ? 'm' : (s.cond.includes('distance') ? (s.cond.includes('kilometer') ? 'km' : (s.cond.includes('mile') ? 'mi' : 'm')) : 's');
-      flatSteps.push({ type: s.type, secs: secs, label: `${s.duration}${u}` });
+      let u = s.cond.includes('minute') ? 'm' : (s.cond.includes('distance') ? 'm' : 's');
+      let intensityScore = parsePaceToSpeedScore(s.p1, s.p2);
+      flatSteps.push({ type: s.type, secs: secs, meters: meters, intensity: intensityScore, label: `${s.duration}${u}` });
       totalSecs += secs;
       totalMeters += meters;
     }
@@ -1335,21 +1391,29 @@ function updatePreviewGraph() {
   durationLabel.textContent = `Time: ~${Math.round(totalSecs / 60)} min`;
   distLabel.textContent = `Dist: ~${(totalMeters / 1000).toFixed(2)} km`;
 
-  if (flatSteps.length === 0) {
+  if (flatSteps.length === 0 || (totalSecs === 0 && totalMeters === 0)) {
     graphContainer.innerHTML = '<div style="color: var(--text-muted); font-size: 0.85em; margin: auto;">No steps defined</div>';
     return;
   }
 
-  let maxSecs = Math.max(...flatSteps.map(st => st.secs), 60);
+  // Always use total meters if distance is present across any step, otherwise use total seconds
+  const hasDistanceSteps = flatSteps.some(st => st.meters > 0);
+  let totalSizeMetric = hasDistanceSteps ? (totalMeters > 0 ? totalMeters : flatSteps.reduce((acc, st) => acc + (st.meters || 50), 0)) : totalSecs;
+  let maxIntensity = Math.max(...flatSteps.map(st => st.intensity), 100);
 
   flatSteps.forEach(step => {
     let barWrapper = document.createElement('div');
     barWrapper.className = 'graph-bar-wrapper';
 
+    let stepSizeMetric = hasDistanceSteps ? (step.meters > 0 ? step.meters : (step.secs * 1.5)) : step.secs;
+    let widthPercent = (stepSizeMetric / (totalSizeMetric > 0 ? totalSizeMetric : 1)) * 100;
+    barWrapper.style.flex = `${Math.max(5, widthPercent)} 1 0%`;
+    barWrapper.style.minWidth = '28px';
+
     let bar = document.createElement('div');
     bar.className = `graph-bar bar-${step.type}`;
     
-    let heightPercent = Math.max(25, (step.secs / maxSecs) * 100);
+    let heightPercent = Math.max(25, (step.intensity / maxIntensity) * 100);
     bar.style.height = `${heightPercent}%`;
 
     let label = document.createElement('span');
@@ -1471,7 +1535,7 @@ function createStepElement(step, idx) {
       subDiv.style.borderRadius = "12px";
       subDiv.style.marginBottom = "10px";
       subDiv.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
           <strong style="color:var(--accent); font-size: 0.9em; text-transform:uppercase;">${subStep.type}</strong>
           <div class="btn-icon-group">
             <button type="button" class="modern-btn btn-secondary btn-small" style="padding: 2px 5px !important;" ${subIdx === 0 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''} onclick="moveSubStep(${idx}, ${subIdx}, -1)">▲</button>
