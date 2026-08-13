@@ -358,7 +358,7 @@
       background: var(--accent-light);
     }
 
-    /* Visual Preview Graph Styles (Width = Duration/Distance, Height = Intensity/Pace) */
+    /* Visual Preview Graph Styles */
     .preview-graph-container {
       margin-bottom: 24px;
       background: var(--sub-card);
@@ -701,6 +701,18 @@
         <span class="box-tooltip">Import a past workout GPX file to extract key metrics. These metrics are used to automatically calibrate your target intensity levels and setup your structured workouts.</span>
       </span>
     </div>
+
+    <!-- Effort Context Dropdown -->
+    <div style="margin-bottom: 14px; text-align: center;">
+      <label for="effortSelect" style="display:inline-block; margin-right:8px; color:var(--text-main); font-size: 0.85em;">Session Effort:</label>
+      <select id="effortSelect" style="width:auto; display:inline-block; padding: 6px 12px; border-radius: 8px; font-size: 0.85em;">
+        <option value="auto">Auto-Detect (HR Zone 2)</option>
+        <option value="easy">Easy Aerobic (1.0x)</option>
+        <option value="tempo">Tempo / Threshold (1.15x)</option>
+        <option value="race">All-Out / Race (1.25x)</option>
+      </select>
+    </div>
+
     <label class="gpx-upload-label" for="gpxFileInput">Upload GPX</label>
     <input type="file" id="gpxFileInput" accept=".gpx" style="display:none" onchange="parseGpxFile(event)">
     
@@ -719,6 +731,9 @@
 
     <div id="gpxStatsContainer" style="display:none">
       <div class="gpx-stats-grid" id="gpxStatsGrid"></div>
+      <div style="margin-top: 14px; text-align: center;">
+        <button type="button" class="modern-btn btn-secondary btn-small" onclick="generateSmartWorkoutSuggestion()">✨ Workout of the Day Suggestion</button>
+      </div>
     </div>
   </div>
 
@@ -787,7 +802,7 @@
 let currentSport = "running";
 let stepIdCounter = 7316001338;
 let calibratedBaseSecPerKm = 300; 
-let parsedGpxData = { dist: 0, timeMin: 0, paceSec: 300, elevGain: 0, avgHr: 0 };
+let parsedGpxData = { dist: 0, timeMin: 0, paceSec: 300, elevGain: 0, avgHr: 0, calibratedEasyPace: 345 };
 let currentTheme = "dark";
 
 const SPORT_CONFIGS = {
@@ -951,6 +966,8 @@ function parseGpxFile(event) {
   const file = event.target.files[0];
   if (!file) return;
 
+  const effortSelected = document.getElementById('effortSelect').value;
+
   const reader = new FileReader();
   reader.onload = function(e) {
     const parser = new DOMParser();
@@ -962,10 +979,7 @@ function parseGpxFile(event) {
       return;
     }
 
-    let totalDistMeters = 0;
-    let prevLat = null, prevLon = null, prevEle = null;
-    let startTime = null, endTime = null;
-    let totalEleGain = 0;
+    let rawPoints = [];
     let hrSum = 0, hrCount = 0;
 
     for (let i = 0; i < trkpts.length; i++) {
@@ -975,53 +989,125 @@ function parseGpxFile(event) {
       let timeTag = trkpts[i].getElementsByTagName("time")[0];
       
       let hrTag = trkpts[i].getElementsByTagName("ns3:hr")[0] || trkpts[i].getElementsByTagName("hr")[0];
+      let hr = null;
       if (hrTag) {
         let hrVal = parseInt(hrTag.textContent);
-        if (!isNaN(hrVal)) { hrSum += hrVal; hrCount++; }
+        if (!isNaN(hrVal)) { 
+          hr = hrVal; 
+          hrSum += hrVal; 
+          hrCount++; 
+        }
       }
 
-      let ele = eleTag ? parseFloat(eleTag.textContent) : null;
+      let ele = eleTag ? parseFloat(eleTag.textContent) : 0;
+      let time = timeTag ? new Date(timeTag.textContent) : null;
 
-      if (timeTag && !startTime) startTime = new Date(timeTag.textContent);
-      if (timeTag) endTime = new Date(timeTag.textContent);
+      if (!isNaN(lat) && !isNaN(lon)) {
+        rawPoints.push({ lat, lon, ele, time, hr });
+      }
+    }
 
-      if (prevLat !== null && prevLon !== null) {
-        let R = 6371e3;
-        let φ1 = prevLat * Math.PI/180;
-        let φ2 = lat * Math.PI/180;
-        let Δφ = (lat-prevLat) * Math.PI/180;
-        let Δλ = (lon-prevLon) * Math.PI/180;
+    if (rawPoints.length === 0) return;
 
-        let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-                Math.cos(φ1) * Math.cos(φ2) *
-                Math.sin(Δλ/2) * Math.sin(Δλ/2);
-        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        totalDistMeters += R * c;
+    let filteredPoints = [rawPoints[0]];
+    for (let i = 1; i < rawPoints.length; i++) {
+      let prev = filteredPoints[filteredPoints.length - 1];
+      let curr = rawPoints[i];
+      
+      let R = 6371e3;
+      let φ1 = prev.lat * Math.PI/180;
+      let φ2 = curr.lat * Math.PI/180;
+      let Δφ = (curr.lat - prev.lat) * Math.PI/180;
+      let Δλ = (curr.lon - prev.lon) * Math.PI/180;
+
+      let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      let dist = R * c;
+
+      if (dist >= 1.2) {
+        filteredPoints.push(curr);
+      } else if (curr.time && prev.time && (curr.time - prev.time) > 10000) {
+        filteredPoints.push(curr);
+      }
+    }
+
+    let totalDistMeters = 0;
+    let totalEleGain = 0;
+    let movingSecs = 0;
+    
+    // Tracking specific HR Zone 2 metrics
+    let hrZone2Secs = 0;
+    let hrZone2Meters = 0;
+
+    for (let i = 1; i < filteredPoints.length; i++) {
+      let prev = filteredPoints[i - 1];
+      let curr = filteredPoints[i];
+
+      let R = 6371e3;
+      let φ1 = prev.lat * Math.PI/180;
+      let φ2 = curr.lat * Math.PI/180;
+      let Δφ = (curr.lat - prev.lat) * Math.PI/180;
+      let Δλ = (curr.lon - prev.lon) * Math.PI/180;
+
+      let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      let stepDist = R * c;
+      totalDistMeters += stepDist;
+
+      if (curr.ele > prev.ele) {
+        let eleDiff = curr.ele - prev.ele;
+        if (eleDiff < 10) totalEleGain += eleDiff;
       }
 
-      if (prevEle !== null && ele !== null) {
-        let diff = ele - prevEle;
-        if (diff > 0) totalEleGain += diff;
+      if (curr.time && prev.time) {
+        let dt = (curr.time - prev.time) / 1000;
+        if (dt > 0 && dt < 45) {
+          movingSecs += dt;
+          
+          // Check if both points fall into a standard Zone 2 aerobic heart rate (130 - 145 bpm)
+          if (curr.hr !== null && prev.hr !== null && curr.hr >= 130 && curr.hr <= 145 && prev.hr >= 130 && prev.hr <= 145) {
+            hrZone2Secs += dt;
+            hrZone2Meters += stepDist;
+          }
+        }
       }
-
-      prevLat = lat;
-      prevLon = lon;
-      prevEle = ele;
     }
 
     let totalKm = totalDistMeters / 1000;
-    let totalSecs = (endTime && startTime) ? (endTime - startTime) / 1000 : 1800;
-    if (totalSecs < 60) totalSecs = 1800;
+    if (movingSecs <= 0 && filteredPoints.length > 1 && filteredPoints[filteredPoints.length-1].time && filteredPoints[0].time) {
+      movingSecs = (filteredPoints[filteredPoints.length-1].time - filteredPoints[0].time) / 1000;
+    }
+    if (movingSecs <= 0) movingSecs = 1648; 
 
-    let secPerKm = totalSecs / (totalKm > 0 ? totalKm : 5);
-    calibratedBaseSecPerKm = secPerKm;
+    let avgPaceOverall = movingSecs / (totalKm > 0 ? totalKm : 4.01);
+    calibratedBaseSecPerKm = avgPaceOverall;
+    
+    // Calculate final Easy Pace based on manual selection OR Heart Rate anchoring
+    let finalCalibratedEasyPace = avgPaceOverall;
+    
+    if (effortSelected === 'auto') {
+      if (hrZone2Meters > 500) {
+        // If we spent at least 500 meters in Zone 2 HR, use that pure data
+        finalCalibratedEasyPace = hrZone2Secs / (hrZone2Meters / 1000);
+      } else {
+        // Fallback guess if no HR data exists, based on average pace speed
+        finalCalibratedEasyPace = (avgPaceOverall < 300) ? avgPaceOverall * 1.15 : avgPaceOverall;
+      }
+    } else if (effortSelected === 'easy') {
+      finalCalibratedEasyPace = avgPaceOverall * 1.0;
+    } else if (effortSelected === 'tempo') {
+      finalCalibratedEasyPace = avgPaceOverall * 1.15;
+    } else if (effortSelected === 'race') {
+      finalCalibratedEasyPace = avgPaceOverall * 1.25;
+    }
 
     parsedGpxData = {
       dist: totalKm,
-      timeMin: Math.round(totalSecs / 60),
-      paceSec: secPerKm,
+      timeMin: Math.round(movingSecs / 60),
+      paceSec: avgPaceOverall,
       elevGain: Math.round(totalEleGain),
-      avgHr: hrCount > 0 ? Math.round(hrSum / hrCount) : 145
+      avgHr: hrCount > 0 ? Math.round(hrSum / hrCount) : 142,
+      calibratedEasyPace: finalCalibratedEasyPace
     };
 
     document.getElementById('metricsSelectorPanel').style.display = 'block';
@@ -1093,13 +1179,14 @@ function updateDisplayedMetrics() {
       </div>`;
   }
   if (showEasy) {
+    let mode = document.getElementById('effortSelect').value === 'auto' ? '(HR Anchored)' : '(Manual Multiplier)';
     grid.innerHTML += `
       <div class="gpx-stat-card">
         <div class="gpx-stat-label-row">
           <div class="gpx-stat-label">Calibrated Easy</div>
-          <span class="info-tooltip" data-tooltip="Automatically calculated Zone 2 recovery pace (~15% slower than your average pace).">i</span>
+          <span class="info-tooltip" data-tooltip="Your true Zone 2 easy pace calculated via ${mode}.">i</span>
         </div>
-        <div class="gpx-stat-value">${formatSecToPace(parsedGpxData.paceSec * 1.15)} /km</div>
+        <div class="gpx-stat-value">${formatSecToPace(parsedGpxData.calibratedEasyPace)} /km</div>
       </div>`;
   }
 }
@@ -1122,21 +1209,21 @@ function loadPreset(presetKey) {
   let base = calibratedBaseSecPerKm;
   let fastPace = formatSecToPace(base * 0.8);
   let midFastPace = formatSecToPace(base * 0.9);
-  let slowPace = formatSecToPace(base * 1.15);
-  let longPace = formatSecToPace(base * 1.25);
+  let slowPace = formatSecToPace(parsedGpxData.calibratedEasyPace || (base * 1.15));
+  let longPace = formatSecToPace((parsedGpxData.calibratedEasyPace || (base * 1.15)) * 1.05);
 
   if (presetKey === 'easyRun') {
     document.getElementById('workoutName').value = "Calibrated Easy Run";
     stepsConfig = [
       { type: 'warmup', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false },
-      { type: 'interval', cond: 'time (minutes)', duration: 45, target: 'pace', p1: slowPace, p2: formatSecToPace(base * 1.35), collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 45, target: 'pace', p1: slowPace, p2: formatSecToPace((parsedGpxData.calibratedEasyPace || base * 1.15) * 1.1), collapsed: false },
       { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'longRun') {
     document.getElementById('workoutName').value = "Calibrated Long Run";
     stepsConfig = [
       { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
-      { type: 'interval', cond: 'time (minutes)', duration: 75, target: 'pace', p1: longPace, p2: formatSecToPace(base * 1.4), collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 75, target: 'pace', p1: longPace, p2: formatSecToPace((parsedGpxData.calibratedEasyPace || base * 1.15) * 1.15), collapsed: false },
       { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'tempo') {
@@ -1335,7 +1422,7 @@ function updateAutoDescription() {
 function calcStepSecs(sub) {
   if (sub.cond.includes('minute')) return sub.duration * 60;
   if (sub.cond === 'time') return sub.duration;
-  return 30; // fallback for distance steps in time equivalence
+  return 30;
 }
 
 function calcStepDistMeters(sub) {
@@ -1396,7 +1483,6 @@ function updatePreviewGraph() {
     return;
   }
 
-  // Always use total meters if distance is present across any step, otherwise use total seconds
   const hasDistanceSteps = flatSteps.some(st => st.meters > 0);
   let totalSizeMetric = hasDistanceSteps ? (totalMeters > 0 ? totalMeters : flatSteps.reduce((acc, st) => acc + (st.meters || 50), 0)) : totalSecs;
   let maxIntensity = Math.max(...flatSteps.map(st => st.intensity), 100);
@@ -1577,7 +1663,7 @@ function createStepElement(step, idx) {
         <button type="button" class="modern-btn btn-secondary btn-small" onclick="addSubStep(${idx}, 'interval')">+ Interval</button>
         <button type="button" class="modern-btn btn-secondary btn-small" onclick="addSubStep(${idx}, 'recovery')">+ Recovery</button>
       </div>
-    </div>`;
+    `;
     div.innerHTML = innerHtml;
   } else {
     div.style.borderLeft = "4px solid var(--accent)";
@@ -1665,6 +1751,49 @@ function paceToMps(paceStr) {
   const totalMin = mins + (secs / 60);
   if (totalMin <= 0) return null;
   return 1000 / (totalMin * 60);
+}
+
+function generateSmartWorkoutSuggestion() {
+  if (!parsedGpxData || parsedGpxData.dist === 0) {
+    alert("Please upload a recent GPX file first so the app can analyze your recent training load!");
+    return;
+  }
+
+  let base = parsedGpxData.calibratedEasyPace || calibratedBaseSecPerKm;
+  let suggestionTitle = "";
+  
+  if (parsedGpxData.dist > 15 || parsedGpxData.elevGain > 300) {
+    suggestionTitle = "Smart Recovery Run (Post-Hard Effort)";
+    document.getElementById('workoutName').value = suggestionTitle;
+    stepsConfig = [
+      { type: 'interval', cond: 'time (minutes)', duration: 30, target: 'heart rate', p1: '115', p2: '130', collapsed: false },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
+    ];
+  } else if (parsedGpxData.dist < 8) {
+    suggestionTitle = "Smart Threshold Builder";
+    document.getElementById('workoutName').value = suggestionTitle;
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'repeat', iterations: 4, collapsed: false, steps: [
+          { type: 'interval', cond: 'time (minutes)', duration: 5, target: 'pace', p1: formatSecToPace(base * 0.75), p2: formatSecToPace(base * 0.8) },
+          { type: 'recovery', cond: 'time (minutes)', duration: 2, target: 'no target', p1: '', p2: '' }
+        ]
+      },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
+    ];
+  } else {
+    suggestionTitle = "Smart Aerobic Endurance";
+    document.getElementById('workoutName').value = suggestionTitle;
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 40, target: 'pace', p1: formatSecToPace(base * 0.95), p2: formatSecToPace(base * 1.05), collapsed: false },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
+    ];
+  }
+
+  renderSteps();
+  updateAutoDescription();
+  alert(`Based on your uploaded GPX file (${parsedGpxData.dist.toFixed(1)} km), we've generated your "${suggestionTitle}" for today!`);
 }
 
 function buildExecutableStepDTO(s, order) {
