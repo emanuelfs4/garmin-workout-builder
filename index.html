@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,37 @@
       --danger: #f43f5e;
       --danger-hover: #e11d48;
       --success: #10b981;
+      --code-bg: #090d16;
+      --code-text: #38bdf8;
+      --sub-card: rgba(15, 23, 42, 0.4);
+      --sub-card-inner: rgba(15, 23, 42, 0.4);
+      --preset-bg: #0f172a;
+      --btn-secondary-bg: #334155;
+      --btn-secondary-hover: #475569;
+      --btn-secondary-text: #f8fafc;
+    }
+
+    [data-theme="light"] {
+      --bg-app: #f1f5f9;
+      --bg-card: #ffffff;
+      --bg-input: #f8fafc;
+      --border-color: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --accent-hover: #0369a1;
+      --accent-light: rgba(2, 132, 199, 0.1);
+      --danger: #e11d48;
+      --danger-hover: #be123c;
+      --success: #059669;
+      --code-bg: #0f172a;
+      --code-text: #38bdf8;
+      --sub-card: #f8fafc;
+      --sub-card-inner: #ffffff;
+      --preset-bg: #ffffff;
+      --btn-secondary-bg: #e2e8f0;
+      --btn-secondary-hover: #cbd5e1;
+      --btn-secondary-text: #0f172a;
     }
 
     body { 
@@ -27,6 +58,7 @@
       color: var(--text-main); 
       margin: 0; 
       padding: 30px 20px; 
+      transition: background 0.3s, color 0.3s;
     }
 
     .container { 
@@ -34,9 +66,34 @@
       margin: 0 auto; 
       background: var(--bg-card); 
       border-radius: 24px;
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5); 
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15); 
       border: 1px solid var(--border-color);
       padding: 36px 32px;
+      position: relative;
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      position: absolute;
+      top: 36px;
+      right: 32px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent);
     }
 
     h1 { 
@@ -106,7 +163,7 @@
       cursor: pointer;
       display: inline-block;
       background: var(--accent);
-      color: #0f172a;
+      color: #ffffff;
       font-weight: 700;
       padding: 10px 18px;
       border-radius: 10px;
@@ -121,7 +178,7 @@
     .metrics-selector-panel {
       margin-top: 14px;
       text-align: left;
-      background: rgba(15, 23, 42, 0.5);
+      background: var(--sub-card);
       padding: 12px 16px;
       border-radius: 12px;
       border: 1px solid var(--border-color);
@@ -162,7 +219,7 @@
     }
 
     .gpx-stat-card {
-      background: rgba(15, 23, 42, 0.6);
+      background: var(--sub-card);
       border: 1px solid var(--border-color);
       padding: 10px 14px;
       border-radius: 10px;
@@ -204,15 +261,15 @@
       bottom: 125%;
       left: 50%;
       transform: translateX(-50%);
-      background: #090d16;
-      color: #f8fafc;
+      background: var(--bg-card);
+      color: var(--text-main);
       padding: 6px 10px;
       border-radius: 6px;
       font-size: 0.8em;
       font-weight: normal;
       white-space: nowrap;
       border: 1px solid var(--border-color);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       z-index: 10;
       pointer-events: none;
     }
@@ -235,8 +292,8 @@
       top: 125%;
       left: 50%;
       transform: translateX(-50%);
-      background: #090d16;
-      color: #f8fafc;
+      background: var(--bg-card);
+      color: var(--text-main);
       padding: 10px 14px;
       border-radius: 8px;
       font-size: 0.75em;
@@ -244,7 +301,7 @@
       width: 260px;
       text-align: left;
       border: 1px solid var(--border-color);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
       z-index: 20;
       line-height: 1.4;
       text-transform: none;
@@ -259,7 +316,7 @@
 
     .presets-container {
       margin-bottom: 24px;
-      background: rgba(15, 23, 42, 0.4);
+      background: var(--sub-card);
       padding: 14px;
       border-radius: 14px;
       border: 1px solid var(--border-color);
@@ -283,7 +340,7 @@
     }
 
     .preset-btn {
-      background: var(--bg-input);
+      background: var(--preset-bg);
       border: 1px solid var(--border-color);
       color: var(--text-muted);
       padding: 6px 12px;
@@ -303,7 +360,7 @@
     /* Visual Preview Graph Styles */
     .preview-graph-container {
       margin-bottom: 24px;
-      background: rgba(15, 23, 42, 0.7);
+      background: var(--sub-card);
       border: 1px solid var(--border-color);
       border-radius: 16px;
       padding: 16px 20px;
@@ -318,6 +375,23 @@
       margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .graph-summary-pills {
+      display: flex;
+      gap: 12px;
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+
+    .graph-summary-pill {
+      background: rgba(6, 182, 212, 0.1);
+      color: var(--accent);
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(6, 182, 212, 0.2);
     }
 
     .graph-bars {
@@ -351,6 +425,13 @@
     .bar-recovery { background: #64748b; }
     .bar-cooldown { background: #10b981; }
 
+    .graph-bar-label {
+      font-size: 0.65em;
+      color: var(--text-muted);
+      margin-top: 4px;
+      white-space: nowrap;
+    }
+
     .form-group { margin-bottom: 18px; }
     
     label { 
@@ -373,7 +454,7 @@
       box-sizing: border-box; 
       font-size: 0.95em; 
       font-family: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.3s, color 0.3s;
     }
 
     input:focus, select:focus { 
@@ -383,13 +464,23 @@
     }
     
     .step-builder-section { 
-      background: rgba(15, 23, 42, 0.6); 
+      background: var(--sub-card); 
       border: 1px solid var(--border-color); 
       padding: 20px; 
       border-radius: 16px; 
       margin-bottom: 16px; 
       position: relative; 
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, opacity 0.2s;
+      cursor: grab;
+    }
+
+    .step-builder-section:active {
+      cursor: grabbing;
+    }
+
+    .step-builder-section.dragging {
+      opacity: 0.4;
+      border: 2px dashed var(--accent);
     }
 
     .step-builder-section:hover {
@@ -405,13 +496,45 @@
       align-items: center; 
       font-size: 1.05em;
     }
+
+    .step-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .collapse-toggle {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.9em;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .collapse-toggle:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+    }
+
+    .step-content-body {
+      transition: max-height 0.3s ease, opacity 0.2s ease;
+      overflow: hidden;
+    }
+
+    .step-content-body.collapsed {
+      display: none;
+    }
     
     .row { display: flex; gap: 12px; }
     .row > div { flex: 1; }
 
     .modern-btn { 
       background: var(--accent); 
-      color: #0f172a; 
+      color: #ffffff; 
       font-weight: 700; 
       font-size: 1em; 
       border: 0; 
@@ -458,12 +581,12 @@
     }
 
     .btn-secondary { 
-      background: #334155; 
-      color: var(--text-main); 
+      background: var(--btn-secondary-bg); 
+      color: var(--btn-secondary-text); 
     }
     
     .btn-secondary:hover { 
-      background: #475569; 
+      background: var(--btn-secondary-hover); 
     }
 
     .steps-preview { 
@@ -477,7 +600,7 @@
     .import-tip {
       margin-top: 20px;
       padding: 12px 16px;
-      background: rgba(51, 65, 85, 0.4);
+      background: var(--sub-card);
       border-radius: 12px;
       border: 1px dashed var(--border-color);
       font-size: 0.9em;
@@ -496,8 +619,8 @@
     }
 
     pre { 
-      background: #090d16; 
-      color: #38bdf8; 
+      background: var(--code-bg); 
+      color: var(--code-text); 
       padding: 20px; 
       border-radius: 14px; 
       overflow-x: auto; 
@@ -512,6 +635,7 @@
 </head>
 <body>
 <div class="container">
+  <button type="button" class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark</button>
   <h1>Garmin Workout Builder</h1>
   
   <div class="sport-tabs">
@@ -558,11 +682,11 @@
   <div class="row">
     <div class="form-group">
       <label for="workoutName">Workout Name</label>
-      <input type="text" id="workoutName" value="4×4 Norwegian Intervals">
+      <input type="text" id="workoutName" value="4×4 Norwegian Intervals" oninput="saveToLocalStorage()">
     </div>
     <div class="form-group">
       <label for="workoutDesc">Description</label>
-      <input type="text" id="workoutDesc" value="">
+      <input type="text" id="workoutDesc" value="" oninput="saveToLocalStorage()">
     </div>
   </div>
 
@@ -570,7 +694,10 @@
   <div class="preview-graph-container">
     <div class="preview-graph-title">
       <span>Workout Visualizer</span>
-      <span id="graphTotalDuration" style="color: var(--accent);">Total: ~0 min</span>
+      <div class="graph-summary-pills">
+        <span class="graph-summary-pill" id="graphTotalDist">Dist: ~0.0 km</span>
+        <span class="graph-summary-pill" id="graphTotalDuration">Time: ~0 min</span>
+      </div>
     </div>
     <div class="graph-bars" id="visualGraphBars"></div>
   </div>
@@ -613,6 +740,7 @@ let currentSport = "running";
 let stepIdCounter = 7316001338;
 let calibratedBaseSecPerKm = 300; 
 let parsedGpxData = { dist: 0, timeMin: 0, paceSec: 300, elevGain: 0, avgHr: 0 };
+let currentTheme = "dark";
 
 const SPORT_CONFIGS = {
   running: {
@@ -688,14 +816,82 @@ const conditionTypeMap = {
 };
 
 let stepsConfig = [
-  { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
-  { type: 'repeat', iterations: 4, steps: [
+  { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
+  { type: 'repeat', iterations: 4, collapsed: false, steps: [
       { type: 'interval', cond: 'time (minutes)', duration: 4, target: 'pace', p1: '4:00', p2: '4:15' },
       { type: 'recovery', cond: 'time (minutes)', duration: 3, target: 'no target', p1: '', p2: '' }
     ]
   },
-  { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+  { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
 ];
+
+function toggleTheme() {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  const btn = document.getElementById('themeToggleBtn');
+  btn.textContent = currentTheme === 'dark' ? '🌙 Dark' : '☀️ Light';
+  renderSteps();
+  saveToLocalStorage();
+}
+
+function saveToLocalStorage() {
+  const data = {
+    currentSport,
+    workoutName: document.getElementById('workoutName').value,
+    workoutDesc: document.getElementById('workoutDesc').value,
+    stepsConfig,
+    poolLength: currentSport === 'swimming' ? SPORT_CONFIGS.swimming.poolLength : 25,
+    theme: currentTheme
+  };
+  localStorage.setItem('garmin_builder_state', JSON.stringify(data));
+}
+
+function loadFromLocalStorage() {
+  const saved = localStorage.getItem('garmin_builder_state');
+  if (!saved) return false;
+  try {
+    const data = JSON.parse(saved);
+    currentSport = data.currentSport || 'running';
+    document.getElementById('workoutName').value = data.workoutName || '';
+    document.getElementById('workoutDesc').value = data.workoutDesc || '';
+    if (data.stepsConfig) stepsConfig = data.stepsConfig;
+    if (data.poolLength && SPORT_CONFIGS.swimming) {
+      SPORT_CONFIGS.swimming.poolLength = data.poolLength;
+    }
+    if (data.theme) {
+      currentTheme = data.theme;
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      document.getElementById('themeToggleBtn').textContent = currentTheme === 'dark' ? '🌙 Dark' : '☀️ Light';
+    }
+    
+    document.querySelectorAll('.sport-tab').forEach(tab => {
+      tab.classList.remove('active');
+      if (tab.textContent.toLowerCase().includes(currentSport)) {
+        tab.classList.add('active');
+      }
+    });
+
+    const specificContainer = document.getElementById('sportSpecificConfig');
+    if (currentSport === 'swimming') {
+      specificContainer.innerHTML = `
+        <div class="row">
+          <div>
+            <label for="poolLength">Pool Length (meters)</label>
+            <input type="number" id="poolLength" value="${SPORT_CONFIGS.swimming.poolLength}" onchange="SPORT_CONFIGS.swimming.poolLength = parseInt(this.value); saveToLocalStorage();">
+          </div>
+        </div>`;
+    } else {
+      specificContainer.innerHTML = '';
+    }
+
+    renderPresetsBar();
+    renderSteps();
+    return true;
+  } catch (e) {
+    console.error("Failed to load saved state", e);
+    return false;
+  }
+}
 
 function formatSecToPace(secPerKm) {
   let mins = Math.floor(secPerKm / 60);
@@ -884,185 +1080,185 @@ function loadPreset(presetKey) {
   if (presetKey === 'easyRun') {
     document.getElementById('workoutName').value = "Calibrated Easy Run";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' },
-      { type: 'interval', cond: 'time (minutes)', duration: 45, target: 'pace', p1: slowPace, p2: formatSecToPace(base * 1.35) },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+      { type: 'warmup', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 45, target: 'pace', p1: slowPace, p2: formatSecToPace(base * 1.35), collapsed: false },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'longRun') {
     document.getElementById('workoutName').value = "Calibrated Long Run";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
-      { type: 'interval', cond: 'time (minutes)', duration: 75, target: 'pace', p1: longPace, p2: formatSecToPace(base * 1.4) },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 75, target: 'pace', p1: longPace, p2: formatSecToPace(base * 1.4), collapsed: false },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'tempo') {
     document.getElementById('workoutName').value = "Calibrated Tempo Run";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
-      { type: 'interval', cond: 'time (minutes)', duration: 25, target: 'pace', p1: midFastPace, p2: formatSecToPace(base * 0.98) },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 25, target: 'pace', p1: midFastPace, p2: formatSecToPace(base * 0.98), collapsed: false },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'threshold') {
     document.getElementById('workoutName').value = "Threshold Session";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '' },
-      { type: 'repeat', iterations: 3, steps: [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'repeat', iterations: 3, collapsed: false, steps: [
           { type: 'interval', cond: 'time (minutes)', duration: 8, target: 'pace', p1: '4:05', p2: '4:15' },
           { type: 'recovery', cond: 'time (minutes)', duration: 2, target: 'no target', p1: '', p2: '' }
         ]
       },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' }
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'vo2max') {
     document.getElementById('workoutName').value = "VO₂max Intervals";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '' },
-      { type: 'repeat', iterations: 5, steps: [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'repeat', iterations: 5, collapsed: false, steps: [
           { type: 'interval', cond: 'time (minutes)', duration: 3, target: 'pace', p1: '3:45', p2: '4:00' },
           { type: 'recovery', cond: 'time (minutes)', duration: 3, target: 'no target', p1: '', p2: '' }
         ]
       },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' }
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'norwegian4x4') {
     document.getElementById('workoutName').value = "4×4 Norwegian Intervals (Calibrated)";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
-      { type: 'repeat', iterations: 4, steps: [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'repeat', iterations: 4, collapsed: false, steps: [
           { type: 'interval', cond: 'time (minutes)', duration: 4, target: 'pace', p1: fastPace, p2: midFastPace },
           { type: 'recovery', cond: 'time (minutes)', duration: 3, target: 'no target', p1: '', p2: '' }
         ]
       },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'norwegian4x2') {
     document.getElementById('workoutName').value = "4×2 Norwegian Intervals";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
-      { type: 'repeat', iterations: 5, steps: [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'repeat', iterations: 5, collapsed: false, steps: [
           { type: 'interval', cond: 'time (minutes)', duration: 2, target: 'pace', p1: '3:50', p2: '4:05' },
           { type: 'recovery', cond: 'time (minutes)', duration: 2, target: 'no target', p1: '', p2: '' }
         ]
       },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'fartlek') {
     document.getElementById('workoutName').value = "Fartlek Session";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
-      { type: 'repeat', iterations: 6, steps: [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'repeat', iterations: 6, collapsed: false, steps: [
           { type: 'interval', cond: 'time', duration: 60, target: 'pace', p1: '3:50', p2: '4:10' },
           { type: 'recovery', cond: 'time', duration: 90, target: 'no target', p1: '', p2: '' }
         ]
       },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' }
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'progression') {
     document.getElementById('workoutName').value = "Progression Run";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
-      { type: 'interval', cond: 'time (minutes)', duration: 15, target: 'pace', p1: '5:15', p2: '5:30' },
-      { type: 'interval', cond: 'time (minutes)', duration: 15, target: 'pace', p1: '4:45', p2: '5:00' },
-      { type: 'interval', cond: 'time (minutes)', duration: 10, target: 'pace', p1: '4:15', p2: '4:30' },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 15, target: 'pace', p1: '5:15', p2: '5:30', collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 15, target: 'pace', p1: '4:45', p2: '5:00', collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 10, target: 'pace', p1: '4:15', p2: '4:30', collapsed: false },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'hillRepeats') {
     document.getElementById('workoutName').value = "Hill Repeats";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '' },
-      { type: 'repeat', iterations: 8, steps: [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'repeat', iterations: 8, collapsed: false, steps: [
           { type: 'interval', cond: 'time', duration: 90, target: 'heart rate', p1: '165', p2: '180' },
           { type: 'recovery', cond: 'time', duration: 90, target: 'no target', p1: '', p2: '' }
         ]
       },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' }
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'recoveryRun') {
     document.getElementById('workoutName').value = "Recovery Run";
     stepsConfig = [
-      { type: 'interval', cond: 'time (minutes)', duration: 30, target: 'heart rate', p1: '115', p2: '130' },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+      { type: 'interval', cond: 'time (minutes)', duration: 30, target: 'heart rate', p1: '115', p2: '130', collapsed: false },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'raceSim') {
     document.getElementById('workoutName').value = "Race Simulation";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '' },
-      { type: 'interval', cond: 'time (minutes)', duration: 20, target: 'pace', p1: '4:00', p2: '4:05' },
-      { type: 'recovery', cond: 'time (minutes)', duration: 3, target: 'no target', p1: '', p2: '' },
-      { type: 'interval', cond: 'time (minutes)', duration: 10, target: 'pace', p1: '3:55', p2: '4:00' },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' }
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 20, target: 'pace', p1: '4:00', p2: '4:05', collapsed: false },
+      { type: 'recovery', cond: 'time (minutes)', duration: 3, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 10, target: 'pace', p1: '3:55', p2: '4:00', collapsed: false },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'bikeRecovery') {
     document.getElementById('workoutName').value = "Recovery Spin";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'power', p1: '100', p2: '130' },
-      { type: 'interval', cond: 'time (minutes)', duration: 40, target: 'power', p1: '130', p2: '160' },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '90', p2: '110' }
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'power', p1: '100', p2: '130', collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 40, target: 'power', p1: '130', p2: '160', collapsed: false },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '90', p2: '110', collapsed: false }
     ];
   } else if (presetKey === 'bikeEndurance') {
     document.getElementById('workoutName').value = "Endurance Ride";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '140', p2: '170' },
-      { type: 'interval', cond: 'time (minutes)', duration: 90, target: 'power', p1: '180', p2: '210' },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 15, target: 'power', p1: '120', p2: '150' }
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '140', p2: '170', collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 90, target: 'power', p1: '180', p2: '210', collapsed: false },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 15, target: 'power', p1: '120', p2: '150', collapsed: false }
     ];
   } else if (presetKey === 'bikeSweetSpot') {
     document.getElementById('workoutName').value = "Sweet Spot Intervals";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '150', p2: '180' },
-      { type: 'repeat', iterations: 3, steps: [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '150', p2: '180', collapsed: false },
+      { type: 'repeat', iterations: 3, collapsed: false, steps: [
           { type: 'interval', cond: 'time (minutes)', duration: 12, target: 'power', p1: '235', p2: '255' },
           { type: 'recovery', cond: 'time (minutes)', duration: 5, target: 'power', p1: '130', p2: '150' }
         ]
       },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '120', p2: '140' }
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '120', p2: '140', collapsed: false }
     ];
   } else if (presetKey === 'bikeThreshold') {
     document.getElementById('workoutName').value = "FTP Builder";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '150', p2: '180' },
-      { type: 'repeat', iterations: 2, steps: [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '150', p2: '180', collapsed: false },
+      { type: 'repeat', iterations: 2, collapsed: false, steps: [
           { type: 'interval', cond: 'time (minutes)', duration: 20, target: 'power', p1: '260', p2: '280' },
           { type: 'recovery', cond: 'time (minutes)', duration: 5, target: 'power', p1: '130', p2: '150' }
         ]
       },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '120', p2: '140' }
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '120', p2: '140', collapsed: false }
     ];
   } else if (presetKey === 'bikeVO2') {
     document.getElementById('workoutName').value = "Power VO₂max";
     stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '150', p2: '180' },
-      { type: 'repeat', iterations: 5, steps: [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '150', p2: '180', collapsed: false },
+      { type: 'repeat', iterations: 5, collapsed: false, steps: [
           { type: 'interval', cond: 'time (minutes)', duration: 3, target: 'power', p1: '320', p2: '350' },
           { type: 'recovery', cond: 'time (minutes)', duration: 3, target: 'power', p1: '130', p2: '150' }
         ]
       },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '120', p2: '140' }
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '120', p2: '140', collapsed: false }
     ];
   } else if (presetKey === 'swimWarmup') {
     document.getElementById('workoutName').value = "Technique Warmup";
     stepsConfig = [
-      { type: 'warmup', cond: 'distance', duration: 400, target: 'no target', p1: '', p2: '' },
-      { type: 'interval', cond: 'distance', duration: 200, target: 'swim instruction', p1: '', p2: '' },
-      { type: 'cooldown', cond: 'distance', duration: 100, target: 'no target', p1: '', p2: '' }
+      { type: 'warmup', cond: 'distance', duration: 400, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'interval', cond: 'distance', duration: 200, target: 'swim instruction', p1: '', p2: '', collapsed: false },
+      { type: 'cooldown', cond: 'distance', duration: 100, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'swimEndurance') {
     document.getElementById('workoutName').value = "Continuous Endurance Swim";
     stepsConfig = [
-      { type: 'warmup', cond: 'distance', duration: 300, target: 'no target', p1: '', p2: '' },
-      { type: 'interval', cond: 'distance', duration: 1500, target: 'no target', p1: '', p2: '' },
-      { type: 'cooldown', cond: 'distance', duration: 200, target: 'no target', p1: '', p2: '' }
+      { type: 'warmup', cond: 'distance', duration: 300, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'interval', cond: 'distance', duration: 1500, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'cooldown', cond: 'distance', duration: 200, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'swimIntervals') {
     document.getElementById('workoutName').value = "Distance Repeats";
     stepsConfig = [
-      { type: 'warmup', cond: 'distance', duration: 300, target: 'no target', p1: '', p2: '' },
-      { type: 'repeat', iterations: 10, steps: [
+      { type: 'warmup', cond: 'distance', duration: 300, target: 'no target', p1: '', p2: '', collapsed: false },
+      { type: 'repeat', iterations: 10, collapsed: false, steps: [
           { type: 'interval', cond: 'distance', duration: 100, target: 'no target', p1: '', p2: '' },
           { type: 'recovery', cond: 'time', duration: 20, target: 'no target', p1: '', p2: '' }
         ]
       },
-      { type: 'cooldown', cond: 'distance', duration: 200, target: 'no target', p1: '', p2: '' }
+      { type: 'cooldown', cond: 'distance', duration: 200, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   }
   renderSteps();
@@ -1085,6 +1281,7 @@ function updateAutoDescription() {
   });
   document.getElementById('workoutDesc').value = parts.join(', ');
   updatePreviewGraph();
+  saveToLocalStorage();
 }
 
 function calcStepSecs(sub) {
@@ -1096,33 +1293,47 @@ function calcStepSecs(sub) {
   return 60; 
 }
 
+function calcStepDistMeters(sub) {
+  if (sub.cond.includes('kilometer')) return sub.duration * 1000;
+  if (sub.cond.includes('mile')) return sub.duration * 1609.344;
+  if (sub.cond === 'distance') return sub.duration;
+  return 0; 
+}
+
 function updatePreviewGraph() {
   const graphContainer = document.getElementById('visualGraphBars');
   const durationLabel = document.getElementById('graphTotalDuration');
+  const distLabel = document.getElementById('graphTotalDist');
   graphContainer.innerHTML = '';
 
   let flatSteps = [];
   let totalSecs = 0;
+  let totalMeters = 0;
 
   stepsConfig.forEach(s => {
     if (s.type === 'repeat') {
       for (let i = 0; i < s.iterations; i++) {
         s.steps.forEach(sub => {
           let secs = calcStepSecs(sub);
+          let meters = calcStepDistMeters(sub);
           let u = sub.cond.includes('minute') ? 'm' : (sub.cond.includes('distance') ? (sub.cond.includes('kilometer') ? 'km' : (sub.cond.includes('mile') ? 'mi' : 'm')) : 's');
           flatSteps.push({ type: sub.type, secs: secs, label: `${sub.duration}${u}` });
           totalSecs += secs;
+          totalMeters += meters;
         });
       }
     } else {
       let secs = calcStepSecs(s);
+      let meters = calcStepDistMeters(s);
       let u = s.cond.includes('minute') ? 'm' : (s.cond.includes('distance') ? (s.cond.includes('kilometer') ? 'km' : (s.cond.includes('mile') ? 'mi' : 'm')) : 's');
       flatSteps.push({ type: s.type, secs: secs, label: `${s.duration}${u}` });
       totalSecs += secs;
+      totalMeters += meters;
     }
   });
 
-  durationLabel.textContent = `Total: ~${Math.round(totalSecs / 60)} min`;
+  durationLabel.textContent = `Time: ~${Math.round(totalSecs / 60)} min`;
+  distLabel.textContent = `Dist: ~${(totalMeters / 1000).toFixed(2)} km`;
 
   if (flatSteps.length === 0) {
     graphContainer.innerHTML = '<div style="color: var(--text-muted); font-size: 0.85em; margin: auto;">No steps defined</div>';
@@ -1164,7 +1375,7 @@ function switchSport(sportKey, tabElement) {
       <div class="row">
         <div>
           <label for="poolLength">Pool Length (meters)</label>
-          <input type="number" id="poolLength" value="${SPORT_CONFIGS.swimming.poolLength}" onchange="SPORT_CONFIGS.swimming.poolLength = parseInt(this.value)">
+          <input type="number" id="poolLength" value="${SPORT_CONFIGS.swimming.poolLength}" onchange="SPORT_CONFIGS.swimming.poolLength = parseInt(this.value); saveToLocalStorage();">
         </div>
       </div>`;
   } else {
@@ -1175,6 +1386,7 @@ function switchSport(sportKey, tabElement) {
   if (sportKey === 'running') loadPreset('norwegian4x4');
   else if (sportKey === 'cycling') loadPreset('bikeSweetSpot');
   else if (sportKey === 'swimming') loadPreset('swimIntervals');
+  saveToLocalStorage();
 }
 
 function renderSteps() {
@@ -1191,15 +1403,51 @@ function renderTargetOptions(selectedTarget) {
   return targets.map(t => `<option value="${t.val}" ${selectedTarget === t.val ? 'selected' : ''}>${t.label}</option>`).join('');
 }
 
+function toggleCollapse(idx) {
+  stepsConfig[idx].collapsed = !stepsConfig[idx].collapsed;
+  renderSteps();
+}
+
 function createStepElement(step, idx) {
   const div = document.createElement('div');
   div.className = 'step-builder-section';
+  div.draggable = true;
+  div.dataset.index = idx;
+
+  div.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text/plain', idx);
+    div.classList.add('dragging');
+  });
+
+  div.addEventListener('dragend', () => {
+    div.classList.remove('dragging');
+  });
+
+  div.addEventListener('dragover', (e) => {
+    e.preventDefault();
+  });
+
+  div.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const draggedIdx = parseInt(e.dataTransfer.getData('text/plain'));
+    const targetIdx = idx;
+    if (draggedIdx !== targetIdx) {
+      const item = stepsConfig.splice(draggedIdx, 1)[0];
+      stepsConfig.splice(targetIdx, 0, item);
+      renderSteps();
+    }
+  });
   
+  let collapseIcon = step.collapsed ? '▶ Expand' : '▼ Collapse';
+
   let reorderButtons = `
-    <div class="btn-icon-group">
-      <button type="button" class="modern-btn btn-secondary btn-small" style="padding: 3px 6px !important;" ${idx === 0 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''} onclick="moveStep(${idx}, -1)" title="Move Up">▲</button>
-      <button type="button" class="modern-btn btn-secondary btn-small" style="padding: 3px 6px !important;" ${idx === stepsConfig.length - 1 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''} onclick="moveStep(${idx}, 1)" title="Move Down">▼</button>
-      <button type="button" class="modern-btn btn-danger btn-small" onclick="removeStep(${idx})">Delete</button>
+    <div class="step-header-actions">
+      <button type="button" class="collapse-toggle" onclick="toggleCollapse(${idx})">${collapseIcon}</button>
+      <div class="btn-icon-group">
+        <button type="button" class="modern-btn btn-secondary btn-small" style="padding: 3px 6px !important;" ${idx === 0 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''} onclick="moveStep(${idx}, -1)" title="Move Up">▲</button>
+        <button type="button" class="modern-btn btn-secondary btn-small" style="padding: 3px 6px !important;" ${idx === stepsConfig.length - 1 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''} onclick="moveStep(${idx}, 1)" title="Move Down">▼</button>
+        <button type="button" class="modern-btn btn-danger btn-small" onclick="removeStep(${idx})">Delete</button>
+      </div>
     </div>
   `;
 
@@ -1207,16 +1455,17 @@ function createStepElement(step, idx) {
     div.style.borderLeft = "4px solid #3b82f6";
     let innerHtml = `
       <h4>Repeat Loop [${idx+1}] ${reorderButtons}</h4>
-      <div class="row">
-        <div><label>Iterations</label><input type="number" value="${step.iterations}" onchange="stepsConfig[${idx}].iterations = parseInt(this.value); updateAutoDescription();"></div>
-      </div>
-      <label style="margin-top:14px; margin-bottom:8px;">Sub-steps Inside Loop:</label>
-      <div style="padding-left: 12px; border-left: 2px solid var(--border-color);" id="subSteps_${idx}">
+      <div class="step-content-body ${step.collapsed ? 'collapsed' : ''}">
+        <div class="row">
+          <div><label>Iterations</label><input type="number" value="${step.iterations}" onchange="stepsConfig[${idx}].iterations = parseInt(this.value); updateAutoDescription();"></div>
+        </div>
+        <label style="margin-top:14px; margin-bottom:8px;">Sub-steps Inside Loop:</label>
+        <div style="padding-left: 12px; border-left: 2px solid var(--border-color);" id="subSteps_${idx}">
     `;
     
     step.steps.forEach((subStep, subIdx) => {
       const subDiv = document.createElement('div');
-      subDiv.style.background = "rgba(15, 23, 42, 0.4)";
+      subDiv.style.background = "var(--sub-card-inner)";
       subDiv.style.border = "1px solid var(--border-color)";
       subDiv.style.padding = "12px";
       subDiv.style.borderRadius = "12px";
@@ -1264,36 +1513,38 @@ function createStepElement(step, idx) {
         <button type="button" class="modern-btn btn-secondary btn-small" onclick="addSubStep(${idx}, 'interval')">+ Interval</button>
         <button type="button" class="modern-btn btn-secondary btn-small" onclick="addSubStep(${idx}, 'recovery')">+ Recovery</button>
       </div>
-    `;
+    </div>`;
     div.innerHTML = innerHtml;
   } else {
     div.style.borderLeft = "4px solid var(--accent)";
     div.innerHTML = `
       <h4>${step.type.toUpperCase()} ${reorderButtons}</h4>
-      <div class="row">
-        <div><label>Condition</label><select onchange="stepsConfig[${idx}].cond = this.value; renderSteps();">
-          <option value="time" ${step.cond==='time'?'selected':''}>Seconds</option>
-          <option value="time (minutes)" ${step.cond==='time (minutes)'?'selected':''}>Minutes</option>
-          <option value="distance" ${step.cond==='distance'?'selected':''}>Meters</option>
-          <option value="distance (kilometers)" ${step.cond==='distance (kilometers)'?'selected':''}>Kilometers</option>
-          <option value="distance (miles)" ${step.cond==='distance (miles)'?'selected':''}>Miles</option>
-          <option value="lap" ${step.cond==='lap'?'selected':''}>Lap Button</option>
-        </select></div>
-        ${step.cond !== 'lap' ? `<div><label>Value</label><input type="number" step="any" value="${step.duration}" onchange="stepsConfig[${idx}].duration = parseFloat(this.value); updateAutoDescription();"></div>` : ''}
-        <div><label>Target</label><select onchange="stepsConfig[${idx}].target = this.value; renderSteps();">
-          ${renderTargetOptions(step.target)}
-        </select></div>
+      <div class="step-content-body ${step.collapsed ? 'collapsed' : ''}">
+        <div class="row">
+          <div><label>Condition</label><select onchange="stepsConfig[${idx}].cond = this.value; renderSteps();">
+            <option value="time" ${step.cond==='time'?'selected':''}>Seconds</option>
+            <option value="time (minutes)" ${step.cond==='time (minutes)'?'selected':''}>Minutes</option>
+            <option value="distance" ${step.cond==='distance'?'selected':''}>Meters</option>
+            <option value="distance (kilometers)" ${step.cond==='distance (kilometers)'?'selected':''}>Kilometers</option>
+            <option value="distance (miles)" ${step.cond==='distance (miles)'?'selected':''}>Miles</option>
+            <option value="lap" ${step.cond==='lap'?'selected':''}>Lap Button</option>
+          </select></div>
+          ${step.cond !== 'lap' ? `<div><label>Value</label><input type="number" step="any" value="${step.duration}" onchange="stepsConfig[${idx}].duration = parseFloat(this.value); updateAutoDescription();"></div>` : ''}
+          <div><label>Target</label><select onchange="stepsConfig[${idx}].target = this.value; renderSteps();">
+            ${renderTargetOptions(step.target)}
+          </select></div>
+        </div>
+        ${step.target === 'pace' ? `
+          <div class="row" style="margin-top:10px;">
+            <div><label>Fastest (min:sec)</label><input type="text" value="${step.p1}" placeholder="e.g. 4:00" onchange="stepsConfig[${idx}].p1 = this.value"></div>
+            <div><label>Slowest (min:sec)</label><input type="text" value="${step.p2}" placeholder="e.g. 4:30" onchange="stepsConfig[${idx}].p2 = this.value"></div>
+          </div>` : ''}
+        ${step.target === 'heart rate' || step.target === 'power' || step.target === 'cadence' || step.target === 'speed' ? `
+          <div class="row" style="margin-top:10px;">
+            <div><label>Min Target</label><input type="text" value="${step.p1}" onchange="stepsConfig[${idx}].p1 = this.value"></div>
+            <div><label>Max Target</label><input type="text" value="${step.p2}" onchange="stepsConfig[${idx}].p2 = this.value"></div>
+          </div>` : ''}
       </div>
-      ${step.target === 'pace' ? `
-        <div class="row" style="margin-top:10px;">
-          <div><label>Fastest (min:sec)</label><input type="text" value="${step.p1}" placeholder="e.g. 4:00" onchange="stepsConfig[${idx}].p1 = this.value"></div>
-          <div><label>Slowest (min:sec)</label><input type="text" value="${step.p2}" placeholder="e.g. 4:30" onchange="stepsConfig[${idx}].p2 = this.value"></div>
-        </div>` : ''}
-      ${step.target === 'heart rate' || step.target === 'power' || step.target === 'cadence' || step.target === 'speed' ? `
-        <div class="row" style="margin-top:10px;">
-          <div><label>Min Target</label><input type="text" value="${step.p1}" onchange="stepsConfig[${idx}].p1 = this.value"></div>
-          <div><label>Max Target</label><input type="text" value="${step.p2}" onchange="stepsConfig[${idx}].p2 = this.value"></div>
-        </div>` : ''}
     `;
   }
   return div;
@@ -1301,8 +1552,8 @@ function createStepElement(step, idx) {
 
 function addStepBlock(type) {
   const newBlock = type === 'repeat' 
-    ? { type: 'repeat', iterations: 3, steps: [{ type: 'interval', cond: 'time', duration: 60, target: 'no target', p1: '', p2: '' }] }
-    : { type: type, cond: 'time', duration: 300, target: 'no target', p1: '', p2: '' };
+    ? { type: 'repeat', iterations: 3, collapsed: false, steps: [{ type: 'interval', cond: 'time', duration: 60, target: 'no target', p1: '', p2: '' }] }
+    : { type: type, cond: 'time', duration: 300, target: 'no target', p1: '', p2: '', collapsed: false };
   
   stepsConfig.push(newBlock);
   renderSteps();
@@ -1523,8 +1774,10 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
   URL.revokeObjectURL(url);
 });
 
-renderPresetsBar();
-renderSteps();
+if (!loadFromLocalStorage()) {
+  renderPresetsBar();
+  renderSteps();
+}
 </script>
 </body>
 </html>
