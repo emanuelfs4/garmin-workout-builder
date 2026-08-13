@@ -18,6 +18,7 @@
       --accent-light: rgba(6, 182, 212, 0.1);
       --danger: #f43f5e;
       --danger-hover: #e11d48;
+      --success: #10b981;
     }
 
     body { 
@@ -56,7 +57,7 @@
     .sport-tabs { 
       display: flex; 
       gap: 10px; 
-      margin-bottom: 28px; 
+      margin-bottom: 20px; 
       justify-content: center; 
       border-bottom: 1px solid var(--border-color); 
       padding-bottom: 16px; 
@@ -85,6 +86,237 @@
       color: var(--accent); 
       box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
     }
+
+    /* GPX Analyzer Box */
+    .gpx-analyzer-box {
+      background: rgba(6, 182, 212, 0.05);
+      border: 2px dashed rgba(6, 182, 212, 0.3);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .gpx-analyzer-box:hover {
+      border-color: var(--accent);
+    }
+
+    .gpx-upload-label {
+      cursor: pointer;
+      display: inline-block;
+      background: var(--accent);
+      color: #0f172a;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 0.9em;
+      transition: all 0.2s;
+    }
+
+    .gpx-upload-label:hover {
+      background: var(--accent-hover);
+    }
+
+    .metrics-selector-panel {
+      margin-top: 14px;
+      text-align: left;
+      background: rgba(15, 23, 42, 0.5);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      display: none;
+    }
+
+    .metrics-selector-title {
+      font-size: 0.75em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .metrics-checkboxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.85em;
+    }
+
+    .metrics-checkboxes label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-main);
+      cursor: pointer;
+      text-transform: none;
+      font-weight: 500;
+    }
+
+    .gpx-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+      text-align: left;
+    }
+
+    .gpx-stat-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .gpx-stat-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .gpx-stat-label {
+      font-size: 0.7em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* Tooltip style */
+    .info-tooltip {
+      cursor: help;
+      color: var(--accent);
+      font-size: 0.75em;
+      font-weight: bold;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      width: 14px;
+      height: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .info-tooltip:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #090d16;
+      color: #f8fafc;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.8em;
+      font-weight: normal;
+      white-space: nowrap;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .gpx-stat-value {
+      font-size: 1.05em;
+      color: var(--success);
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .presets-container {
+      margin-bottom: 24px;
+      background: rgba(15, 23, 42, 0.4);
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+    }
+
+    .presets-header {
+      font-size: 0.82em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    .presets-bar {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .preset-btn {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.82em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--accent);
+      color: var(--text-main);
+      background: var(--accent-light);
+    }
+
+    /* Visual Preview Graph Styles */
+    .preview-graph-container {
+      margin-bottom: 24px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 16px 20px;
+    }
+
+    .preview-graph-title {
+      font-size: 0.85em;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .graph-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 90px;
+      padding-top: 10px;
+      border-bottom: 2px solid var(--border-color);
+      overflow-x: auto;
+    }
+
+    .graph-bar-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+      min-width: 24px;
+    }
+
+    .graph-bar {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .bar-warmup { background: #f43f5e; }
+    .bar-interval { background: #06b6d4; }
+    .bar-recovery { background: #64748b; }
+    .bar-cooldown { background: #10b981; }
 
     .form-group { margin-bottom: 18px; }
     
@@ -255,15 +487,53 @@
     <button type="button" class="sport-tab" onclick="switchSport('swimming')">🏊 Swimming</button>
   </div>
 
+  <!-- GPX Analyzer & Calibrator Box -->
+  <div class="gpx-analyzer-box">
+    <div style="font-size: 0.9em; font-weight: 700; margin-bottom: 8px; color: var(--text-main);">📈 Calibrate Paces from Morning Workout GPX</div>
+    <label class="gpx-upload-label" for="gpxFileInput">Upload Morning Run GPX</label>
+    <input type="file" id="gpxFileInput" accept=".gpx" style="display:none" onchange="parseGpxFile(event)">
+    
+    <!-- Checkbox Metric Selector Panel -->
+    <div class="metrics-selector-panel" id="metricsSelectorPanel">
+      <div class="metrics-selector-title">Select Metrics to Display & Calibrate With:</div>
+      <div class="metrics-checkboxes">
+        <label><input type="checkbox" id="chkDist" checked onchange="updateDisplayedMetrics()"> Distance</label>
+        <label><input type="checkbox" id="chkTime" checked onchange="updateDisplayedMetrics()"> Moving Time</label>
+        <label><input type="checkbox" id="chkPace" checked onchange="updateDisplayedMetrics()"> Average Pace</label>
+        <label><input type="checkbox" id="chkElevation" checked onchange="updateDisplayedMetrics()"> Elevation Gain</label>
+        <label><input type="checkbox" id="chkHR" checked onchange="updateDisplayedMetrics()"> Heart Rate</label>
+        <label><input type="checkbox" id="chkEasy" checked onchange="updateDisplayedMetrics()"> Calibrated Easy</label>
+      </div>
+    </div>
+
+    <div id="gpxStatsContainer" style="display:none">
+      <div class="gpx-stats-grid" id="gpxStatsGrid"></div>
+    </div>
+  </div>
+
+  <div class="presets-container">
+    <div class="presets-header">Quick Workout Templates</div>
+    <div class="presets-bar" id="presetsBar"></div>
+  </div>
+
   <div class="row">
     <div class="form-group">
       <label for="workoutName">Workout Name</label>
-      <input type="text" id="workoutName" value="Threshold Intervals">
+      <input type="text" id="workoutName" value="4×4 Norwegian Intervals">
     </div>
     <div class="form-group">
       <label for="workoutDesc">Description</label>
-      <input type="text" id="workoutDesc" value="Created with Garmin Workout Builder">
+      <input type="text" id="workoutDesc" value="">
     </div>
+  </div>
+
+  <!-- Visual Preview Graph Section -->
+  <div class="preview-graph-container">
+    <div class="preview-graph-title">
+      <span>Workout Visualizer</span>
+      <span id="graphTotalDuration" style="color: var(--accent);">Total: ~0 min</span>
+    </div>
+    <div class="graph-bars" id="visualGraphBars"></div>
   </div>
 
   <div id="sportSpecificConfig" class="form-group"></div>
@@ -302,6 +572,8 @@
 <script>
 let currentSport = "running";
 let stepIdCounter = 7316001338;
+let calibratedBaseSecPerKm = 300; 
+let parsedGpxData = { dist: 0, timeMin: 0, paceSec: 300, elevGain: 0, avgHr: 0 };
 
 const SPORT_CONFIGS = {
   running: {
@@ -311,6 +583,20 @@ const SPORT_CONFIGS = {
       { val: 'pace', label: 'Pace Range (min/km)' },
       { val: 'heart rate', label: 'Heart Rate Zone' },
       { val: 'cadence', label: 'Cadence (spm)' }
+    ],
+    presets: [
+      { key: 'easyRun', label: 'Easy Run' },
+      { key: 'longRun', label: 'Long Run' },
+      { key: 'tempo', label: 'Tempo' },
+      { key: 'threshold', label: 'Threshold' },
+      { key: 'vo2max', label: 'VO₂max Intervals' },
+      { key: 'norwegian4x4', label: '4×4 Norwegian' },
+      { key: 'norwegian4x2', label: '4×2 Norwegian' },
+      { key: 'fartlek', label: 'Fartlek' },
+      { key: 'progression', label: 'Progression Run' },
+      { key: 'hillRepeats', label: 'Hill Repeats' },
+      { key: 'recoveryRun', label: 'Recovery Run' },
+      { key: 'raceSim', label: 'Race Simulation' }
     ]
   },
   cycling: {
@@ -320,6 +606,13 @@ const SPORT_CONFIGS = {
       { val: 'power', label: 'Power (Watts)' },
       { val: 'heart rate', label: 'Heart Rate Zone' },
       { val: 'speed', label: 'Speed (km/h)' }
+    ],
+    presets: [
+      { key: 'bikeRecovery', label: 'Recovery Spin' },
+      { key: 'bikeEndurance', label: 'Endurance Ride' },
+      { key: 'bikeSweetSpot', label: 'Sweet Spot Intervals' },
+      { key: 'bikeThreshold', label: 'FTP Builder' },
+      { key: 'bikeVO2', label: 'Power VO₂max' }
     ]
   },
   swimming: {
@@ -328,6 +621,11 @@ const SPORT_CONFIGS = {
     targets: [
       { val: 'no target', label: 'No Target' },
       { val: 'swim instruction', label: 'Swim Instruction / Stroke' }
+    ],
+    presets: [
+      { key: 'swimWarmup', label: 'Technique Warmup' },
+      { key: 'swimEndurance', label: 'Continuous Endurance' },
+      { key: 'swimIntervals', label: 'Distance Repeats' }
     ]
   }
 };
@@ -344,19 +642,322 @@ const conditionTypeMap = {
   lap: { conditionTypeId: 1, conditionTypeKey: "lap.button", displayOrder: 1 },
   time: { conditionTypeId: 2, conditionTypeKey: "time", displayOrder: 2 },
   'time (minutes)': { conditionTypeId: 2, conditionTypeKey: "time", displayOrder: 2 },
-  distance: { conditionTypeId: 3, conditionTypeKey: "distance", displayOrder: 3 },
+  distance: { conditionTypeId: 3, conditionTypeKey: "distance", displayOrder: 3, unitKey: "meter", unitId: 1, factor: 100 },
+  'distance (kilometers)': { conditionTypeId: 3, conditionTypeKey: "distance", displayOrder: 3, unitKey: "kilometer", unitId: 2, factor: 100000 },
+  'distance (miles)': { conditionTypeId: 3, conditionTypeKey: "distance", displayOrder: 3, unitKey: "mile", unitId: 3, factor: 160934 },
   iterations: { conditionTypeId: 7, conditionTypeKey: "iterations", displayOrder: 7 }
 };
 
 let stepsConfig = [
   { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
   { type: 'repeat', iterations: 4, steps: [
-      { type: 'interval', cond: 'time', duration: 120, target: 'pace', p1: '4:15', p2: '4:30' },
-      { type: 'recovery', cond: 'time', duration: 90, target: 'no target', p1: '', p2: '' }
+      { type: 'interval', cond: 'time (minutes)', duration: 4, target: 'pace', p1: '4:00', p2: '4:15' },
+      { type: 'recovery', cond: 'time (minutes)', duration: 3, target: 'no target', p1: '', p2: '' }
     ]
   },
   { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
 ];
+
+function formatSecToPace(secPerKm) {
+  let mins = Math.floor(secPerKm / 60);
+  let secs = Math.round(secPerKm % 60);
+  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+}
+
+function parseGpxFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(e.target.result, "text/xml");
+    
+    const trkpts = xmlDoc.getElementsByTagName("trkpt");
+    if (trkpts.length === 0) {
+      alert("No track points found in GPX file.");
+      return;
+    }
+
+    let totalDistMeters = 0;
+    let prevLat = null, prevLon = null, prevEle = null;
+    let startTime = null, endTime = null;
+    let totalEleGain = 0;
+    let hrSum = 0, hrCount = 0;
+
+    for (let i = 0; i < trkpts.length; i++) {
+      let lat = parseFloat(trkpts[i].getAttribute("lat"));
+      let lon = parseFloat(trkpts[i].getAttribute("lon"));
+      let eleTag = trkpts[i].getElementsByTagName("ele")[0];
+      let timeTag = trkpts[i].getElementsByTagName("time")[0];
+      
+      let hrTag = trkpts[i].getElementsByTagName("ns3:hr")[0] || trkpts[i].getElementsByTagName("hr")[0];
+      if (hrTag) {
+        let hrVal = parseInt(hrTag.textContent);
+        if (!isNaN(hrVal)) { hrSum += hrVal; hrCount++; }
+      }
+
+      let ele = eleTag ? parseFloat(eleTag.textContent) : null;
+
+      if (timeTag && !startTime) startTime = new Date(timeTag.textContent);
+      if (timeTag) endTime = new Date(timeTag.textContent);
+
+      if (prevLat !== null && prevLon !== null) {
+        let R = 6371e3;
+        let φ1 = prevLat * Math.PI/180;
+        let φ2 = lat * Math.PI/180;
+        let Δφ = (lat-prevLat) * Math.PI/180;
+        let Δλ = (lon-prevLon) * Math.PI/180;
+
+        let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        totalDistMeters += R * c;
+      }
+
+      if (prevEle !== null && ele !== null) {
+        let diff = ele - prevEle;
+        if (diff > 0) totalEleGain += diff;
+      }
+
+      prevLat = lat;
+      prevLon = lon;
+      prevEle = ele;
+    }
+
+    let totalKm = totalDistMeters / 1000;
+    let totalSecs = (endTime && startTime) ? (endTime - startTime) / 1000 : 1800;
+    if (totalSecs < 60) totalSecs = 1800;
+
+    let secPerKm = totalSecs / (totalKm > 0 ? totalKm : 5);
+    calibratedBaseSecPerKm = secPerKm;
+
+    parsedGpxData = {
+      dist: totalKm,
+      timeMin: Math.round(totalSecs / 60),
+      paceSec: secPerKm,
+      elevGain: Math.round(totalEleGain),
+      avgHr: hrCount > 0 ? Math.round(hrSum / hrCount) : 145
+    };
+
+    document.getElementById('metricsSelectorPanel').style.display = 'block';
+    document.getElementById('gpxStatsContainer').style.display = 'block';
+    updateDisplayedMetrics();
+  };
+  reader.readAsText(file);
+}
+
+function updateDisplayedMetrics() {
+  const grid = document.getElementById('gpxStatsGrid');
+  grid.innerHTML = '';
+
+  const showDist = document.getElementById('chkDist').checked;
+  const showTime = document.getElementById('chkTime').checked;
+  const showPace = document.getElementById('chkPace').checked;
+  const showElevation = document.getElementById('chkElevation').checked;
+  const showHR = document.getElementById('chkHR').checked;
+  const showEasy = document.getElementById('chkEasy').checked;
+
+  if (showDist) {
+    grid.innerHTML += `
+      <div class="gpx-stat-card">
+        <div class="gpx-stat-label-row">
+          <div class="gpx-stat-label">Distance</div>
+          <span class="info-tooltip" data-tooltip="Total horizontal ground distance covered during the recorded session.">i</span>
+        </div>
+        <div class="gpx-stat-value">${parsedGpxData.dist.toFixed(2)} km</div>
+      </div>`;
+  }
+  if (showTime) {
+    grid.innerHTML += `
+      <div class="gpx-stat-card">
+        <div class="gpx-stat-label-row">
+          <div class="gpx-stat-label">Moving Time</div>
+          <span class="info-tooltip" data-tooltip="Total active elapsed duration from start timestamp to finish.">i</span>
+        </div>
+        <div class="gpx-stat-value">${parsedGpxData.timeMin} min</div>
+      </div>`;
+  }
+  if (showPace) {
+    grid.innerHTML += `
+      <div class="gpx-stat-card">
+        <div class="gpx-stat-label-row">
+          <div class="gpx-stat-label">Average Pace</div>
+          <span class="info-tooltip" data-tooltip="Overall average time taken to complete each kilometer.">i</span>
+        </div>
+        <div class="gpx-stat-value">${formatSecToPace(parsedGpxData.paceSec)} /km</div>
+      </div>`;
+  }
+  if (showElevation) {
+    grid.innerHTML += `
+      <div class="gpx-stat-card">
+        <div class="gpx-stat-label-row">
+          <div class="gpx-stat-label">Elevation Gain</div>
+          <span class="info-tooltip" data-tooltip="Cumulative upward vertical ascent accumulated across the route.">i</span>
+        </div>
+        <div class="gpx-stat-value">${parsedGpxData.elevGain} m</div>
+      </div>`;
+  }
+  if (showHR) {
+    grid.innerHTML += `
+      <div class="gpx-stat-card">
+        <div class="gpx-stat-label-row">
+          <div class="gpx-stat-label">Average Heart Rate</div>
+          <span class="info-tooltip" data-tooltip="Mean cardiovascular heart rate recorded via sensor tags in the GPX.">i</span>
+        </div>
+        <div class="gpx-stat-value">${parsedGpxData.avgHr} bpm</div>
+      </div>`;
+  }
+  if (showEasy) {
+    grid.innerHTML += `
+      <div class="gpx-stat-card">
+        <div class="gpx-stat-label-row">
+          <div class="gpx-stat-label">Calibrated Easy</div>
+          <span class="info-tooltip" data-tooltip="Automatically calculated Zone 2 recovery pace (~15% slower than your average pace).">i</span>
+        </div>
+        <div class="gpx-stat-value">${formatSecToPace(parsedGpxData.paceSec * 1.15)} /km</div>
+      </div>`;
+  }
+}
+
+function renderPresetsBar() {
+  const bar = document.getElementById('presetsBar');
+  bar.innerHTML = '';
+  const currentPresets = SPORT_CONFIGS[currentSport].presets;
+  currentPresets.forEach(p => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'preset-btn';
+    btn.textContent = p.label;
+    btn.onclick = () => loadPreset(p.key);
+    bar.appendChild(btn);
+  });
+}
+
+function loadPreset(presetKey) {
+  let base = calibratedBaseSecPerKm;
+  let fastPace = formatSecToPace(base * 0.8);
+  let midFastPace = formatSecToPace(base * 0.9);
+  let slowPace = formatSecToPace(base * 1.15);
+  let longPace = formatSecToPace(base * 1.25);
+
+  if (presetKey === 'easyRun') {
+    document.getElementById('workoutName').value = "Calibrated Easy Run";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' },
+      { type: 'interval', cond: 'time (minutes)', duration: 45, target: 'pace', p1: slowPace, p2: formatSecToPace(base * 1.35) },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'longRun') {
+    document.getElementById('workoutName').value = "Calibrated Long Run";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
+      { type: 'interval', cond: 'time (minutes)', duration: 75, target: 'pace', p1: longPace, p2: formatSecToPace(base * 1.4) },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'tempo') {
+    document.getElementById('workoutName').value = "Calibrated Tempo Run";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
+      { type: 'interval', cond: 'time (minutes)', duration: 25, target: 'pace', p1: midFastPace, p2: formatSecToPace(base * 0.98) },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'norwegian4x4') {
+    document.getElementById('workoutName').value = "4×4 Norwegian Intervals (Calibrated)";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
+      { type: 'repeat', iterations: 4, steps: [
+          { type: 'interval', cond: 'time (minutes)', duration: 4, target: 'pace', p1: fastPace, p2: midFastPace },
+          { type: 'recovery', cond: 'time (minutes)', duration: 3, target: 'no target', p1: '', p2: '' }
+        ]
+      },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+    ];
+  } else {
+    document.getElementById('workoutName').value = "Custom Session";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
+      { type: 'interval', cond: 'time (minutes)', duration: 20, target: 'pace', p1: midFastPace, p2: slowPace },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+    ];
+  }
+  renderSteps();
+  updateAutoDescription();
+}
+
+function updateAutoDescription() {
+  let parts = [];
+  stepsConfig.forEach(s => {
+    if (s.type === 'repeat') {
+      let subParts = s.steps.map(sub => {
+        let u = sub.cond.includes('minute') ? 'm' : (sub.cond.includes('distance') ? (sub.cond.includes('kilometer') ? 'km' : (sub.cond.includes('mile') ? 'mi' : 'm')) : 's');
+        return `${sub.duration}${u} ${sub.type}`;
+      }).join('/');
+      parts.push(`${s.iterations}x(${subParts})`);
+    } else {
+      let u = s.cond.includes('minute') ? 'm' : (s.cond.includes('distance') ? (s.cond.includes('kilometer') ? 'km' : (s.cond.includes('mile') ? 'mi' : 'm')) : 's');
+      parts.push(`${s.duration}${u} ${s.type}`);
+    }
+  });
+  document.getElementById('workoutDesc').value = parts.join(', ');
+  updatePreviewGraph();
+}
+
+function updatePreviewGraph() {
+  const graphContainer = document.getElementById('visualGraphBars');
+  const durationLabel = document.getElementById('graphTotalDuration');
+  graphContainer.innerHTML = '';
+
+  let flatSteps = [];
+  let totalSecs = 0;
+
+  stepsConfig.forEach(s => {
+    if (s.type === 'repeat') {
+      for (let i = 0; i < s.iterations; i++) {
+        s.steps.forEach(sub => {
+          let secs = sub.cond.includes('minute') ? sub.duration * 60 : (sub.cond === 'time' ? sub.duration : (sub.cond.includes('kilometer') ? sub.duration * 300 : (sub.cond.includes('mile') ? sub.duration * 480 : sub.duration * 1.2)));
+          let u = sub.cond.includes('minute') ? 'm' : (sub.cond.includes('distance') ? (sub.cond.includes('kilometer') ? 'km' : (sub.cond.includes('mile') ? 'mi' : 'm')) : 's');
+          flatSteps.push({ type: sub.type, secs: secs, label: `${sub.duration}${u}` });
+          totalSecs += secs;
+        });
+      }
+    } else {
+      let secs = s.cond.includes('minute') ? s.duration * 60 : (s.cond === 'time' ? s.duration : (s.cond.includes('kilometer') ? s.duration * 300 : (s.cond.includes('mile') ? s.duration * 480 : s.duration * 1.2)));
+      let u = s.cond.includes('minute') ? 'm' : (s.cond.includes('distance') ? (s.cond.includes('kilometer') ? 'km' : (s.cond.includes('mile') ? 'mi' : 'm')) : 's');
+      flatSteps.push({ type: s.type, secs: secs, label: `${s.duration}${u}` });
+      totalSecs += secs;
+    }
+  });
+
+  durationLabel.textContent = `Total: ~${Math.round(totalSecs / 60)} min`;
+
+  if (flatSteps.length === 0) {
+    graphContainer.innerHTML = '<div style="color: var(--text-muted); font-size: 0.85em; margin: auto;">No steps defined</div>';
+    return;
+  }
+
+  let maxSecs = Math.max(...flatSteps.map(st => st.secs), 60);
+
+  flatSteps.forEach(step => {
+    let barWrapper = document.createElement('div');
+    barWrapper.className = 'graph-bar-wrapper';
+
+    let bar = document.createElement('div');
+    bar.className = `graph-bar bar-${step.type}`;
+    
+    let heightPercent = Math.max(25, (step.secs / maxSecs) * 100);
+    bar.style.height = `${heightPercent}%`;
+
+    let label = document.createElement('span');
+    label.className = 'graph-bar-label';
+    label.textContent = step.label;
+
+    barWrapper.appendChild(bar);
+    barWrapper.appendChild(label);
+    graphContainer.appendChild(barWrapper);
+  });
+}
 
 function switchSport(sportKey) {
   currentSport = sportKey;
@@ -375,7 +976,11 @@ function switchSport(sportKey) {
   } else {
     specificContainer.innerHTML = '';
   }
-  renderSteps();
+
+  renderPresetsBar();
+  if (sportKey === 'running') loadPreset('norwegian4x4');
+  else if (sportKey === 'cycling') loadPreset('bikeSweetSpot');
+  else if (sportKey === 'swimming') loadPreset('swimIntervals');
 }
 
 function renderSteps() {
@@ -384,6 +989,7 @@ function renderSteps() {
   stepsConfig.forEach((step, idx) => {
     container.appendChild(createStepElement(step, idx));
   });
+  updateAutoDescription();
 }
 
 function renderTargetOptions(selectedTarget) {
@@ -408,7 +1014,7 @@ function createStepElement(step, idx) {
     let innerHtml = `
       <h4>Repeat Loop [${idx+1}] ${reorderButtons}</h4>
       <div class="row">
-        <div><label>Iterations</label><input type="number" value="${step.iterations}" onchange="stepsConfig[${idx}].iterations = parseInt(this.value)"></div>
+        <div><label>Iterations</label><input type="number" value="${step.iterations}" onchange="stepsConfig[${idx}].iterations = parseInt(this.value); updateAutoDescription();"></div>
       </div>
       <label style="margin-top:14px; margin-bottom:8px;">Sub-steps Inside Loop:</label>
       <div style="padding-left: 12px; border-left: 2px solid var(--border-color);" id="subSteps_${idx}">
@@ -435,9 +1041,11 @@ function createStepElement(step, idx) {
             <option value="time" ${subStep.cond==='time'?'selected':''}>Seconds</option>
             <option value="time (minutes)" ${subStep.cond==='time (minutes)'?'selected':''}>Minutes</option>
             <option value="distance" ${subStep.cond==='distance'?'selected':''}>Meters</option>
+            <option value="distance (kilometers)" ${subStep.cond==='distance (kilometers)'?'selected':''}>Kilometers</option>
+            <option value="distance (miles)" ${subStep.cond==='distance (miles)'?'selected':''}>Miles</option>
             <option value="lap" ${subStep.cond==='lap'?'selected':''}>Lap Button</option>
           </select></div>
-          ${subStep.cond !== 'lap' ? `<div><label>Value</label><input type="number" value="${subStep.duration}" onchange="stepsConfig[${idx}].steps[${subIdx}].duration = parseFloat(this.value)"></div>` : ''}
+          ${subStep.cond !== 'lap' ? `<div><label>Value</label><input type="number" step="any" value="${subStep.duration}" onchange="stepsConfig[${idx}].steps[${subIdx}].duration = parseFloat(this.value); updateAutoDescription();"></div>` : ''}
           <div><label>Target</label><select onchange="stepsConfig[${idx}].steps[${subIdx}].target = this.value; renderSteps();">
             ${renderTargetOptions(subStep.target)}
           </select></div>
@@ -473,9 +1081,11 @@ function createStepElement(step, idx) {
           <option value="time" ${step.cond==='time'?'selected':''}>Seconds</option>
           <option value="time (minutes)" ${step.cond==='time (minutes)'?'selected':''}>Minutes</option>
           <option value="distance" ${step.cond==='distance'?'selected':''}>Meters</option>
+          <option value="distance (kilometers)" ${step.cond==='distance (kilometers)'?'selected':''}>Kilometers</option>
+          <option value="distance (miles)" ${step.cond==='distance (miles)'?'selected':''}>Miles</option>
           <option value="lap" ${step.cond==='lap'?'selected':''}>Lap Button</option>
         </select></div>
-        ${step.cond !== 'lap' ? `<div><label>Value</label><input type="number" value="${step.duration}" onchange="stepsConfig[${idx}].duration = parseFloat(this.value)"></div>` : ''}
+        ${step.cond !== 'lap' ? `<div><label>Value</label><input type="number" step="any" value="${step.duration}" onchange="stepsConfig[${idx}].duration = parseFloat(this.value); updateAutoDescription();"></div>` : ''}
         <div><label>Target</label><select onchange="stepsConfig[${idx}].target = this.value; renderSteps();">
           ${renderTargetOptions(step.target)}
         </select></div>
@@ -555,6 +1165,10 @@ function buildExecutableStepDTO(s, order) {
   let endVal = (s.cond === 'lap') ? null : (s.duration || 0);
   if (s.cond === 'time (minutes)') {
     endVal = endVal * 60;
+  } else if (s.cond === 'distance (kilometers)') {
+    endVal = endVal * 1000; // Garmin expects meters internally
+  } else if (s.cond === 'distance (miles)') {
+    endVal = endVal * 1609.344; // Garmin expects meters internally
   }
 
   let targetType = { workoutTargetTypeId: 1, workoutTargetTypeKey: "no.target", displayOrder: 1 };
@@ -584,7 +1198,10 @@ function buildExecutableStepDTO(s, order) {
     tVal2 = s.p2 ? parseFloat(s.p2) / 3.6 : null;
   }
 
-  let unitPref = s.cond === 'distance' ? { unitId: 1, unitKey: "meter", factor: 100 } : null;
+  let unitPref = null;
+  if (s.cond.includes('distance')) {
+    unitPref = { unitId: cond.unitId, unitKey: cond.unitKey, factor: cond.factor };
+  }
 
   return {
     type: "ExecutableStepDTO",
@@ -712,6 +1329,7 @@ document.getElementById('downloadBtn').addEventListener('click', () => {
   URL.revokeObjectURL(url);
 });
 
+renderPresetsBar();
 renderSteps();
 </script>
 </body>
