@@ -217,6 +217,39 @@
       pointer-events: none;
     }
 
+    /* Box Tooltip for header */
+    .header-tooltip-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .header-tooltip-wrapper:hover .box-tooltip {
+      display: block;
+    }
+
+    .box-tooltip {
+      display: none;
+      position: absolute;
+      top: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #090d16;
+      color: #f8fafc;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.75em;
+      font-weight: normal;
+      width: 260px;
+      text-align: left;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+      z-index: 20;
+      line-height: 1.4;
+      text-transform: none;
+    }
+
     .gpx-stat-value {
       font-size: 1.05em;
       color: var(--success);
@@ -482,15 +515,21 @@
   <h1>Garmin Workout Builder</h1>
   
   <div class="sport-tabs">
-    <button type="button" class="sport-tab active" onclick="switchSport('running')">🏃 Running</button>
-    <button type="button" class="sport-tab" onclick="switchSport('cycling')">🚴 Cycling</button>
-    <button type="button" class="sport-tab" onclick="switchSport('swimming')">🏊 Swimming</button>
+    <button type="button" class="sport-tab active" onclick="switchSport('running', this)">🏃 Running</button>
+    <button type="button" class="sport-tab" onclick="switchSport('cycling', this)">🚴 Cycling</button>
+    <button type="button" class="sport-tab" onclick="switchSport('swimming', this)">🏊 Swimming</button>
   </div>
 
   <!-- GPX Analyzer & Calibrator Box -->
   <div class="gpx-analyzer-box">
-    <div style="font-size: 0.9em; font-weight: 700; margin-bottom: 8px; color: var(--text-main);">📈 Calibrate Paces from Morning Workout GPX</div>
-    <label class="gpx-upload-label" for="gpxFileInput">Upload Morning Run GPX</label>
+    <div style="font-size: 0.9em; font-weight: 700; margin-bottom: 8px; color: var(--text-main); display: flex; align-items: center; justify-content: center; gap: 6px;">
+      <span>Calibrate Workout GPX</span>
+      <span class="header-tooltip-wrapper">
+        <span class="info-tooltip">i</span>
+        <span class="box-tooltip">Import a past workout GPX file to extract key metrics. These metrics are used to automatically calibrate your target intensity levels and setup your structured workouts.</span>
+      </span>
+    </div>
+    <label class="gpx-upload-label" for="gpxFileInput">Upload GPX</label>
     <input type="file" id="gpxFileInput" accept=".gpx" style="display:none" onchange="parseGpxFile(event)">
     
     <!-- Checkbox Metric Selector Panel -->
@@ -863,6 +902,28 @@ function loadPreset(presetKey) {
       { type: 'interval', cond: 'time (minutes)', duration: 25, target: 'pace', p1: midFastPace, p2: formatSecToPace(base * 0.98) },
       { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
     ];
+  } else if (presetKey === 'threshold') {
+    document.getElementById('workoutName').value = "Threshold Session";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '' },
+      { type: 'repeat', iterations: 3, steps: [
+          { type: 'interval', cond: 'time (minutes)', duration: 8, target: 'pace', p1: '4:05', p2: '4:15' },
+          { type: 'recovery', cond: 'time (minutes)', duration: 2, target: 'no target', p1: '', p2: '' }
+        ]
+      },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'vo2max') {
+    document.getElementById('workoutName').value = "VO₂max Intervals";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '' },
+      { type: 'repeat', iterations: 5, steps: [
+          { type: 'interval', cond: 'time (minutes)', duration: 3, target: 'pace', p1: '3:45', p2: '4:00' },
+          { type: 'recovery', cond: 'time (minutes)', duration: 3, target: 'no target', p1: '', p2: '' }
+        ]
+      },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' }
+    ];
   } else if (presetKey === 'norwegian4x4') {
     document.getElementById('workoutName').value = "4×4 Norwegian Intervals (Calibrated)";
     stepsConfig = [
@@ -874,12 +935,134 @@ function loadPreset(presetKey) {
       },
       { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
     ];
-  } else {
-    document.getElementById('workoutName').value = "Custom Session";
+  } else if (presetKey === 'norwegian4x2') {
+    document.getElementById('workoutName').value = "4×2 Norwegian Intervals";
     stepsConfig = [
       { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
-      { type: 'interval', cond: 'time (minutes)', duration: 20, target: 'pace', p1: midFastPace, p2: slowPace },
+      { type: 'repeat', iterations: 5, steps: [
+          { type: 'interval', cond: 'time (minutes)', duration: 2, target: 'pace', p1: '3:50', p2: '4:05' },
+          { type: 'recovery', cond: 'time (minutes)', duration: 2, target: 'no target', p1: '', p2: '' }
+        ]
+      },
       { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'fartlek') {
+    document.getElementById('workoutName').value = "Fartlek Session";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
+      { type: 'repeat', iterations: 6, steps: [
+          { type: 'interval', cond: 'time', duration: 60, target: 'pace', p1: '3:50', p2: '4:10' },
+          { type: 'recovery', cond: 'time', duration: 90, target: 'no target', p1: '', p2: '' }
+        ]
+      },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'progression') {
+    document.getElementById('workoutName').value = "Progression Run";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' },
+      { type: 'interval', cond: 'time (minutes)', duration: 15, target: 'pace', p1: '5:15', p2: '5:30' },
+      { type: 'interval', cond: 'time (minutes)', duration: 15, target: 'pace', p1: '4:45', p2: '5:00' },
+      { type: 'interval', cond: 'time (minutes)', duration: 10, target: 'pace', p1: '4:15', p2: '4:30' },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'hillRepeats') {
+    document.getElementById('workoutName').value = "Hill Repeats";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '' },
+      { type: 'repeat', iterations: 8, steps: [
+          { type: 'interval', cond: 'time', duration: 90, target: 'heart rate', p1: '165', p2: '180' },
+          { type: 'recovery', cond: 'time', duration: 90, target: 'no target', p1: '', p2: '' }
+        ]
+      },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'recoveryRun') {
+    document.getElementById('workoutName').value = "Recovery Run";
+    stepsConfig = [
+      { type: 'interval', cond: 'time (minutes)', duration: 30, target: 'heart rate', p1: '115', p2: '130' },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'raceSim') {
+    document.getElementById('workoutName').value = "Race Simulation";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'no target', p1: '', p2: '' },
+      { type: 'interval', cond: 'time (minutes)', duration: 20, target: 'pace', p1: '4:00', p2: '4:05' },
+      { type: 'recovery', cond: 'time (minutes)', duration: 3, target: 'no target', p1: '', p2: '' },
+      { type: 'interval', cond: 'time (minutes)', duration: 10, target: 'pace', p1: '3:55', p2: '4:00' },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'bikeRecovery') {
+    document.getElementById('workoutName').value = "Recovery Spin";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'power', p1: '100', p2: '130' },
+      { type: 'interval', cond: 'time (minutes)', duration: 40, target: 'power', p1: '130', p2: '160' },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '90', p2: '110' }
+    ];
+  } else if (presetKey === 'bikeEndurance') {
+    document.getElementById('workoutName').value = "Endurance Ride";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '140', p2: '170' },
+      { type: 'interval', cond: 'time (minutes)', duration: 90, target: 'power', p1: '180', p2: '210' },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 15, target: 'power', p1: '120', p2: '150' }
+    ];
+  } else if (presetKey === 'bikeSweetSpot') {
+    document.getElementById('workoutName').value = "Sweet Spot Intervals";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '150', p2: '180' },
+      { type: 'repeat', iterations: 3, steps: [
+          { type: 'interval', cond: 'time (minutes)', duration: 12, target: 'power', p1: '235', p2: '255' },
+          { type: 'recovery', cond: 'time (minutes)', duration: 5, target: 'power', p1: '130', p2: '150' }
+        ]
+      },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '120', p2: '140' }
+    ];
+  } else if (presetKey === 'bikeThreshold') {
+    document.getElementById('workoutName').value = "FTP Builder";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '150', p2: '180' },
+      { type: 'repeat', iterations: 2, steps: [
+          { type: 'interval', cond: 'time (minutes)', duration: 20, target: 'power', p1: '260', p2: '280' },
+          { type: 'recovery', cond: 'time (minutes)', duration: 5, target: 'power', p1: '130', p2: '150' }
+        ]
+      },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '120', p2: '140' }
+    ];
+  } else if (presetKey === 'bikeVO2') {
+    document.getElementById('workoutName').value = "Power VO₂max";
+    stepsConfig = [
+      { type: 'warmup', cond: 'time (minutes)', duration: 15, target: 'power', p1: '150', p2: '180' },
+      { type: 'repeat', iterations: 5, steps: [
+          { type: 'interval', cond: 'time (minutes)', duration: 3, target: 'power', p1: '320', p2: '350' },
+          { type: 'recovery', cond: 'time (minutes)', duration: 3, target: 'power', p1: '130', p2: '150' }
+        ]
+      },
+      { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'power', p1: '120', p2: '140' }
+    ];
+  } else if (presetKey === 'swimWarmup') {
+    document.getElementById('workoutName').value = "Technique Warmup";
+    stepsConfig = [
+      { type: 'warmup', cond: 'distance', duration: 400, target: 'no target', p1: '', p2: '' },
+      { type: 'interval', cond: 'distance', duration: 200, target: 'swim instruction', p1: '', p2: '' },
+      { type: 'cooldown', cond: 'distance', duration: 100, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'swimEndurance') {
+    document.getElementById('workoutName').value = "Continuous Endurance Swim";
+    stepsConfig = [
+      { type: 'warmup', cond: 'distance', duration: 300, target: 'no target', p1: '', p2: '' },
+      { type: 'interval', cond: 'distance', duration: 1500, target: 'no target', p1: '', p2: '' },
+      { type: 'cooldown', cond: 'distance', duration: 200, target: 'no target', p1: '', p2: '' }
+    ];
+  } else if (presetKey === 'swimIntervals') {
+    document.getElementById('workoutName').value = "Distance Repeats";
+    stepsConfig = [
+      { type: 'warmup', cond: 'distance', duration: 300, target: 'no target', p1: '', p2: '' },
+      { type: 'repeat', iterations: 10, steps: [
+          { type: 'interval', cond: 'distance', duration: 100, target: 'no target', p1: '', p2: '' },
+          { type: 'recovery', cond: 'time', duration: 20, target: 'no target', p1: '', p2: '' }
+        ]
+      },
+      { type: 'cooldown', cond: 'distance', duration: 200, target: 'no target', p1: '', p2: '' }
     ];
   }
   renderSteps();
@@ -904,6 +1087,15 @@ function updateAutoDescription() {
   updatePreviewGraph();
 }
 
+function calcStepSecs(sub) {
+  if (sub.cond.includes('minute')) return sub.duration * 60;
+  if (sub.cond === 'time') return sub.duration;
+  if (sub.cond.includes('kilometer')) return sub.duration * 300; 
+  if (sub.cond.includes('mile')) return sub.duration * 480;       
+  if (sub.cond === 'distance') return sub.duration * 1.2;          
+  return 60; 
+}
+
 function updatePreviewGraph() {
   const graphContainer = document.getElementById('visualGraphBars');
   const durationLabel = document.getElementById('graphTotalDuration');
@@ -916,14 +1108,14 @@ function updatePreviewGraph() {
     if (s.type === 'repeat') {
       for (let i = 0; i < s.iterations; i++) {
         s.steps.forEach(sub => {
-          let secs = sub.cond.includes('minute') ? sub.duration * 60 : (sub.cond === 'time' ? sub.duration : (sub.cond.includes('kilometer') ? sub.duration * 300 : (sub.cond.includes('mile') ? sub.duration * 480 : sub.duration * 1.2)));
+          let secs = calcStepSecs(sub);
           let u = sub.cond.includes('minute') ? 'm' : (sub.cond.includes('distance') ? (sub.cond.includes('kilometer') ? 'km' : (sub.cond.includes('mile') ? 'mi' : 'm')) : 's');
           flatSteps.push({ type: sub.type, secs: secs, label: `${sub.duration}${u}` });
           totalSecs += secs;
         });
       }
     } else {
-      let secs = s.cond.includes('minute') ? s.duration * 60 : (s.cond === 'time' ? s.duration : (s.cond.includes('kilometer') ? s.duration * 300 : (s.cond.includes('mile') ? s.duration * 480 : s.duration * 1.2)));
+      let secs = calcStepSecs(s);
       let u = s.cond.includes('minute') ? 'm' : (s.cond.includes('distance') ? (s.cond.includes('kilometer') ? 'km' : (s.cond.includes('mile') ? 'mi' : 'm')) : 's');
       flatSteps.push({ type: s.type, secs: secs, label: `${s.duration}${u}` });
       totalSecs += secs;
@@ -959,10 +1151,12 @@ function updatePreviewGraph() {
   });
 }
 
-function switchSport(sportKey) {
+function switchSport(sportKey, tabElement) {
   currentSport = sportKey;
   document.querySelectorAll('.sport-tab').forEach(tab => tab.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+  if (tabElement) {
+    tabElement.classList.add('active');
+  }
   
   const specificContainer = document.getElementById('sportSpecificConfig');
   if (sportKey === 'swimming') {
@@ -1166,9 +1360,9 @@ function buildExecutableStepDTO(s, order) {
   if (s.cond === 'time (minutes)') {
     endVal = endVal * 60;
   } else if (s.cond === 'distance (kilometers)') {
-    endVal = endVal * 1000; // Garmin expects meters internally
+    endVal = endVal * 1000;
   } else if (s.cond === 'distance (miles)') {
-    endVal = endVal * 1609.344; // Garmin expects meters internally
+    endVal = endVal * 1609.344;
   }
 
   let targetType = { workoutTargetTypeId: 1, workoutTargetTypeKey: "no.target", displayOrder: 1 };
