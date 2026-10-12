@@ -145,176 +145,6 @@
       box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
     }
 
-    /* GPX Analyzer Box */
-    .gpx-analyzer-box {
-      background: rgba(6, 182, 212, 0.05);
-      border: 2px dashed rgba(6, 182, 212, 0.3);
-      border-radius: 16px;
-      padding: 18px 20px;
-      margin-bottom: 24px;
-      text-align: center;
-      transition: all 0.2s;
-    }
-
-    .gpx-analyzer-box:hover {
-      border-color: var(--accent);
-    }
-
-    .gpx-upload-label {
-      cursor: pointer;
-      display: inline-block;
-      background: var(--accent);
-      color: #ffffff;
-      font-weight: 700;
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-size: 0.9em;
-      transition: all 0.2s;
-    }
-
-    .gpx-upload-label:hover {
-      background: var(--accent-hover);
-    }
-
-    .metrics-selector-panel {
-      margin-top: 14px;
-      text-align: left;
-      background: var(--sub-card);
-      padding: 12px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      display: none;
-    }
-
-    .metrics-selector-title {
-      font-size: 0.75em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .metrics-checkboxes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 0.85em;
-    }
-
-    .metrics-checkboxes label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-main);
-      cursor: pointer;
-      text-transform: none;
-      font-weight: 500;
-    }
-
-    .gpx-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-      margin-top: 14px;
-      text-align: left;
-    }
-
-    .gpx-stat-card {
-      background: var(--sub-card);
-      border: 1px solid var(--border-color);
-      padding: 10px 14px;
-      border-radius: 10px;
-      position: relative;
-    }
-
-    .gpx-stat-label-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .gpx-stat-label {
-      font-size: 0.7em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    /* Tooltip style */
-    .info-tooltip {
-      cursor: help;
-      color: var(--accent);
-      font-size: 0.75em;
-      font-weight: bold;
-      border: 1px solid var(--accent);
-      border-radius: 50%;
-      width: 14px;
-      height: 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .info-tooltip:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--bg-card);
-      color: var(--text-main);
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 0.8em;
-      font-weight: normal;
-      white-space: nowrap;
-      border: 1px solid var(--border-color);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    /* Box Tooltip for header */
-    .header-tooltip-wrapper {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .header-tooltip-wrapper:hover .box-tooltip {
-      display: block;
-    }
-
-    .box-tooltip {
-      display: none;
-      position: absolute;
-      top: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--bg-card);
-      color: var(--text-main);
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 0.75em;
-      font-weight: normal;
-      width: 260px;
-      text-align: left;
-      border: 1px solid var(--border-color);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-      z-index: 20;
-      line-height: 1.4;
-      text-transform: none;
-    }
-
-    .gpx-stat-value {
-      font-size: 1.05em;
-      color: var(--success);
-      font-weight: 700;
-      margin-top: 4px;
-    }
-
     .presets-container {
       margin-bottom: 24px;
       background: var(--sub-card);
@@ -804,6 +634,93 @@
       box-shadow: 0 6px 16px rgba(6, 182, 212, 0.35);
       transform: translateY(-1px);
     }
+
+    .btn-import-intervals {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+    }
+
+    .btn-import-intervals:hover {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* Output Format Selector Tabs */
+    .format-tabs {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .format-tab {
+      padding: 10px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-input);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95em;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .format-tab:hover {
+      border-color: var(--accent);
+      color: var(--text-main);
+    }
+
+    .format-tab.active {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+    }
+
+    .format-tab.active-intervals {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: #f59e0b;
+      color: #f59e0b;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+    }
+
+    .format-tab.active-fit {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: #10b981;
+      color: #10b981;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+    }
+
+    .btn-download-fit {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-download-fit:hover {
+      background: linear-gradient(135deg, #059669, #047857);
+      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+      transform: translateY(-1px);
+    }
+
+    /* JSON File Dropzone */
+    .json-dropzone {
+      border: 2px dashed var(--border-color);
+      border-radius: 14px;
+      padding: 22px 16px;
+      text-align: center;
+      background: var(--bg-input);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .json-dropzone:hover, .json-dropzone.dragover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
   </style>
 </head>
 <body>
@@ -817,53 +734,11 @@
     <button type="button" class="sport-tab" onclick="switchSport('swimming', this)">🏊 Swimming</button>
   </div>
 
-  <!-- GPX Analyzer & Calibrator Box -->
-  <div class="gpx-analyzer-box">
-    <div style="font-size: 0.9em; font-weight: 700; margin-bottom: 8px; color: var(--text-main); display: flex; align-items: center; justify-content: center; gap: 6px;">
-      <span>Calibrate Workout GPX</span>
-      <span class="header-tooltip-wrapper">
-        <span class="info-tooltip">i</span>
-        <span class="box-tooltip">Import a past workout GPX file to extract key metrics. These metrics are used to automatically calibrate your target intensity levels and setup your structured workouts.</span>
-      </span>
-    </div>
-
-    <!-- Effort Context Dropdown -->
-    <div style="margin-bottom: 14px; text-align: center;">
-      <label for="effortSelect" style="display:inline-block; margin-right:8px; color:var(--text-main); font-size: 0.85em;">Session Effort:</label>
-      <select id="effortSelect" style="width:auto; display:inline-block; padding: 6px 12px; border-radius: 8px; font-size: 0.85em;">
-        <option value="auto">Auto-Detect (HR Zone 2)</option>
-        <option value="easy">Easy Aerobic (1.0x)</option>
-        <option value="tempo">Tempo / Threshold (1.15x)</option>
-        <option value="race">All-Out / Race (1.25x)</option>
-      </select>
-    </div>
-
-    <label class="gpx-upload-label" for="gpxFileInput">Upload GPX</label>
-    <input type="file" id="gpxFileInput" accept=".gpx" style="display:none" onchange="parseGpxFile(event)">
-    
-    <!-- Checkbox Metric Selector Panel -->
-    <div class="metrics-selector-panel" id="metricsSelectorPanel">
-      <div class="metrics-selector-title">Select Metrics to Display & Calibrate With:</div>
-      <div class="metrics-checkboxes">
-        <label><input type="checkbox" id="chkDist" checked onchange="updateDisplayedMetrics()"> Distance</label>
-        <label><input type="checkbox" id="chkTime" checked onchange="updateDisplayedMetrics()"> Moving Time</label>
-        <label><input type="checkbox" id="chkPace" checked onchange="updateDisplayedMetrics()"> Average Pace</label>
-        <label><input type="checkbox" id="chkElevation" checked onchange="updateDisplayedMetrics()"> Elevation Gain</label>
-        <label><input type="checkbox" id="chkHR" checked onchange="updateDisplayedMetrics()"> Heart Rate</label>
-        <label><input type="checkbox" id="chkEasy" checked onchange="updateDisplayedMetrics()"> Calibrated Easy</label>
-      </div>
-    </div>
-
-    <div id="gpxStatsContainer" style="display:none">
-      <div class="gpx-stats-grid" id="gpxStatsGrid"></div>
-      <div style="margin-top: 14px; text-align: center;">
-        <button type="button" class="modern-btn btn-secondary btn-small" onclick="generateSmartWorkoutSuggestion()">✨ Workout of the Day Suggestion</button>
-      </div>
-    </div>
-  </div>
-
   <div class="presets-container">
-    <div class="presets-header">Quick Workout Templates</div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+      <div class="presets-header" style="margin-bottom: 0;">Quick Workout Templates</div>
+      <button type="button" class="modern-btn btn-secondary btn-small" onclick="openImportModalJson()">📥 Import Workout</button>
+    </div>
     <div class="presets-bar" id="presetsBar"></div>
   </div>
 
@@ -894,7 +769,10 @@
 
   <hr>
 
-  <h3>Workout Structure</h3>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+    <h3 style="margin: 0;">Workout Structure</h3>
+    <button type="button" class="modern-btn btn-secondary btn-small" onclick="openImportModalJson()">📥 Import Workout</button>
+  </div>
   <div id="stepsContainer"></div>
 
   <div class="btn-row">
@@ -906,21 +784,46 @@
   </div>
 
   <br>
-  <button type="button" class="modern-btn" id="generateBtn" style="width: 100%; padding: 14px; font-size: 1.05em; letter-spacing: 0.02em;">Generate Garmin JSON</button>
+  <button type="button" class="modern-btn" id="generateBtn" style="width: 100%; padding: 14px; font-size: 1.05em; letter-spacing: 0.02em;">Generate Workout (Garmin & Intervals.icu)</button>
 
   <div class="steps-preview" id="stepsPreview" style="display:none"></div>
   
-  <h2 style="margin-top: 32px; font-size: 1.25rem;">Generated Code Output</h2>
-  <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap;">
+  <h2 style="margin-top: 32px; font-size: 1.25rem;">Generated Workout Output</h2>
+  
+  <div class="format-tabs">
+    <button type="button" class="format-tab active" id="tabFormatGarmin" onclick="switchFormat('garmin')">🛰️ Garmin Connect (JSON)</button>
+    <button type="button" class="format-tab" id="tabFormatIntervals" onclick="switchFormat('intervals')">⚡ Intervals.icu (Workout Text)</button>
+    <button type="button" class="format-tab" id="tabFormatFit" onclick="switchFormat('fit')">💾 Garmin Device (.FIT Binary)</button>
+  </div>
+
+  <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; align-items: center;">
     <button type="button" class="modern-btn btn-import-garmin btn-small" id="importGarminBtn">🚀 Import to Garmin Connect</button>
+    <button type="button" class="modern-btn btn-import-intervals btn-small" id="importIntervalsBtn">⚡ Copy & Open Intervals.icu</button>
+    <button type="button" class="modern-btn btn-download-fit btn-small" id="downloadFitBtn" onclick="downloadFitWorkout()">💾 Download .fit</button>
+    <button type="button" class="modern-btn btn-secondary btn-small" id="importFitBtn" style="display:none;" onclick="openImportModalJson('fit')">📥 Import .fit</button>
     <button type="button" class="modern-btn btn-small" id="copyBtn">Copy JSON</button>
     <button type="button" class="modern-btn btn-secondary btn-small" id="downloadBtn">Download .json</button>
+    <button type="button" class="modern-btn btn-secondary btn-small" id="copyWorkoutNameBtn" onclick="copyWorkoutName(this)">📋 Copy Name</button>
   </div>
-  <pre id="outputJson">Click 'Generate Garmin JSON' or 'Import to Garmin Connect' to render code layout.</pre>
 
-  <div class="import-tip">
-    💡 To easily import the downloaded JSON into your account, use the 
-    <a href="https://chromewebstore.google.com/detail/faebbfokokipdpkbolpbpfadmgdbanpo?utm_source=item-share-cb" target="_blank">Garmin Workout Importer Chrome Extension</a>.
+  <div id="outputWorkoutInfoBar" style="display: flex; justify-content: space-between; align-items: center; background: var(--sub-card); padding: 8px 14px; border-radius: 8px 8px 0 0; border: 1px solid var(--border-color); border-bottom: none; font-size: 0.9em;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="color: var(--text-muted); font-size: 0.85em; text-transform: uppercase; font-weight: 700;">Workout Name:</span>
+      <strong id="outputWorkoutNameDisplay" style="color: var(--text-main);">Workout</strong>
+    </div>
+    <button type="button" class="modern-btn btn-secondary btn-small" style="padding: 3px 8px !important; font-size: 0.82em;" onclick="copyWorkoutName(this)">📋 Copy Name</button>
+  </div>
+  <pre id="outputJson" style="border-top-left-radius: 0; border-top-right-radius: 0; margin-top: 0;">Click 'Generate Workout' or choose an import option to render format layout.</pre>
+
+  <div class="import-tip" id="garminTip">
+    💡 <strong>Garmin Connect Tip:</strong> Use the 
+    <a href="https://chromewebstore.google.com/detail/faebbfokokipdpkbolpbpfadmgdbanpo?utm_source=item-share-cb" target="_blank">Garmin Workout Importer Chrome Extension</a> to paste and save the workout directly into Garmin Connect.
+  </div>
+  <div class="import-tip" id="intervalsTip" style="display:none;">
+    💡 <strong>Intervals.icu Tip:</strong> Open your <a href="https://intervals.icu" target="_blank">Intervals.icu</a> calendar or coaching library, click <strong>+ Add Workout</strong>, and paste the generated text directly into the description box!
+  </div>
+  <div class="import-tip" id="fitTip" style="display:none;">
+    💾 <strong>Garmin .FIT Tip:</strong> Download the binary <code>.fit</code> file and copy it directly to your watch via USB into the <code>GARMIN/Workouts/</code> (or <code>GARMIN/NewFiles/</code>) folder, or upload it to Intervals.icu or TrainingPeaks!
   </div>
 </div>
 
@@ -948,11 +851,91 @@
   </div>
 </div>
 
+<!-- Intervals.icu Import Guidance Modal -->
+<div id="intervalsGuideModal" class="modal-overlay" style="display:none;" onclick="closeIntervalsModal(event)">
+  <div class="modal-card" style="max-width: 580px;" onclick="event.stopPropagation()">
+    <button type="button" class="modal-close-btn" onclick="closeIntervalsModal()">&times;</button>
+    <div class="modal-header">
+      <span style="font-size: 1.4rem;">⚡</span>
+      <h3>Importing to Intervals.icu</h3>
+    </div>
+    <div class="modal-status-badge" style="background: rgba(245, 158, 11, 0.15); color: #f59e0b; border-color: rgba(245, 158, 11, 0.3);">
+      <span>✓</span> Intervals.icu Workout Text Copied to Clipboard!
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; background: var(--sub-card); padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; border: 1px solid var(--border-color);">
+      <div>
+        <span style="font-size: 0.8em; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; display: block;">Workout Name</span>
+        <strong id="modalWorkoutNameDisplay" style="font-size: 1.1em; color: var(--text-main);">Workout</strong>
+      </div>
+      <button type="button" class="modern-btn btn-secondary btn-small" onclick="copyWorkoutName(this)">📋 Copy Name</button>
+    </div>
+
+    <ol class="modal-steps">
+      <li><strong>Intervals.icu Opened:</strong> We launched <a href="https://intervals.icu" target="_blank">intervals.icu</a> in a new tab.</li>
+      <li><strong>Add Workout:</strong> On your calendar or coaching library, click <strong>+ Add Workout</strong> (or click any day on your calendar).</li>
+      <li><strong>Paste & Done:</strong> Paste the copied text into the workout description box. Intervals.icu will automatically parse all intervals and visualize your targets!</li>
+    </ol>
+    <div style="background: var(--sub-card); border-left: 4px solid #f59e0b; border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; font-size: 0.88em; line-height: 1.5;">
+      <div style="font-weight: 700; color: #f59e0b; margin-bottom: 4px;">⌚ Why is Garmin Watch showing "No Target" for Pace?</div>
+      <div style="color: var(--text-muted);">
+        When Intervals.icu syncs workouts to Garmin watches, Garmin's API requires your <strong>Threshold Pace</strong> to calculate targets:
+        <ul style="margin: 6px 0 0 18px; padding: 0;">
+          <li>In Intervals.icu, go to <strong>Settings → Sport Settings → Running</strong> and ensure your <strong>Threshold Pace</strong> is set (e.g. <code>4:30 /km</code>). Without this, Intervals.icu drops pace targets on Garmin sync.</li>
+          <li>In the workout editor dialog, verify the <strong>Target</strong> selector is set to <strong>Pace</strong> (or Auto).</li>
+          <li>If you already synced the workout, delete it from your calendar and re-add it to trigger a fresh export to Garmin Connect.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <a href="https://intervals.icu" target="_blank" class="modern-btn btn-import-intervals btn-small" style="text-decoration:none;">Go to Intervals.icu Tab ↗</a>
+      <button type="button" class="modern-btn btn-secondary btn-small" onclick="closeIntervalsModal()">Got it</button>
+    </div>
+  </div>
+</div>
+
+<!-- Unified Workout Import Modal -->
+<div id="importWorkoutJsonModal" class="modal-overlay" style="display:none;" onclick="closeImportWorkoutModal(event)">
+  <div class="modal-card" style="max-width: 580px;" onclick="event.stopPropagation()">
+    <button type="button" class="modal-close-btn" onclick="closeImportWorkoutModal()">&times;</button>
+    <div class="modal-header">
+      <span style="font-size: 1.4rem;">📥</span>
+      <h3>Import Workout (.FIT, JSON or Text)</h3>
+    </div>
+    <p style="font-size: 0.9em; color: var(--text-muted); margin-top: -6px; margin-bottom: 14px; line-height: 1.5;">
+      Load an existing workout from a <strong>Garmin Device (.fit)</strong>, <strong>Garmin Connect (.json)</strong>, or <strong>Intervals.icu (.txt)</strong> to view and edit its steps, paces, and targets!
+    </p>
+
+    <!-- Format selector tabs for Import -->
+    <div class="format-tabs" style="margin-bottom: 14px;">
+      <button type="button" class="format-tab active" id="tabImportAuto" onclick="switchImportFormat('auto')">🪄 Auto-Detect</button>
+      <button type="button" class="format-tab" id="tabImportFit" onclick="switchImportFormat('fit')">💾 Garmin .FIT Binary</button>
+      <button type="button" class="format-tab" id="tabImportGarmin" onclick="switchImportFormat('garmin')">🛰️ Garmin JSON</button>
+      <button type="button" class="format-tab" id="tabImportIntervals" onclick="switchImportFormat('intervals')">⚡ Intervals.icu Text</button>
+    </div>
+
+    <!-- File Dropzone -->
+    <div id="jsonDropZone" class="json-dropzone" onclick="document.getElementById('workoutJsonFileInput').click()">
+      <input type="file" id="workoutJsonFileInput" accept=".fit,application/octet-stream,.json,application/json,.txt,text/plain" style="display:none;" onchange="handleWorkoutFileSelect(event)">
+      <div style="font-size: 1.8rem; margin-bottom: 6px;">📄</div>
+      <div style="font-weight: 700; color: var(--text-main); font-size: 0.95em;">Click to choose file or drag & drop here</div>
+      <div style="font-size: 0.8em; color: var(--text-muted); margin-top: 4px;">Supports Garmin Device .fit, Garmin Connect .json & Intervals.icu .txt</div>
+    </div>
+
+    <div style="text-align: center; margin: 12px 0; color: var(--text-muted); font-size: 0.8em; font-weight: 600; letter-spacing: 0.05em;">— OR PASTE CONTENT DIRECTLY —</div>
+
+    <textarea id="importJsonTextarea" placeholder="Paste your Garmin workout JSON or Intervals.icu workout text here..." style="width: 100%; height: 120px; box-sizing: border-box; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-input); color: var(--text-main); font-family: 'Courier New', monospace; font-size: 0.85em; resize: vertical;"></textarea>
+
+    <div class="modal-actions" style="margin-top: 14px;">
+      <button type="button" class="modern-btn btn-secondary btn-small" onclick="closeImportWorkoutModal()">Cancel</button>
+      <button type="button" class="modern-btn btn-small" onclick="handlePastedWorkoutImport()">Load Workout</button>
+    </div>
+  </div>
+</div>
+
 <script>
 let currentSport = "running";
 let stepIdCounter = 7316001338;
-let calibratedBaseSecPerKm = 300; 
-let parsedGpxData = { dist: 0, timeMin: 0, paceSec: 300, elevGain: 0, avgHr: 0, calibratedEasyPace: 345 };
 let currentTheme = "dark";
 
 const SPORT_CONFIGS = {
@@ -1048,6 +1031,12 @@ function toggleTheme() {
 }
 
 function saveToLocalStorage() {
+  const name = document.getElementById('workoutName').value || 'Workout';
+  const nameDisp = document.getElementById('outputWorkoutNameDisplay');
+  if (nameDisp) nameDisp.textContent = name;
+  const modalNameDisp = document.getElementById('modalWorkoutNameDisplay');
+  if (modalNameDisp) modalNameDisp.textContent = name;
+
   const data = {
     currentSport,
     workoutName: document.getElementById('workoutName').value,
@@ -1067,6 +1056,12 @@ function loadFromLocalStorage() {
     currentSport = data.currentSport || 'running';
     document.getElementById('workoutName').value = data.workoutName || '';
     document.getElementById('workoutDesc').value = data.workoutDesc || '';
+    const name = data.workoutName || 'Workout';
+    const nameDisp = document.getElementById('outputWorkoutNameDisplay');
+    if (nameDisp) nameDisp.textContent = name;
+    const modalNameDisp = document.getElementById('modalWorkoutNameDisplay');
+    if (modalNameDisp) modalNameDisp.textContent = name;
+
     if (data.stepsConfig) stepsConfig = data.stepsConfig;
     if (data.poolLength && SPORT_CONFIGS.swimming) {
       SPORT_CONFIGS.swimming.poolLength = data.poolLength;
@@ -1112,235 +1107,6 @@ function formatSecToPace(secPerKm) {
   return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 }
 
-function parseGpxFile(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const effortSelected = document.getElementById('effortSelect').value;
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(e.target.result, "text/xml");
-    
-    const trkpts = xmlDoc.getElementsByTagName("trkpt");
-    if (trkpts.length === 0) {
-      alert("No track points found in GPX file.");
-      return;
-    }
-
-    let rawPoints = [];
-    let hrSum = 0, hrCount = 0;
-
-    for (let i = 0; i < trkpts.length; i++) {
-      let lat = parseFloat(trkpts[i].getAttribute("lat"));
-      let lon = parseFloat(trkpts[i].getAttribute("lon"));
-      let eleTag = trkpts[i].getElementsByTagName("ele")[0];
-      let timeTag = trkpts[i].getElementsByTagName("time")[0];
-      
-      let hrTag = trkpts[i].getElementsByTagName("ns3:hr")[0] || trkpts[i].getElementsByTagName("hr")[0];
-      let hr = null;
-      if (hrTag) {
-        let hrVal = parseInt(hrTag.textContent);
-        if (!isNaN(hrVal)) { 
-          hr = hrVal; 
-          hrSum += hrVal; 
-          hrCount++; 
-        }
-      }
-
-      let ele = eleTag ? parseFloat(eleTag.textContent) : 0;
-      let time = timeTag ? new Date(timeTag.textContent) : null;
-
-      if (!isNaN(lat) && !isNaN(lon)) {
-        rawPoints.push({ lat, lon, ele, time, hr });
-      }
-    }
-
-    if (rawPoints.length === 0) return;
-
-    let filteredPoints = [rawPoints[0]];
-    for (let i = 1; i < rawPoints.length; i++) {
-      let prev = filteredPoints[filteredPoints.length - 1];
-      let curr = rawPoints[i];
-      
-      let R = 6371e3;
-      let φ1 = prev.lat * Math.PI/180;
-      let φ2 = curr.lat * Math.PI/180;
-      let Δφ = (curr.lat - prev.lat) * Math.PI/180;
-      let Δλ = (curr.lon - prev.lon) * Math.PI/180;
-
-      let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ/2) * Math.sin(Δλ/2);
-      let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-      let dist = R * c;
-
-      if (dist >= 1.2) {
-        filteredPoints.push(curr);
-      } else if (curr.time && prev.time && (curr.time - prev.time) > 10000) {
-        filteredPoints.push(curr);
-      }
-    }
-
-    let totalDistMeters = 0;
-    let totalEleGain = 0;
-    let movingSecs = 0;
-    
-    // Tracking specific HR Zone 2 metrics
-    let hrZone2Secs = 0;
-    let hrZone2Meters = 0;
-
-    for (let i = 1; i < filteredPoints.length; i++) {
-      let prev = filteredPoints[i - 1];
-      let curr = filteredPoints[i];
-
-      let R = 6371e3;
-      let φ1 = prev.lat * Math.PI/180;
-      let φ2 = curr.lat * Math.PI/180;
-      let Δφ = (curr.lat - prev.lat) * Math.PI/180;
-      let Δλ = (curr.lon - prev.lon) * Math.PI/180;
-
-      let a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ/2) * Math.sin(Δλ/2);
-      let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-      let stepDist = R * c;
-      totalDistMeters += stepDist;
-
-      if (curr.ele > prev.ele) {
-        let eleDiff = curr.ele - prev.ele;
-        if (eleDiff < 10) totalEleGain += eleDiff;
-      }
-
-      if (curr.time && prev.time) {
-        let dt = (curr.time - prev.time) / 1000;
-        if (dt > 0 && dt < 45) {
-          movingSecs += dt;
-          
-          // Check if both points fall into a standard Zone 2 aerobic heart rate (130 - 145 bpm)
-          if (curr.hr !== null && prev.hr !== null && curr.hr >= 130 && curr.hr <= 145 && prev.hr >= 130 && prev.hr <= 145) {
-            hrZone2Secs += dt;
-            hrZone2Meters += stepDist;
-          }
-        }
-      }
-    }
-
-    let totalKm = totalDistMeters / 1000;
-    if (movingSecs <= 0 && filteredPoints.length > 1 && filteredPoints[filteredPoints.length-1].time && filteredPoints[0].time) {
-      movingSecs = (filteredPoints[filteredPoints.length-1].time - filteredPoints[0].time) / 1000;
-    }
-    if (movingSecs <= 0) movingSecs = 1648; 
-
-    let avgPaceOverall = movingSecs / (totalKm > 0 ? totalKm : 4.01);
-    calibratedBaseSecPerKm = avgPaceOverall;
-    
-    // Calculate final Easy Pace based on manual selection OR Heart Rate anchoring
-    let finalCalibratedEasyPace = avgPaceOverall;
-    
-    if (effortSelected === 'auto') {
-      if (hrZone2Meters > 500) {
-        // If we spent at least 500 meters in Zone 2 HR, use that pure data
-        finalCalibratedEasyPace = hrZone2Secs / (hrZone2Meters / 1000);
-      } else {
-        // Fallback guess if no HR data exists, based on average pace speed
-        finalCalibratedEasyPace = (avgPaceOverall < 300) ? avgPaceOverall * 1.15 : avgPaceOverall;
-      }
-    } else if (effortSelected === 'easy') {
-      finalCalibratedEasyPace = avgPaceOverall * 1.0;
-    } else if (effortSelected === 'tempo') {
-      finalCalibratedEasyPace = avgPaceOverall * 1.15;
-    } else if (effortSelected === 'race') {
-      finalCalibratedEasyPace = avgPaceOverall * 1.25;
-    }
-
-    parsedGpxData = {
-      dist: totalKm,
-      timeMin: Math.round(movingSecs / 60),
-      paceSec: avgPaceOverall,
-      elevGain: Math.round(totalEleGain),
-      avgHr: hrCount > 0 ? Math.round(hrSum / hrCount) : 142,
-      calibratedEasyPace: finalCalibratedEasyPace
-    };
-
-    document.getElementById('metricsSelectorPanel').style.display = 'block';
-    document.getElementById('gpxStatsContainer').style.display = 'block';
-    updateDisplayedMetrics();
-  };
-  reader.readAsText(file);
-}
-
-function updateDisplayedMetrics() {
-  const grid = document.getElementById('gpxStatsGrid');
-  grid.innerHTML = '';
-
-  const showDist = document.getElementById('chkDist').checked;
-  const showTime = document.getElementById('chkTime').checked;
-  const showPace = document.getElementById('chkPace').checked;
-  const showElevation = document.getElementById('chkElevation').checked;
-  const showHR = document.getElementById('chkHR').checked;
-  const showEasy = document.getElementById('chkEasy').checked;
-
-  if (showDist) {
-    grid.innerHTML += `
-      <div class="gpx-stat-card">
-        <div class="gpx-stat-label-row">
-          <div class="gpx-stat-label">Distance</div>
-          <span class="info-tooltip" data-tooltip="Total horizontal ground distance covered during the recorded session.">i</span>
-        </div>
-        <div class="gpx-stat-value">${parsedGpxData.dist.toFixed(2)} km</div>
-      </div>`;
-  }
-  if (showTime) {
-    grid.innerHTML += `
-      <div class="gpx-stat-card">
-        <div class="gpx-stat-label-row">
-          <div class="gpx-stat-label">Moving Time</div>
-          <span class="info-tooltip" data-tooltip="Total active elapsed duration from start timestamp to finish.">i</span>
-        </div>
-        <div class="gpx-stat-value">${parsedGpxData.timeMin} min</div>
-      </div>`;
-  }
-  if (showPace) {
-    grid.innerHTML += `
-      <div class="gpx-stat-card">
-        <div class="gpx-stat-label-row">
-          <div class="gpx-stat-label">Average Pace</div>
-          <span class="info-tooltip" data-tooltip="Overall average time taken to complete each kilometer.">i</span>
-        </div>
-        <div class="gpx-stat-value">${formatSecToPace(parsedGpxData.paceSec)} /km</div>
-      </div>`;
-  }
-  if (showElevation) {
-    grid.innerHTML += `
-      <div class="gpx-stat-card">
-        <div class="gpx-stat-label-row">
-          <div class="gpx-stat-label">Elevation Gain</div>
-          <span class="info-tooltip" data-tooltip="Cumulative upward vertical ascent accumulated across the route.">i</span>
-        </div>
-        <div class="gpx-stat-value">${parsedGpxData.elevGain} m</div>
-      </div>`;
-  }
-  if (showHR) {
-    grid.innerHTML += `
-      <div class="gpx-stat-card">
-        <div class="gpx-stat-label-row">
-          <div class="gpx-stat-label">Average Heart Rate</div>
-          <span class="info-tooltip" data-tooltip="Mean cardiovascular heart rate recorded via sensor tags in the GPX.">i</span>
-        </div>
-        <div class="gpx-stat-value">${parsedGpxData.avgHr} bpm</div>
-      </div>`;
-  }
-  if (showEasy) {
-    let mode = document.getElementById('effortSelect').value === 'auto' ? '(HR Anchored)' : '(Manual Multiplier)';
-    grid.innerHTML += `
-      <div class="gpx-stat-card">
-        <div class="gpx-stat-label-row">
-          <div class="gpx-stat-label">Calibrated Easy</div>
-          <span class="info-tooltip" data-tooltip="Your true Zone 2 easy pace calculated via ${mode}.">i</span>
-        </div>
-        <div class="gpx-stat-value">${formatSecToPace(parsedGpxData.calibratedEasyPace)} /km</div>
-      </div>`;
-  }
-}
-
 function renderPresetsBar() {
   const bar = document.getElementById('presetsBar');
   bar.innerHTML = '';
@@ -1356,31 +1122,30 @@ function renderPresetsBar() {
 }
 
 function loadPreset(presetKey) {
-  let base = calibratedBaseSecPerKm;
-  let fastPace = formatSecToPace(base * 0.8);
-  let midFastPace = formatSecToPace(base * 0.9);
-  let slowPace = formatSecToPace(parsedGpxData.calibratedEasyPace || (base * 1.15));
-  let longPace = formatSecToPace((parsedGpxData.calibratedEasyPace || (base * 1.15)) * 1.05);
+  let fastPace = "4:00";
+  let midFastPace = "4:15";
+  let slowPace = "5:30";
+  let longPace = "5:45";
 
   if (presetKey === 'easyRun') {
-    document.getElementById('workoutName').value = "Calibrated Easy Run";
+    document.getElementById('workoutName').value = "Easy Run";
     stepsConfig = [
       { type: 'warmup', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false },
-      { type: 'interval', cond: 'time (minutes)', duration: 45, target: 'pace', p1: slowPace, p2: formatSecToPace((parsedGpxData.calibratedEasyPace || base * 1.15) * 1.1), collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 45, target: 'pace', p1: slowPace, p2: "6:00", collapsed: false },
       { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'longRun') {
-    document.getElementById('workoutName').value = "Calibrated Long Run";
+    document.getElementById('workoutName').value = "Long Run";
     stepsConfig = [
       { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
-      { type: 'interval', cond: 'time (minutes)', duration: 75, target: 'pace', p1: longPace, p2: formatSecToPace((parsedGpxData.calibratedEasyPace || base * 1.15) * 1.15), collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 75, target: 'pace', p1: longPace, p2: "6:15", collapsed: false },
       { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'tempo') {
-    document.getElementById('workoutName').value = "Calibrated Tempo Run";
+    document.getElementById('workoutName').value = "Tempo Run";
     stepsConfig = [
       { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
-      { type: 'interval', cond: 'time (minutes)', duration: 25, target: 'pace', p1: midFastPace, p2: formatSecToPace(base * 0.98), collapsed: false },
+      { type: 'interval', cond: 'time (minutes)', duration: 25, target: 'pace', p1: midFastPace, p2: "4:30", collapsed: false },
       { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'threshold') {
@@ -1406,7 +1171,7 @@ function loadPreset(presetKey) {
       { type: 'cooldown', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false }
     ];
   } else if (presetKey === 'norwegian4x4') {
-    document.getElementById('workoutName').value = "4×4 Norwegian Intervals (Calibrated)";
+    document.getElementById('workoutName').value = "4×4 Norwegian Intervals";
     stepsConfig = [
       { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
       { type: 'repeat', iterations: 4, collapsed: false, steps: [
@@ -1903,49 +1668,6 @@ function paceToMps(paceStr) {
   return 1000 / (totalMin * 60);
 }
 
-function generateSmartWorkoutSuggestion() {
-  if (!parsedGpxData || parsedGpxData.dist === 0) {
-    alert("Please upload a recent GPX file first so the app can analyze your recent training load!");
-    return;
-  }
-
-  let base = parsedGpxData.calibratedEasyPace || calibratedBaseSecPerKm;
-  let suggestionTitle = "";
-  
-  if (parsedGpxData.dist > 15 || parsedGpxData.elevGain > 300) {
-    suggestionTitle = "Smart Recovery Run (Post-Hard Effort)";
-    document.getElementById('workoutName').value = suggestionTitle;
-    stepsConfig = [
-      { type: 'interval', cond: 'time (minutes)', duration: 30, target: 'heart rate', p1: '115', p2: '130', collapsed: false },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
-    ];
-  } else if (parsedGpxData.dist < 8) {
-    suggestionTitle = "Smart Threshold Builder";
-    document.getElementById('workoutName').value = suggestionTitle;
-    stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
-      { type: 'repeat', iterations: 4, collapsed: false, steps: [
-          { type: 'interval', cond: 'time (minutes)', duration: 5, target: 'pace', p1: formatSecToPace(base * 0.75), p2: formatSecToPace(base * 0.8) },
-          { type: 'recovery', cond: 'time (minutes)', duration: 2, target: 'no target', p1: '', p2: '' }
-        ]
-      },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
-    ];
-  } else {
-    suggestionTitle = "Smart Aerobic Endurance";
-    document.getElementById('workoutName').value = suggestionTitle;
-    stepsConfig = [
-      { type: 'warmup', cond: 'time (minutes)', duration: 10, target: 'no target', p1: '', p2: '', collapsed: false },
-      { type: 'interval', cond: 'time (minutes)', duration: 40, target: 'pace', p1: formatSecToPace(base * 0.95), p2: formatSecToPace(base * 1.05), collapsed: false },
-      { type: 'cooldown', cond: 'time (minutes)', duration: 5, target: 'no target', p1: '', p2: '', collapsed: false }
-    ];
-  }
-
-  renderSteps();
-  updateAutoDescription();
-  alert(`Based on your uploaded GPX file (${parsedGpxData.dist.toFixed(1)} km), we've generated your "${suggestionTitle}" for today!`);
-}
-
 function buildExecutableStepDTO(s, order) {
   const st = stepTypeMap[s.type] || stepTypeMap.interval;
   const cond = conditionTypeMap[s.cond] || conditionTypeMap.time;
@@ -2090,34 +1812,685 @@ function generateGarminJson() {
   return JSON.stringify(finalWorkout, null, 2);
 }
 
+let currentFormat = 'garmin'; // 'garmin' | 'intervals'
+
+function formatIntervalsDuration(cond, duration) {
+  if (cond === 'lap') return 'press lap';
+  const val = parseFloat(duration) || 0;
+  if (cond === 'time (minutes)') {
+    if (val % 1 === 0) return `${val}m`;
+    const totalSec = Math.round(val * 60);
+    const m = Math.floor(totalSec / 60);
+    const s = totalSec % 60;
+    if (m > 0 && s > 0) return `${m}m${s}s`;
+    if (m > 0) return `${m}m`;
+    return `${s}s`;
+  }
+  if (cond === 'time') {
+    if (val % 60 === 0 && val >= 60) return `${val / 60}m`;
+    return `${val}s`;
+  }
+  if (cond === 'distance') {
+    return `${val}mtr`; // Intervals.icu requires 'mtr' for meters
+  }
+  if (cond === 'distance (kilometers)') {
+    return `${val}km`;
+  }
+  if (cond === 'distance (miles)') {
+    return `${val}mi`;
+  }
+  return `${val}m`;
+}
+
+function formatIntervalsTarget(target, p1, p2, sport) {
+  if (!target || target === 'no target') return '';
+  p1 = (p1 || '').toString().trim();
+  p2 = (p2 || '').toString().trim();
+
+  if (target === 'pace') {
+    if (p1 && p2) {
+      const sp1 = paceToMps(p1);
+      const sp2 = paceToMps(p2);
+      if (sp1 && sp2 && sp1 < sp2) {
+        return `${p2}-${p1}/km Pace`;
+      }
+      return `${p1}-${p2}/km Pace`;
+    } else if (p1) {
+      return `${p1}/km Pace`;
+    }
+  } else if (target === 'power') {
+    if (p1 && p2) {
+      const isPercent = p1.includes('%') || p2.includes('%');
+      return isPercent ? `${p1.replace('%','')}-${p2.replace('%','')}%` : `${p1}-${p2}w`;
+    } else if (p1) {
+      return p1.includes('%') ? p1 : `${p1}w`;
+    }
+  } else if (target === 'heart rate') {
+    if (p1 && p2) {
+      const z1Match = p1.match(/^Z?([1-7])$/i);
+      const z2Match = p2.match(/^Z?([1-7])$/i);
+      if (z1Match && z2Match) {
+        return `Z${z1Match[1]}-Z${z2Match[1]} HR`;
+      }
+      return `${p1}-${p2}% HR`;
+    } else if (p1) {
+      const z1Match = p1.match(/^Z?([1-7])$/i);
+      if (z1Match) return `Z${z1Match[1]} HR`;
+      return p1.includes('%') ? `${p1} HR` : `${p1}% HR`;
+    }
+  } else if (target === 'cadence') {
+    if (p1) {
+      const unit = (sport === 'running') ? 'spm' : 'rpm';
+      return `${p1}${unit}`;
+    }
+  } else if (target === 'speed') {
+    if (p1 && p2) return `${p1}-${p2}km/h`;
+    if (p1) return `${p1}km/h`;
+  } else if (target === 'swim instruction') {
+    if (p1) return p1;
+  }
+  return '';
+}
+
+function formatIntervalsStep(s, prefix = '') {
+  const dur = formatIntervalsDuration(s.cond, s.duration);
+  const tgt = formatIntervalsTarget(s.target, s.p1, s.p2, currentSport);
+  let stepText = dur;
+  if (tgt) {
+    stepText += ` ${tgt}`;
+  }
+  if (prefix) {
+    return `- ${prefix} ${stepText}`.trim();
+  }
+  return `- ${stepText}`.trim();
+}
+
+function generateIntervalsIcuText() {
+  const workoutName = (document.getElementById('workoutName').value || "Workout").trim();
+  const workoutDesc = (document.getElementById('workoutDesc').value || "").trim();
+
+  let lines = [];
+  
+  // Workout Title at the top so it's readily accessible without scrolling
+  lines.push(`# ${workoutName}`);
+  lines.push('');
+
+  if (workoutDesc) {
+    lines.push(workoutDesc);
+    lines.push('');
+  }
+
+  stepsConfig.forEach((block) => {
+    if (block.type === 'repeat') {
+      lines.push(`${block.iterations}x`);
+      block.steps.forEach(sub => {
+        lines.push(formatIntervalsStep(sub));
+      });
+      lines.push('');
+    } else if (block.type === 'warmup') {
+      lines.push('Warmup');
+      lines.push(formatIntervalsStep(block));
+      lines.push('');
+    } else if (block.type === 'cooldown') {
+      lines.push('Cooldown');
+      lines.push(formatIntervalsStep(block));
+      lines.push('');
+    } else {
+      let label = block.type.charAt(0).toUpperCase() + block.type.slice(1);
+      lines.push(label);
+      lines.push(formatIntervalsStep(block));
+      lines.push('');
+    }
+  });
+
+  return lines.join('\n').trim();
+}
+
+// ==========================================
+// GARMIN BINARY .FIT WORKOUT ENCODER
+// ==========================================
+const fitCrcTable = [
+  0x0000, 0xCC01, 0xD801, 0x1400, 0xF001, 0x3C00, 0x2800, 0xE401,
+  0xA001, 0x6C00, 0x7800, 0xB401, 0x5000, 0x9C01, 0x8801, 0x4400
+];
+
+function updateFitCrc(crc, byte) {
+  let tmp = fitCrcTable[crc & 0xF];
+  crc = (crc >> 4) & 0x0FFF;
+  crc = crc ^ tmp ^ fitCrcTable[byte & 0xF];
+
+  tmp = fitCrcTable[crc & 0xF];
+  crc = (crc >> 4) & 0x0FFF;
+  crc = crc ^ tmp ^ fitCrcTable[(byte >> 4) & 0xF];
+
+  return crc;
+}
+
+class FitBinaryWriter {
+  constructor(initialSize = 4096) {
+    this.buffer = new Uint8Array(initialSize);
+    this.view = new DataView(this.buffer.buffer);
+    this.offset = 0;
+  }
+  ensure(bytes) {
+    if (this.offset + bytes > this.buffer.length) {
+      const next = new Uint8Array(Math.max(this.buffer.length * 2, this.offset + bytes));
+      next.set(this.buffer);
+      this.buffer = next;
+      this.view = new DataView(this.buffer.buffer);
+    }
+  }
+  writeUint8(val) {
+    this.ensure(1);
+    this.view.setUint8(this.offset, val & 0xFF);
+    this.offset += 1;
+  }
+  writeUint16(val) {
+    this.ensure(2);
+    this.view.setUint16(this.offset, val & 0xFFFF, true);
+    this.offset += 2;
+  }
+  writeUint32(val) {
+    this.ensure(4);
+    this.view.setUint32(this.offset, val >>> 0, true);
+    this.offset += 4;
+  }
+  writeString(str, fixedLen) {
+    this.ensure(fixedLen);
+    const enc = new TextEncoder().encode(str || '');
+    const maxLen = Math.min(enc.length, fixedLen - 1);
+    for (let i = 0; i < maxLen; i++) {
+      this.buffer[this.offset + i] = enc[i];
+    }
+    for (let i = maxLen; i < fixedLen; i++) {
+      this.buffer[this.offset + i] = 0;
+    }
+    this.offset += fixedLen;
+  }
+  getBytes() {
+    return this.buffer.subarray(0, this.offset);
+  }
+}
+
+function generateGarminFitFile() {
+  const workoutName = (document.getElementById('workoutName').value || "Workout").trim();
+  const sport = currentSport || 'running';
+  let sportId = 1; // 1 = running
+  if (sport === 'cycling') sportId = 2;
+  else if (sport === 'swimming') sportId = 5;
+
+  let fitSteps = [];
+  stepsConfig.forEach((block) => {
+    if (block.type === 'repeat') {
+      const startStepIdx = fitSteps.length;
+      block.steps.forEach(sub => {
+        fitSteps.push({
+          isRepeatStep: false,
+          name: sub.type.charAt(0).toUpperCase() + sub.type.slice(1),
+          step: sub
+        });
+      });
+      fitSteps.push({
+        isRepeatStep: true,
+        name: 'Repeat Loop',
+        repeatBackToIndex: startStepIdx,
+        iterations: block.iterations || 1
+      });
+    } else {
+      fitSteps.push({
+        isRepeatStep: false,
+        name: block.type.charAt(0).toUpperCase() + block.type.slice(1),
+        step: block
+      });
+    }
+  });
+
+  const dataWriter = new FitBinaryWriter();
+
+  // 1. Definition Message 0: File ID (Global Msg 0)
+  dataWriter.writeUint8(0x40); // Definition record, local message 0
+  dataWriter.writeUint8(0x00); // Reserved
+  dataWriter.writeUint8(0x00); // Architecture: 0 = Little Endian
+  dataWriter.writeUint16(0);   // Global Msg 0 (file_id)
+  dataWriter.writeUint8(5);   // 5 fields
+  dataWriter.writeUint8(0); dataWriter.writeUint8(1); dataWriter.writeUint8(0x00); // type (enum, 1 byte)
+  dataWriter.writeUint8(1); dataWriter.writeUint8(2); dataWriter.writeUint8(0x84); // manufacturer (uint16, 2 bytes)
+  dataWriter.writeUint8(2); dataWriter.writeUint8(2); dataWriter.writeUint8(0x84); // product (uint16, 2 bytes)
+  dataWriter.writeUint8(3); dataWriter.writeUint8(4); dataWriter.writeUint8(0x8C); // serial_number (uint32z, 4 bytes)
+  dataWriter.writeUint8(4); dataWriter.writeUint8(4); dataWriter.writeUint8(0x86); // time_created (uint32, 4 bytes)
+
+  // Data Message 0: File ID
+  dataWriter.writeUint8(0x00); // Data record, local message 0
+  dataWriter.writeUint8(5);    // type: 5 (workout)
+  dataWriter.writeUint16(1);   // manufacturer: 1 (Garmin)
+  dataWriter.writeUint16(0);   // product: 0
+  const fitSerial = ((Math.floor(Date.now() / 1000) ^ 0x5A5A5A5A) >>> 0);
+  dataWriter.writeUint32(fitSerial);
+  const fitTimeCreated = Math.max(0, Math.floor(Date.now() / 1000) - 631065600);
+  dataWriter.writeUint32(fitTimeCreated);
+
+  // 2. Definition Message 1: Workout (Global Msg 26 in FIT SDK Profile)
+  dataWriter.writeUint8(0x41); // Definition record, local message 1
+  dataWriter.writeUint8(0x00); // Reserved
+  dataWriter.writeUint8(0x00); // Little Endian
+  dataWriter.writeUint16(26);  // Global Msg 26 (workout)
+  dataWriter.writeUint8(4);   // 4 fields
+  dataWriter.writeUint8(4); dataWriter.writeUint8(1); dataWriter.writeUint8(0x00); // field 4 (sport), 1 byte, enum
+  dataWriter.writeUint8(5); dataWriter.writeUint8(4); dataWriter.writeUint8(0x8C); // field 5 (capabilities), 4 bytes, uint32z
+  dataWriter.writeUint8(6); dataWriter.writeUint8(2); dataWriter.writeUint8(0x84); // field 6 (num_valid_steps), 2 bytes, uint16
+  dataWriter.writeUint8(8); dataWriter.writeUint8(32); dataWriter.writeUint8(0x07); // field 8 (wkt_name), 32 bytes, string
+
+  // Data Message 1: Workout
+  dataWriter.writeUint8(0x01); // Data record, local message 1
+  dataWriter.writeUint8(sportId); // sport: 1 = running, 2 = cycling, 5 = swimming
+  dataWriter.writeUint32(0x00000020); // capabilities: TCX / standard workout
+  dataWriter.writeUint16(fitSteps.length); // num_valid_steps
+  dataWriter.writeString(workoutName, 32);
+
+  // 3. Definition Message 2: Workout Step (Global Msg 27 in FIT SDK Profile)
+  dataWriter.writeUint8(0x42); // Definition record, local message 2
+  dataWriter.writeUint8(0x00); // Reserved
+  dataWriter.writeUint8(0x00); // Little Endian
+  dataWriter.writeUint16(27);  // Global Msg 27 (workout_step)
+  dataWriter.writeUint8(9);   // 9 fields
+  dataWriter.writeUint8(254); dataWriter.writeUint8(2); dataWriter.writeUint8(0x84); // field 254 (message_index), 2 bytes, uint16
+  dataWriter.writeUint8(0); dataWriter.writeUint8(16); dataWriter.writeUint8(0x07);   // field 0 (wkt_step_name), 16 bytes, string
+  dataWriter.writeUint8(1); dataWriter.writeUint8(1); dataWriter.writeUint8(0x00);   // field 1 (duration_type), 1 byte, enum
+  dataWriter.writeUint8(2); dataWriter.writeUint8(4); dataWriter.writeUint8(0x86);   // field 2 (duration_value), 4 bytes, uint32
+  dataWriter.writeUint8(3); dataWriter.writeUint8(1); dataWriter.writeUint8(0x00);   // field 3 (target_type), 1 byte, enum
+  dataWriter.writeUint8(4); dataWriter.writeUint8(4); dataWriter.writeUint8(0x86);   // field 4 (target_value), 4 bytes, uint32
+  dataWriter.writeUint8(5); dataWriter.writeUint8(4); dataWriter.writeUint8(0x86);   // field 5 (custom_target_value_low), 4 bytes, uint32
+  dataWriter.writeUint8(6); dataWriter.writeUint8(4); dataWriter.writeUint8(0x86);   // field 6 (custom_target_value_high), 4 bytes, uint32
+  dataWriter.writeUint8(7); dataWriter.writeUint8(1); dataWriter.writeUint8(0x00);   // field 7 (intensity), 1 byte, enum
+
+  // Data Messages for each step:
+  fitSteps.forEach((fStep, index) => {
+    dataWriter.writeUint8(0x02); // Data record, local message 2
+    dataWriter.writeUint16(index); // message_index (0-indexed step number)
+
+    if (fStep.isRepeatStep) {
+      dataWriter.writeString('Repeat', 16);
+      dataWriter.writeUint8(6); // duration_type: 6 = repeat_until_steps_cmplt in FIT Profile
+      dataWriter.writeUint32(fStep.repeatBackToIndex); // duration_value: step index to repeat back to
+      dataWriter.writeUint8(2); // target_type: 2 = open
+      dataWriter.writeUint32(fStep.iterations); // target_value: iteration count
+      dataWriter.writeUint32(0); // custom_target_value_low: 0
+      dataWriter.writeUint32(0); // custom_target_value_high: 0
+      dataWriter.writeUint8(0); // intensity: 0 = active
+    } else {
+      const s = fStep.step;
+      const stepName = s.type ? (s.type.charAt(0).toUpperCase() + s.type.slice(1)) : 'Step';
+      dataWriter.writeString(stepName, 16);
+
+      let durType = 0; // 0 = time
+      let durVal = 0;
+      if (s.cond === 'lap') {
+        durType = 5; // duration_type: 5 = open (lap button) in FIT Profile
+        durVal = 0;
+      } else if (s.cond === 'time (minutes)') {
+        durType = 0; // time
+        durVal = Math.round((parseFloat(s.duration) || 0) * 60 * 1000);
+      } else if (s.cond === 'time') {
+        durType = 0; // time
+        durVal = Math.round((parseFloat(s.duration) || 0) * 1000);
+      } else if (s.cond === 'distance (kilometers)') {
+        durType = 1; // distance
+        durVal = Math.round((parseFloat(s.duration) || 0) * 1000 * 100); // cm
+      } else if (s.cond === 'distance (miles)') {
+        durType = 1; // distance
+        durVal = Math.round((parseFloat(s.duration) || 0) * 1609.344 * 100); // cm
+      } else if (s.cond === 'distance') {
+        durType = 1; // distance
+        durVal = Math.round((parseFloat(s.duration) || 0) * 100); // cm
+      }
+
+      let tgtType = 2; // 2 = open (no target)
+      let tgtVal = 0;
+      let lowVal = 0;
+      let highVal = 0;
+
+      if (s.target === 'pace' && s.p1) {
+        tgtType = 0; // 0 = speed in FIT Profile
+        tgtVal = 0;
+        const mps1 = paceToMps(s.p1);
+        const mps2 = s.p2 ? paceToMps(s.p2) : mps1;
+        if (mps1 && mps2) {
+          // Speed scale 1000 (mm/s): lower speed limit = slower pace, higher speed limit = faster pace
+          lowVal = Math.round(Math.min(mps1, mps2) * 1000);
+          highVal = Math.round(Math.max(mps1, mps2) * 1000);
+        }
+      } else if (s.target === 'power' && s.p1) {
+        tgtType = 4; // 4 = power in FIT Profile
+        tgtVal = 0;
+        const w1 = parseInt(s.p1, 10) || 0;
+        const w2 = parseInt(s.p2, 10) || w1;
+        // Absolute watts have +1000 offset in FIT SDK
+        lowVal = Math.min(w1, w2) + 1000;
+        highVal = Math.max(w1, w2) + 1000;
+      } else if (s.target === 'heart rate' && s.p1) {
+        tgtType = 1; // 1 = heart_rate in FIT Profile
+        const zMatch = s.p1.match(/^Z?([1-7])$/i);
+        if (zMatch) {
+          tgtVal = parseInt(zMatch[1], 10);
+          lowVal = 0;
+          highVal = 0;
+        } else {
+          tgtVal = 0;
+          const hr1 = parseInt(s.p1, 10) || 0;
+          const hr2 = parseInt(s.p2, 10) || hr1;
+          // Absolute BPM has +100 offset in FIT SDK
+          lowVal = Math.min(hr1, hr2) + 100;
+          highVal = Math.max(hr1, hr2) + 100;
+        }
+      } else if (s.target === 'cadence' && s.p1) {
+        tgtType = 3; // 3 = cadence in FIT Profile
+        tgtVal = 0;
+        const cad1 = parseInt(s.p1, 10) || 0;
+        const cad2 = parseInt(s.p2, 10) || cad1;
+        lowVal = Math.min(cad1, cad2);
+        highVal = Math.max(cad1, cad2);
+      } else if (s.target === 'speed' && s.p1) {
+        tgtType = 0; // 0 = speed in FIT Profile
+        tgtVal = 0;
+        const spd1 = (parseFloat(s.p1) || 0) / 3.6;
+        const spd2 = (parseFloat(s.p2) || 0) / 3.6;
+        lowVal = Math.round(Math.min(spd1, spd2) * 1000);
+        highVal = Math.round(Math.max(spd1, spd2) * 1000);
+      }
+
+      let intensity = 0; // 0 = active
+      if (s.type === 'warmup') intensity = 2;
+      else if (s.type === 'cooldown') intensity = 3;
+      else if (s.type === 'recovery') intensity = 4;
+      else if (s.type === 'interval') intensity = 5;
+      else if (s.type === 'rest') intensity = 1;
+
+      dataWriter.writeUint8(durType);
+      dataWriter.writeUint32(durVal);
+      dataWriter.writeUint8(tgtType);
+      dataWriter.writeUint32(tgtVal);
+      dataWriter.writeUint32(lowVal);
+      dataWriter.writeUint32(highVal);
+      dataWriter.writeUint8(intensity);
+    }
+  });
+
+  const dataBytes = dataWriter.getBytes();
+  const dataSize = dataBytes.length;
+
+  // Build 14-byte Header
+  const header = new Uint8Array(14);
+  const headerView = new DataView(header.buffer);
+  headerView.setUint8(0, 14);
+  headerView.setUint8(1, 0x20); // Protocol 2.0
+  headerView.setUint16(2, 2160, true); // Profile 21.60
+  headerView.setUint32(4, dataSize, true);
+  header[8] = 0x2E; // '.'
+  header[9] = 0x46; // 'F'
+  header[10] = 0x49; // 'I'
+  header[11] = 0x54; // 'T'
+
+  let headerCrc = 0;
+  for (let i = 0; i < 12; i++) {
+    headerCrc = updateFitCrc(headerCrc, header[i]);
+  }
+  headerView.setUint16(12, headerCrc, true);
+
+  let fileCrc = 0;
+  for (let i = 0; i < 14; i++) {
+    fileCrc = updateFitCrc(fileCrc, header[i]);
+  }
+  for (let i = 0; i < dataSize; i++) {
+    fileCrc = updateFitCrc(fileCrc, dataBytes[i]);
+  }
+
+  const finalFile = new Uint8Array(14 + dataSize + 2);
+  finalFile.set(header, 0);
+  finalFile.set(dataBytes, 14);
+  const finalView = new DataView(finalFile.buffer);
+  finalView.setUint16(14 + dataSize, fileCrc, true);
+
+  return finalFile;
+}
+
+function downloadFitWorkout() {
+  const fitBytes = generateGarminFitFile();
+  const name = document.getElementById('workoutName').value.replace(/[^a-z0-9]/gi, '_').toLowerCase() || 'workout';
+  const blob = new Blob([fitBytes], { type: 'application/octet-stream' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${name}.fit`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function generateFitSummaryView() {
+  const workoutName = (document.getElementById('workoutName').value || "Workout").trim();
+  const fitBytes = generateGarminFitFile();
+  
+  let lines = [];
+  lines.push('============================================================');
+  lines.push('💾 GARMIN BINARY WORKOUT (.FIT) ENCODER');
+  lines.push('============================================================');
+  lines.push(`Workout Name : ${workoutName}`);
+  lines.push(`Sport        : ${currentSport.charAt(0).toUpperCase() + currentSport.slice(1)}`);
+  lines.push(`Binary Size  : ${fitBytes.length} bytes (14-byte Header + Definition & Data Records + CRC)`);
+  lines.push(`File Format  : Standard Garmin FIT Protocol 2.0 (File ID 5: Workout)`);
+  lines.push(`Checksum     : 16-bit FIT CRC-16 Validated (0x${new DataView(fitBytes.buffer).getUint16(fitBytes.length - 2, true).toString(16).toUpperCase().padStart(4, '0')})`);
+  lines.push('');
+  lines.push('FIT WORKOUT STEPS & NATIVE TARGETS:');
+  lines.push('------------------------------------------------------------');
+
+  let stepCounter = 1;
+  stepsConfig.forEach((b) => {
+    if (b.type === 'repeat') {
+      const loopStart = stepCounter;
+      b.steps.forEach(sub => {
+        let tgtDesc = 'Open / No Target';
+        if (sub.target === 'pace' && sub.p1) {
+          const spd1 = paceToMps(sub.p1);
+          const spd2 = sub.p2 ? paceToMps(sub.p2) : spd1;
+          tgtDesc = `Speed ${Math.min(spd1, spd2).toFixed(2)} - ${Math.max(spd1, spd2).toFixed(2)} m/s (${sub.p1}${sub.p2 ? ' - ' + sub.p2 : ''}/km Pace)`;
+        } else if (sub.target === 'power') {
+          tgtDesc = `Power ${sub.p1}${sub.p2 ? ' - ' + sub.p2 : ''}w`;
+        } else if (sub.target === 'heart rate') {
+          tgtDesc = `Heart Rate ${sub.p1}${sub.p2 ? ' - ' + sub.p2 : ''}`;
+        }
+        lines.push(`[Step ${stepCounter++}] ${sub.type.toUpperCase()}: ${sub.duration} ${sub.cond}`);
+        lines.push(`         Target: ${tgtDesc}`);
+      });
+      lines.push(`[Step ${stepCounter++}] REPEAT LOOP: Repeat ${b.iterations}x back to Step ${loopStart}`);
+      lines.push(`         FIT Duration Type: repeat_until_steps_cmplt (6)`);
+    } else {
+      let tgtDesc = 'Open / No Target';
+      if (b.target === 'pace' && b.p1) {
+        const spd1 = paceToMps(b.p1);
+        const spd2 = b.p2 ? paceToMps(b.p2) : spd1;
+        tgtDesc = `Speed ${Math.min(spd1, spd2).toFixed(2)} - ${Math.max(spd1, spd2).toFixed(2)} m/s (${b.p1}${b.p2 ? ' - ' + b.p2 : ''}/km Pace)`;
+      } else if (b.target === 'power') {
+        tgtDesc = `Power ${b.p1}${b.p2 ? ' - ' + b.p2 : ''}w`;
+      } else if (b.target === 'heart rate') {
+        tgtDesc = `Heart Rate ${b.p1}${b.p2 ? ' - ' + b.p2 : ''}`;
+      }
+      lines.push(`[Step ${stepCounter++}] ${b.type.toUpperCase()}: ${b.duration} ${b.cond}`);
+      lines.push(`         Target: ${tgtDesc}`);
+    }
+  });
+
+  lines.push('------------------------------------------------------------');
+  lines.push('👉 Click "💾 Download .fit" above to save your binary workout file!');
+  lines.push('   Direct Watch Install:');
+  lines.push('   1. Connect your Garmin watch to your computer via USB.');
+  lines.push('   2. Copy the .fit file into GARMIN/Workouts/ (or GARMIN/NewFiles/).');
+  lines.push('   3. Disconnect watch — workout appears under Training > Workouts!');
+  lines.push('   You can also upload this .fit directly to Intervals.icu or TrainingPeaks.');
+
+  return lines.join('\n');
+}
+
+function switchFormat(formatKey) {
+  currentFormat = formatKey;
+  const tabGarmin = document.getElementById('tabFormatGarmin');
+  const tabIntervals = document.getElementById('tabFormatIntervals');
+  const tabFit = document.getElementById('tabFormatFit');
+  const garminTip = document.getElementById('garminTip');
+  const intervalsTip = document.getElementById('intervalsTip');
+  const fitTip = document.getElementById('fitTip');
+
+  const importGarminBtn = document.getElementById('importGarminBtn');
+  const importIntervalsBtn = document.getElementById('importIntervalsBtn');
+  const downloadFitBtn = document.getElementById('downloadFitBtn');
+  const importFitBtn = document.getElementById('importFitBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const copyWorkoutNameBtn = document.getElementById('copyWorkoutNameBtn');
+
+  [tabGarmin, tabIntervals, tabFit].forEach(t => {
+    if (t) t.className = 'format-tab';
+  });
+  if (garminTip) garminTip.style.display = 'none';
+  if (intervalsTip) intervalsTip.style.display = 'none';
+  if (fitTip) fitTip.style.display = 'none';
+
+  if (formatKey === 'intervals') {
+    tabIntervals.classList.add('active-intervals');
+    if (intervalsTip) intervalsTip.style.display = 'block';
+
+    if (importIntervalsBtn) importIntervalsBtn.style.display = 'inline-flex';
+    if (importGarminBtn) importGarminBtn.style.display = 'none';
+    if (downloadFitBtn) downloadFitBtn.style.display = 'none';
+    if (importFitBtn) importFitBtn.style.display = 'none';
+
+    if (copyBtn) {
+      copyBtn.style.display = 'inline-flex';
+      copyBtn.textContent = 'Copy Intervals.icu Text';
+    }
+    if (downloadBtn) {
+      downloadBtn.style.display = 'inline-flex';
+      downloadBtn.textContent = 'Download .txt';
+    }
+    if (copyWorkoutNameBtn) copyWorkoutNameBtn.style.display = 'inline-flex';
+  } else if (formatKey === 'fit') {
+    tabFit.classList.add('active-fit');
+    if (fitTip) fitTip.style.display = 'block';
+
+    if (downloadFitBtn) downloadFitBtn.style.display = 'inline-flex';
+    if (importFitBtn) importFitBtn.style.display = 'inline-flex';
+    if (importGarminBtn) importGarminBtn.style.display = 'none';
+    if (importIntervalsBtn) importIntervalsBtn.style.display = 'none';
+
+    if (copyBtn) copyBtn.style.display = 'none';
+    if (downloadBtn) downloadBtn.style.display = 'none';
+    if (copyWorkoutNameBtn) copyWorkoutNameBtn.style.display = 'inline-flex';
+  } else {
+    tabGarmin.classList.add('active');
+    if (garminTip) garminTip.style.display = 'block';
+
+    if (importGarminBtn) importGarminBtn.style.display = 'inline-flex';
+    if (importIntervalsBtn) importIntervalsBtn.style.display = 'none';
+    if (downloadFitBtn) downloadFitBtn.style.display = 'none';
+    if (importFitBtn) importFitBtn.style.display = 'none';
+
+    if (copyBtn) {
+      copyBtn.style.display = 'inline-flex';
+      copyBtn.textContent = 'Copy JSON';
+    }
+    if (downloadBtn) {
+      downloadBtn.style.display = 'inline-flex';
+      downloadBtn.textContent = 'Download .json';
+    }
+    if (copyWorkoutNameBtn) copyWorkoutNameBtn.style.display = 'inline-flex';
+  }
+
+  updateOutputView();
+}
+
+function updateOutputView() {
+  const outputEl = document.getElementById('outputJson');
+  const name = (document.getElementById('workoutName').value || "Workout").trim();
+  const nameDisp = document.getElementById('outputWorkoutNameDisplay');
+  if (nameDisp) nameDisp.textContent = name;
+  const modalNameDisp = document.getElementById('modalWorkoutNameDisplay');
+  if (modalNameDisp) modalNameDisp.textContent = name;
+
+  if (currentFormat === 'intervals') {
+    outputEl.textContent = generateIntervalsIcuText();
+  } else if (currentFormat === 'fit') {
+    outputEl.textContent = generateFitSummaryView();
+  } else {
+    outputEl.textContent = generateGarminJson();
+  }
+}
+
+function copyWorkoutName(btn) {
+  const name = (document.getElementById('workoutName').value || "Workout").trim();
+  navigator.clipboard.writeText(name).then(() => {
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = "Copied!";
+      setTimeout(() => btn.textContent = orig, 1500);
+    }
+  }).catch(err => console.error("Failed to copy workout name:", err));
+}
+
+document.getElementById('workoutName').addEventListener('input', (e) => {
+  const val = e.target.value.trim() || 'Workout';
+  const nameDisp = document.getElementById('outputWorkoutNameDisplay');
+  if (nameDisp) nameDisp.textContent = val;
+  const modalNameDisp = document.getElementById('modalWorkoutNameDisplay');
+  if (modalNameDisp) modalNameDisp.textContent = val;
+});
+
 document.getElementById('generateBtn').addEventListener('click', () => {
-  const jsonString = generateGarminJson();
-  document.getElementById('outputJson').textContent = jsonString;
+  updateOutputView();
 });
 
 document.getElementById('copyBtn').addEventListener('click', () => {
   const text = document.getElementById('outputJson').textContent;
   navigator.clipboard.writeText(text);
   const btn = document.getElementById('copyBtn');
+  const originalText = btn.textContent;
   btn.textContent = "Copied!";
-  setTimeout(() => btn.textContent = "Copy JSON", 1500);
+  setTimeout(() => btn.textContent = originalText, 1500);
 });
 
 document.getElementById('downloadBtn').addEventListener('click', () => {
+  if (currentFormat === 'fit') {
+    downloadFitWorkout();
+    return;
+  }
+
   const text = document.getElementById('outputJson').textContent;
-  const name = document.getElementById('workoutName').value.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-  const blob = new Blob([text], { type: "application/json;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `${name || 'workout'}.json`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+  const name = document.getElementById('workoutName').value.replace(/[^a-z0-9]/gi, '_').toLowerCase() || 'workout';
+  
+  if (currentFormat === 'intervals') {
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${name}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  } else {
+    const blob = new Blob([text], { type: "application/json;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${name}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
 });
 
 function handleImportToGarmin() {
+  switchFormat('garmin');
   const jsonString = generateGarminJson();
   document.getElementById('outputJson').textContent = jsonString;
 
@@ -2131,18 +2504,927 @@ function handleImportToGarmin() {
   if (modal) modal.style.display = 'flex';
 }
 
+function handleImportToIntervals() {
+  const name = (document.getElementById('workoutName').value || "Workout").trim();
+  const modalNameDisp = document.getElementById('modalWorkoutNameDisplay');
+  if (modalNameDisp) modalNameDisp.textContent = name;
+  const nameDisp = document.getElementById('outputWorkoutNameDisplay');
+  if (nameDisp) nameDisp.textContent = name;
+
+  const text = generateIntervalsIcuText();
+  switchFormat('intervals');
+  document.getElementById('outputJson').textContent = text;
+
+  navigator.clipboard.writeText(text).catch(err => console.error("Failed to copy to clipboard:", err));
+
+  window.open('https://intervals.icu', '_blank');
+
+  const modal = document.getElementById('intervalsGuideModal');
+  if (modal) modal.style.display = 'flex';
+}
+
 function closeImportModal(e) {
   if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('modal-close-btn')) return;
   const modal = document.getElementById('importGuideModal');
   if (modal) modal.style.display = 'none';
 }
 
+function closeIntervalsModal(e) {
+  if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('modal-close-btn')) return;
+  const modal = document.getElementById('intervalsGuideModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function mpsToPace(mps) {
+  if (!mps || mps <= 0) return '';
+  const totalSec = Math.round(1000 / mps);
+  const mins = Math.floor(totalSec / 60);
+  const secs = totalSec % 60;
+  const padSec = secs < 10 ? '0' + secs : secs;
+  return `${mins}:${padSec}`;
+}
+
+function parseGarminExecutableStep(s) {
+  let type = 'interval';
+  const typeKey = (s.stepType && s.stepType.stepTypeKey) || s.stepTypeKey || s.stepType || '';
+  if (typeof typeKey === 'string') {
+    const tk = typeKey.toLowerCase();
+    if (tk.includes('warmup')) type = 'warmup';
+    else if (tk.includes('cooldown')) type = 'cooldown';
+    else if (tk.includes('recovery') || tk.includes('rest')) type = 'recovery';
+    else if (tk.includes('interval')) type = 'interval';
+  }
+
+  let cond = 'time (minutes)';
+  let duration = 5;
+  const condKey = (s.endCondition && s.endCondition.conditionTypeKey) || s.conditionTypeKey || s.conditionType || '';
+  const unitKey = (s.preferredEndConditionUnit && s.preferredEndConditionUnit.unitKey) || s.unitKey || '';
+  const endVal = s.endConditionValue != null ? parseFloat(s.endConditionValue) : null;
+
+  if (typeof condKey === 'string' && condKey.includes('lap')) {
+    cond = 'lap';
+    duration = null;
+  } else if (typeof condKey === 'string' && condKey.includes('distance')) {
+    if (unitKey === 'kilometer') {
+      cond = 'distance (kilometers)';
+      duration = endVal ? parseFloat((endVal / 1000).toFixed(2)) : 1;
+    } else if (unitKey === 'mile') {
+      cond = 'distance (miles)';
+      duration = endVal ? parseFloat((endVal / 1609.344).toFixed(2)) : 1;
+    } else {
+      cond = 'distance';
+      duration = endVal || 400;
+    }
+  } else {
+    if (endVal != null) {
+      if (endVal % 60 === 0 && endVal >= 60) {
+        cond = 'time (minutes)';
+        duration = endVal / 60;
+      } else if (endVal > 60) {
+        cond = 'time (minutes)';
+        duration = parseFloat((endVal / 60).toFixed(2));
+      } else {
+        cond = 'time';
+        duration = endVal;
+      }
+    }
+  }
+
+  let target = 'no target';
+  let p1 = '';
+  let p2 = '';
+  const targetKey = (s.targetType && s.targetType.workoutTargetTypeKey) || s.workoutTargetTypeKey || s.targetType || '';
+  const tkStr = typeof targetKey === 'string' ? targetKey.toLowerCase() : '';
+
+  if (tkStr.includes('pace')) {
+    target = 'pace';
+    if (s.targetValueOne && s.targetValueTwo) {
+      const spd1 = parseFloat(s.targetValueOne);
+      const spd2 = parseFloat(s.targetValueTwo);
+      p1 = mpsToPace(Math.max(spd1, spd2));
+      p2 = mpsToPace(Math.min(spd1, spd2));
+    } else {
+      const p = mpsToPace(s.targetValueOne || s.targetValueTwo);
+      p1 = p;
+      p2 = p;
+    }
+  } else if (tkStr.includes('heart') || tkStr.includes('hr')) {
+    target = 'heart rate';
+    if (s.zoneNumber != null) {
+      p1 = s.zoneNumber.toString();
+    } else {
+      p1 = s.targetValueOne ? Math.round(s.targetValueOne).toString() : '';
+      p2 = s.targetValueTwo ? Math.round(s.targetValueTwo).toString() : '';
+    }
+  } else if (tkStr.includes('power')) {
+    target = 'power';
+    if (s.zoneNumber != null) {
+      p1 = s.zoneNumber.toString();
+    } else {
+      p1 = s.targetValueOne ? Math.round(s.targetValueOne).toString() : '';
+      p2 = s.targetValueTwo ? Math.round(s.targetValueTwo).toString() : '';
+    }
+  } else if (tkStr.includes('cadence')) {
+    target = 'cadence';
+    p1 = s.targetValueOne ? Math.round(s.targetValueOne).toString() : '';
+    p2 = s.targetValueTwo ? Math.round(s.targetValueTwo).toString() : '';
+  } else if (tkStr.includes('speed')) {
+    target = 'speed';
+    p1 = s.targetValueOne ? (s.targetValueOne * 3.6).toFixed(1) : '';
+    p2 = s.targetValueTwo ? (s.targetValueTwo * 3.6).toFixed(1) : '';
+  } else if (tkStr.includes('swim')) {
+    target = 'swim instruction';
+    p1 = s.description || s.exerciseName || '';
+  }
+
+  return { type, cond, duration, target, p1, p2, collapsed: false };
+}
+
+function parseGarminStep(s) {
+  const isRepeat = (s.type === 'RepeatGroupDTO') || (s.numberOfIterations && s.workoutSteps) || (s.stepType && (s.stepType.stepTypeKey === 'repeat' || s.stepType === 'repeat'));
+  if (isRepeat) {
+    const iters = s.numberOfIterations || s.endConditionValue || 1;
+    const rawSubSteps = s.workoutSteps || [];
+    return {
+      type: 'repeat',
+      iterations: parseInt(iters) || 1,
+      collapsed: false,
+      steps: rawSubSteps.map(sub => parseGarminExecutableStep(sub))
+    };
+  } else {
+    return parseGarminExecutableStep(s);
+  }
+}
+
+function importWorkoutFromJson(jsonStr) {
+  let data;
+  try {
+    data = typeof jsonStr === 'string' ? JSON.parse(jsonStr) : jsonStr;
+  } catch (err) {
+    alert("Invalid JSON format! Please check the file or pasted content.");
+    return false;
+  }
+
+  if (Array.isArray(data)) {
+    if (data.length === 0) {
+      alert("JSON array is empty!");
+      return false;
+    }
+    data = data[0];
+  }
+
+  // 1. Detect Sport
+  let sport = 'running';
+  const sportKey = (data.sportType && data.sportType.sportTypeKey) || data.sportTypeKey || data.sport || '';
+  if (typeof sportKey === 'string') {
+    const sk = sportKey.toLowerCase();
+    if (sk.includes('cycling') || sk.includes('bike')) sport = 'cycling';
+    else if (sk.includes('swimming') || sk.includes('swim')) sport = 'swimming';
+    else if (sk.includes('running') || sk.includes('run')) sport = 'running';
+  } else if (data.sportType && data.sportType.sportTypeId) {
+    if (data.sportType.sportTypeId === 2) sport = 'cycling';
+    else if (data.sportType.sportTypeId === 4 || data.sportType.sportTypeId === 5) sport = 'swimming';
+  }
+
+  if (sport !== currentSport) {
+    const tabBtn = document.querySelector(`.sport-tab[onclick*="${sport}"]`);
+    switchSport(sport, tabBtn);
+  }
+
+  // 2. Set Name & Description
+  if (data.workoutName) {
+    document.getElementById('workoutName').value = data.workoutName;
+  }
+  if (data.description != null) {
+    document.getElementById('workoutDesc').value = data.description;
+  }
+
+  // 3. Extract Steps
+  let rawSteps = [];
+  if (data.workoutSegments && Array.isArray(data.workoutSegments) && data.workoutSegments.length > 0) {
+    data.workoutSegments.forEach(seg => {
+      if (seg.workoutSteps && Array.isArray(seg.workoutSteps)) {
+        rawSteps.push(...seg.workoutSteps);
+      }
+    });
+  } else if (data.workoutSteps && Array.isArray(data.workoutSteps)) {
+    rawSteps = data.workoutSteps;
+  }
+
+  if (rawSteps.length === 0) {
+    alert("No workout steps found in the JSON payload.");
+    return false;
+  }
+
+  stepsConfig = rawSteps.map(s => parseGarminStep(s));
+
+  renderSteps();
+  updateAutoDescription();
+  saveToLocalStorage();
+  updateOutputView();
+
+  return true;
+}
+
+let selectedImportFormat = 'auto'; // 'auto' | 'fit' | 'garmin' | 'intervals'
+
+function switchImportFormat(formatKey) {
+  selectedImportFormat = formatKey;
+  const tabAuto = document.getElementById('tabImportAuto');
+  const tabFit = document.getElementById('tabImportFit');
+  const tabGarmin = document.getElementById('tabImportGarmin');
+  const tabIntervals = document.getElementById('tabImportIntervals');
+  const textarea = document.getElementById('importJsonTextarea');
+
+  [tabAuto, tabFit, tabGarmin, tabIntervals].forEach(t => {
+    if (t) t.classList.remove('active');
+  });
+
+  if (formatKey === 'fit' && tabFit) {
+    tabFit.classList.add('active');
+    if (textarea) textarea.placeholder = "Click the file box above to choose or drag & drop a Garmin .fit binary workout file...";
+  } else if (formatKey === 'garmin' && tabGarmin) {
+    tabGarmin.classList.add('active');
+    if (textarea) textarea.placeholder = "Paste your Garmin workout JSON payload here...";
+  } else if (formatKey === 'intervals' && tabIntervals) {
+    tabIntervals.classList.add('active');
+    if (textarea) textarea.placeholder = "Paste your Intervals.icu workout text here...\n(e.g.\n# Tempo Run\nWarmup\n- 10m 5:30 Pace\n\n4x\n- 4m 4:00 Pace\n- 2m\n\nCooldown\n- 5m)";
+  } else if (tabAuto) {
+    tabAuto.classList.add('active');
+    if (textarea) textarea.placeholder = "Drop a .fit, .json, or .txt file, or paste Garmin JSON / Intervals.icu workout text here (format will be auto-detected)...";
+  }
+}
+
+function parseSingleIntervalsStepText(line, activeSectionType, isInsideRepeat) {
+  if (!line) return null;
+  const lower = line.toLowerCase();
+
+  // 1. Condition & Duration
+  let cond = 'time (minutes)';
+  let duration = 5;
+
+  if (lower.includes('press lap') || lower.includes('lap button')) {
+    cond = 'lap';
+    duration = null;
+  } else {
+    const kmMatch = line.match(/(\d+(?:\.\d+)?)\s*km\b/i);
+    const miMatch = line.match(/(\d+(?:\.\d+)?)\s*mi\b/i);
+    const mtrMatch = line.match(/(\d+(?:\.\d+)?)\s*(?:mtr|meters?)\b/i);
+
+    if (kmMatch) {
+      cond = 'distance (kilometers)';
+      duration = parseFloat(kmMatch[1]);
+    } else if (miMatch) {
+      cond = 'distance (miles)';
+      duration = parseFloat(miMatch[1]);
+    } else if (mtrMatch) {
+      cond = 'distance';
+      duration = parseFloat(mtrMatch[1]);
+    } else {
+      const hmMatch = line.match(/(\d+)\s*h(?:our)?\s*(\d+)?\s*m/i);
+      const hMatch = line.match(/(\d+(?:\.\d+)?)\s*h(?:our)?\b/i);
+      const msMatch = line.match(/(\d+)\s*m\s*(\d+)\s*s/i);
+      const mMatch = line.match(/(\d+(?:\.\d+)?)\s*m(?:in)?\b/i);
+      const sMatch = line.match(/(\d+)\s*s(?:ec)?\b/i);
+
+      if (hmMatch) {
+        cond = 'time (minutes)';
+        duration = parseInt(hmMatch[1], 10) * 60 + (parseInt(hmMatch[2], 10) || 0);
+      } else if (hMatch) {
+        cond = 'time (minutes)';
+        duration = parseFloat(hMatch[1]) * 60;
+      } else if (msMatch) {
+        cond = 'time (minutes)';
+        duration = parseFloat((parseInt(msMatch[1], 10) + parseInt(msMatch[2], 10) / 60).toFixed(2));
+      } else if (mMatch) {
+        cond = 'time (minutes)';
+        duration = parseFloat(mMatch[1]);
+      } else if (sMatch) {
+        cond = 'time';
+        duration = parseInt(sMatch[1], 10);
+      }
+    }
+  }
+
+  // 2. Targets
+  let target = 'no target';
+  let p1 = '';
+  let p2 = '';
+
+  const paceMatch = line.match(/(\d+:\d{2})\s*(?:-\s*(\d+:\d{2}))?\s*(?:\/km|\/mi)?\s*pace\b/i);
+  const hrZoneMatch = line.match(/z([1-7])\s*(?:-\s*z?([1-7]))?\s*hr\b/i);
+  const hrPctMatch = line.match(/(\d+)(?:\s*-\s*(\d+))?%\s*hr\b/i);
+  const powerWattsMatch = line.match(/(\d+)\s*(?:-\s*(\d+))?\s*w(?:atts?)?\b/i);
+  const powerPctMatch = line.match(/(\d+)\s*(?:-\s*(\d+))?%\s*(?:ftp)?\b/i);
+  const cadMatch = line.match(/(\d+)\s*(spm|rpm)\b/i);
+  const speedMatch = line.match(/(\d+(?:\.\d+)?)\s*(?:-\s*(\d+(?:\.\d+)?))?\s*km\/h\b/i);
+
+  if (paceMatch) {
+    target = 'pace';
+    p1 = paceMatch[1];
+    p2 = paceMatch[2] || paceMatch[1];
+    const s1 = paceToMps(p1);
+    const s2 = paceToMps(p2);
+    if (s1 && s2 && s1 < s2) {
+      const tmp = p1; p1 = p2; p2 = tmp;
+    }
+  } else if (hrZoneMatch) {
+    target = 'heart rate';
+    p1 = hrZoneMatch[1];
+    p2 = hrZoneMatch[2] || hrZoneMatch[1];
+  } else if (hrPctMatch) {
+    target = 'heart rate';
+    p1 = hrPctMatch[1] + '%';
+    p2 = hrPctMatch[2] ? hrPctMatch[2] + '%' : p1;
+  } else if (powerWattsMatch) {
+    target = 'power';
+    p1 = powerWattsMatch[1];
+    p2 = powerWattsMatch[2] || p1;
+  } else if (powerPctMatch && !lower.includes('hr')) {
+    target = 'power';
+    p1 = powerPctMatch[1] + '%';
+    p2 = powerPctMatch[2] ? powerPctMatch[2] + '%' : p1;
+  } else if (cadMatch) {
+    target = 'cadence';
+    p1 = cadMatch[1];
+    p2 = '';
+  } else if (speedMatch) {
+    target = 'speed';
+    p1 = speedMatch[1];
+    p2 = speedMatch[2] || p1;
+  }
+
+  // 3. Step Type
+  let type = 'interval';
+  if (lower.includes('warmup') || lower.includes('warm up')) {
+    type = 'warmup';
+  } else if (lower.includes('cooldown') || lower.includes('cool down')) {
+    type = 'cooldown';
+  } else if (lower.includes('recovery') || lower.includes('rest') || lower.includes('easy')) {
+    type = 'recovery';
+  } else if (activeSectionType) {
+    type = activeSectionType;
+  } else if (isInsideRepeat) {
+    if (target === 'no target' || lower.includes('recovery') || lower.includes('rest')) {
+      type = 'recovery';
+    } else {
+      type = 'interval';
+    }
+  }
+
+  return {
+    type,
+    cond,
+    duration,
+    target,
+    p1,
+    p2,
+    collapsed: false
+  };
+}
+
+function parseIntervalsIcuWorkoutText(text) {
+  if (!text || typeof text !== 'string') return null;
+
+  const rawLines = text.split(/\r?\n/).map(l => l.trim());
+  let workoutName = '';
+  let workoutDesc = [];
+  let sport = currentSport || 'running';
+
+  // Sport detection
+  const lowerAll = text.toLowerCase();
+  if (lowerAll.includes('/km pace') || lowerAll.includes('/mi pace') || lowerAll.includes('spm') || lowerAll.includes('run')) {
+    sport = 'running';
+  } else if (lowerAll.includes('rpm') || lowerAll.includes('ftp') || lowerAll.includes('bike') || lowerAll.includes('cycling') || lowerAll.includes('sweet spot')) {
+    sport = 'cycling';
+  } else if (lowerAll.includes('swim') || lowerAll.includes('stroke') || lowerAll.includes('/100m')) {
+    sport = 'swimming';
+  }
+
+  let steps = [];
+  let currentRepeat = null;
+  let activeSectionType = null;
+  let foundFirstStep = false;
+
+  for (let i = 0; i < rawLines.length; i++) {
+    const line = rawLines[i];
+    if (!line) {
+      if (currentRepeat && currentRepeat.steps.length > 0) {
+        steps.push(currentRepeat);
+        currentRepeat = null;
+      }
+      activeSectionType = null;
+      continue;
+    }
+
+    // 1. Markdown / Title headers: # Workout Name or Title: ...
+    const titleMatch = line.match(/^#{1,6}\s*(.+)$/i) || line.match(/^(?:workout\s*name|workout|title|name):\s*(.+)$/i);
+    if (titleMatch && !foundFirstStep) {
+      workoutName = titleMatch[1].trim();
+      continue;
+    }
+
+    // 2. Repeat headers: e.g. "4x", "4x - ", "Repeat 4x"
+    const repeatMatch = line.match(/^(?:repeat\s*)?(\d+)\s*x(?:\s*-)?$/i);
+    if (repeatMatch) {
+      if (currentRepeat && currentRepeat.steps.length > 0) {
+        steps.push(currentRepeat);
+      }
+      currentRepeat = {
+        type: 'repeat',
+        iterations: parseInt(repeatMatch[1], 10) || 1,
+        collapsed: false,
+        steps: []
+      };
+      foundFirstStep = true;
+      activeSectionType = null;
+      continue;
+    }
+
+    // 3. Standalone Section Headers
+    if (/^warmup$/i.test(line) || /^warm\s*up$/i.test(line)) {
+      if (currentRepeat && currentRepeat.steps.length > 0) {
+        steps.push(currentRepeat);
+        currentRepeat = null;
+      }
+      activeSectionType = 'warmup';
+      continue;
+    } else if (/^cooldown$/i.test(line) || /^cool\s*down$/i.test(line)) {
+      if (currentRepeat && currentRepeat.steps.length > 0) {
+        steps.push(currentRepeat);
+        currentRepeat = null;
+      }
+      activeSectionType = 'cooldown';
+      continue;
+    } else if (/^recovery$/i.test(line) || /^rest$/i.test(line)) {
+      activeSectionType = 'recovery';
+      continue;
+    } else if (/^(?:main\s*set|set|intervals?)$/i.test(line)) {
+      if (currentRepeat && currentRepeat.steps.length > 0) {
+        steps.push(currentRepeat);
+        currentRepeat = null;
+      }
+      activeSectionType = 'interval';
+      continue;
+    }
+
+    // 4. Step line detection
+    const isStepLine = line.startsWith('-') || /^\d+(?:\.\d+)?(?:m|s|h|km|mi|mtr)\b/i.test(line) || line.toLowerCase().includes('press lap');
+
+    if (isStepLine) {
+      foundFirstStep = true;
+      const cleanLine = line.replace(/^-\s*/, '').trim();
+
+      const parsedStep = parseSingleIntervalsStepText(cleanLine, activeSectionType, currentRepeat != null);
+      if (parsedStep) {
+        if (currentRepeat) {
+          currentRepeat.steps.push(parsedStep);
+        } else {
+          steps.push(parsedStep);
+        }
+      }
+      continue;
+    }
+
+    // 5. Title / Description before steps
+    if (!foundFirstStep) {
+      if (!workoutName) {
+        workoutName = line;
+      } else {
+        workoutDesc.push(line);
+      }
+    }
+  }
+
+  if (currentRepeat && currentRepeat.steps.length > 0) {
+    steps.push(currentRepeat);
+  }
+
+  if (steps.length === 0) return null;
+
+  return {
+    workoutName: workoutName || "Imported Workout",
+    workoutDesc: workoutDesc.join('\n').trim(),
+    sport,
+    steps
+  };
+}
+
+function formatPaceFromMps(mps) {
+  if (!mps || !isFinite(mps) || mps <= 0) return '';
+  const totalMin = 1000 / (mps * 60);
+  const mins = Math.floor(totalMin);
+  const secs = Math.round((totalMin - mins) * 60);
+  if (secs === 60) return (mins + 1) + ':00';
+  return mins + ':' + (secs < 10 ? '0' : '') + secs;
+}
+
+function parseGarminFitWorkout(buffer) {
+  if (!buffer) return null;
+  const bytes = buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer);
+  if (bytes.length < 14) return null;
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+
+  const headerSize = view.getUint8(0);
+  if (headerSize < 12 || headerSize > bytes.length) return null;
+  const dataSize = view.getUint32(4, true);
+  const tag = String.fromCharCode(view.getUint8(8), view.getUint8(9), view.getUint8(10), view.getUint8(11));
+  if (tag !== '.FIT') return null;
+
+  let offset = headerSize;
+  const endOffset = Math.min(bytes.length, headerSize + dataSize);
+  const definitions = {};
+
+  let workoutName = 'Imported Workout';
+  let sport = 'running';
+  let rawSteps = [];
+
+  while (offset < endOffset) {
+    const rh = view.getUint8(offset++);
+    // Normal Header check (bit 7 must be 0)
+    if ((rh & 0x80) !== 0) {
+      continue;
+    }
+
+    const isDefinition = (rh & 0x40) !== 0;
+    const hasDevData = (rh & 0x20) !== 0;
+    const localId = rh & 0x0F;
+
+    if (isDefinition) {
+      offset++; // reserved
+      const arch = view.getUint8(offset++); // 0 = LE, 1 = BE
+      const isLE = (arch === 0);
+      const globalMsgNum = isLE ? view.getUint16(offset, true) : view.getUint16(offset, false);
+      offset += 2;
+      const numFields = view.getUint8(offset++);
+      const fields = [];
+      for (let f = 0; f < numFields; f++) {
+        const fNum = view.getUint8(offset++);
+        const fSize = view.getUint8(offset++);
+        const fType = view.getUint8(offset++);
+        fields.push({ fNum, fSize, fType });
+      }
+      let devFields = [];
+      if (hasDevData) {
+        const numDev = view.getUint8(offset++);
+        for (let d = 0; d < numDev; d++) {
+          const dNum = view.getUint8(offset++);
+          const dSize = view.getUint8(offset++);
+          const dIdx = view.getUint8(offset++);
+          devFields.push({ dNum, dSize, dIdx });
+        }
+      }
+      definitions[localId] = { isLE, globalMsgNum, fields, devFields };
+    } else {
+      const def = definitions[localId];
+      if (!def) break;
+      const isLE = def.isLE;
+      const values = {};
+
+      def.fields.forEach(f => {
+        let val;
+        if (f.fSize === 1) {
+          val = view.getUint8(offset++);
+        } else if (f.fSize === 2) {
+          val = isLE ? view.getUint16(offset, true) : view.getUint16(offset, false);
+          offset += 2;
+        } else if (f.fSize === 4) {
+          val = isLE ? view.getUint32(offset, true) : view.getUint32(offset, false);
+          offset += 4;
+        } else {
+          const sub = bytes.subarray(offset, offset + f.fSize);
+          offset += f.fSize;
+          const nullPos = sub.indexOf(0);
+          val = new TextDecoder().decode(sub.subarray(0, nullPos >= 0 ? nullPos : sub.length)).trim();
+        }
+        values[f.fNum] = val;
+      });
+
+      if (def.devFields && def.devFields.length > 0) {
+        def.devFields.forEach(df => { offset += df.size; });
+      }
+
+      if (def.globalMsgNum === 26) {
+        if (values[8]) workoutName = values[8];
+        const sId = values[4];
+        if (sId === 1) sport = 'running';
+        else if (sId === 2) sport = 'cycling';
+        else if (sId === 5) sport = 'swimming';
+      } else if (def.globalMsgNum === 27) {
+        rawSteps.push(values);
+      }
+    }
+  }
+
+  if (rawSteps.length === 0) return null;
+
+  rawSteps.sort((a, b) => (a[254] || 0) - (b[254] || 0));
+
+  function convertStep(r) {
+    const durType = r[1] !== undefined ? r[1] : 0;
+    const durVal = r[2] || 0;
+    const tgtType = r[3] !== undefined ? r[3] : 2;
+    const tgtVal = r[4] || 0;
+    const lowVal = r[5] || 0;
+    const highVal = r[6] || 0;
+    const intensity = r[7] !== undefined ? r[7] : 0;
+    const name = (r[0] || '').toLowerCase();
+
+    let type = 'interval';
+    if (intensity === 2 || name.includes('warm')) type = 'warmup';
+    else if (intensity === 3 || name.includes('cool')) type = 'cooldown';
+    else if (intensity === 4 || intensity === 1 || name.includes('recov') || name.includes('rest')) type = 'recovery';
+    else if (intensity === 5 || name.includes('interv')) type = 'interval';
+
+    let cond = 'time (minutes)';
+    let duration = 0;
+    if (durType === 5) {
+      cond = 'lap';
+      duration = 0;
+    } else if (durType === 0) {
+      const totalSec = Math.round(durVal / 1000);
+      if (totalSec >= 60 && totalSec % 60 === 0) {
+        cond = 'time (minutes)';
+        duration = totalSec / 60;
+      } else {
+        cond = 'time';
+        duration = totalSec;
+      }
+    } else if (durType === 1) {
+      const meters = Math.round(durVal / 100);
+      if (meters >= 1000 && meters % 100 === 0) {
+        cond = 'distance (kilometers)';
+        duration = +(meters / 1000).toFixed(2);
+      } else {
+        cond = 'distance';
+        duration = meters;
+      }
+    }
+
+    let target = 'no target';
+    let p1 = '';
+    let p2 = '';
+
+    if (tgtType === 0) {
+      if (sport === 'running') {
+        target = 'pace';
+        const mpsLow = lowVal / 1000;
+        const mpsHigh = highVal / 1000;
+        if (mpsLow > 0 && mpsHigh > 0) {
+          p1 = formatPaceFromMps(Math.max(mpsLow, mpsHigh));
+          p2 = formatPaceFromMps(Math.min(mpsLow, mpsHigh));
+        }
+      } else {
+        target = 'speed';
+        p1 = (lowVal / 1000 * 3.6).toFixed(1);
+        p2 = (highVal / 1000 * 3.6).toFixed(1);
+      }
+    } else if (tgtType === 1) {
+      target = 'heart rate';
+      if (tgtVal > 0) {
+        p1 = 'Z' + tgtVal;
+      } else {
+        let hr1 = lowVal > 100 ? lowVal - 100 : lowVal;
+        let hr2 = highVal > 100 ? highVal - 100 : highVal;
+        p1 = hr1 ? hr1.toString() : '';
+        p2 = hr2 ? hr2.toString() : '';
+      }
+    } else if (tgtType === 4) {
+      target = 'power';
+      let w1 = lowVal >= 1000 ? lowVal - 1000 : lowVal;
+      let w2 = highVal >= 1000 ? highVal - 1000 : highVal;
+      p1 = w1 ? w1.toString() : '';
+      p2 = w2 ? w2.toString() : '';
+    } else if (tgtType === 3) {
+      target = 'cadence';
+      p1 = lowVal ? lowVal.toString() : '';
+      p2 = highVal ? highVal.toString() : '';
+    }
+
+    return { type, cond, duration, target, p1, p2, collapsed: false };
+  }
+
+  const steps = [];
+  let i = 0;
+  while (i < rawSteps.length) {
+    const cur = rawSteps[i];
+    if (cur[1] === 6) { i++; continue; }
+
+    const stepIdx = cur[254] !== undefined ? cur[254] : i;
+    let repeatStep = null;
+    let repeatStepPos = -1;
+    for (let j = i + 1; j < rawSteps.length; j++) {
+      if (rawSteps[j][1] === 6 && rawSteps[j][2] === stepIdx) {
+        repeatStep = rawSteps[j];
+        repeatStepPos = j;
+        break;
+      }
+    }
+
+    if (repeatStep && repeatStepPos > i) {
+      const subSteps = [];
+      for (let k = i; k < repeatStepPos; k++) {
+        subSteps.push(convertStep(rawSteps[k]));
+      }
+      steps.push({
+        type: 'repeat',
+        iterations: repeatStep[4] || 1,
+        collapsed: false,
+        steps: subSteps
+      });
+      i = repeatStepPos + 1;
+    } else {
+      steps.push(convertStep(cur));
+      i++;
+    }
+  }
+
+  return { workoutName, sport, steps };
+}
+
+function importWorkoutFromFit(buffer) {
+  const result = parseGarminFitWorkout(buffer);
+  if (!result || !result.steps || result.steps.length === 0) {
+    alert("Could not find valid workout steps in this .fit file.\nPlease verify it is a valid Garmin workout file.");
+    return false;
+  }
+  return loadStandardWorkoutData(result);
+}
+
+function loadStandardWorkoutData(data) {
+  if (!data || !data.steps || data.steps.length === 0) {
+    alert("No valid workout steps found.");
+    return false;
+  }
+
+  if (data.sport && data.sport !== currentSport) {
+    const tabBtn = document.querySelector(`.sport-tab[onclick*="${data.sport}"]`);
+    switchSport(data.sport, tabBtn);
+  }
+
+  if (data.workoutName) {
+    document.getElementById('workoutName').value = data.workoutName;
+  }
+  if (data.workoutDesc) {
+    document.getElementById('workoutDesc').value = data.workoutDesc;
+  }
+
+  stepsConfig = data.steps;
+
+  renderSteps();
+  if (!data.workoutDesc) {
+    updateAutoDescription();
+  }
+  saveToLocalStorage();
+  updateOutputView();
+
+  return true;
+}
+
+function loadIntervalsIcuWorkout(data) {
+  return loadStandardWorkoutData(data);
+}
+
+function importWorkoutAny(content) {
+  if (!content) return false;
+
+  if (content instanceof ArrayBuffer || ArrayBuffer.isView(content)) {
+    return importWorkoutFromFit(content);
+  }
+
+  content = content.toString().trim();
+  if (!content) return false;
+
+  const isLikelyJson = content.startsWith('{') || content.startsWith('[');
+
+  if (selectedImportFormat === 'garmin' || (selectedImportFormat === 'auto' && isLikelyJson)) {
+    try {
+      const parsed = JSON.parse(content);
+      return importWorkoutFromJson(parsed);
+    } catch (err) {
+      if (selectedImportFormat === 'garmin') {
+        alert("Invalid JSON format! Please check the content.");
+        return false;
+      }
+    }
+  }
+
+  // Try parsing as Intervals.icu text
+  const intervalsResult = parseIntervalsIcuWorkoutText(content);
+  if (intervalsResult) {
+    return loadStandardWorkoutData(intervalsResult);
+  }
+
+  // Fallback to JSON if auto
+  try {
+    const parsed = JSON.parse(content);
+    return importWorkoutFromJson(parsed);
+  } catch (e) {
+    alert("Could not recognize this workout format.\nPlease paste valid Garmin JSON or Intervals.icu workout text, or upload a .fit binary file.");
+    return false;
+  }
+}
+
+function openImportModalJson(formatKey = 'auto') {
+  const modal = document.getElementById('importWorkoutJsonModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    document.getElementById('importJsonTextarea').value = '';
+    switchImportFormat(formatKey);
+  }
+}
+
+function closeImportWorkoutModal(e) {
+  if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('modal-close-btn')) return;
+  const modal = document.getElementById('importWorkoutJsonModal');
+  if (modal) modal.style.display = 'none';
+}
+
+function readWorkoutFile(file) {
+  if (!file) return;
+  const fileName = (file.name || '').toLowerCase();
+  if (fileName.endsWith('.fit') || selectedImportFormat === 'fit') {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const buffer = e.target.result;
+      if (importWorkoutFromFit(buffer)) {
+        closeImportWorkoutModal();
+      }
+    };
+    reader.readAsArrayBuffer(file);
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const content = e.target.result;
+    if (importWorkoutAny(content)) {
+      closeImportWorkoutModal();
+    }
+  };
+  reader.readAsText(file);
+}
+
+function handleWorkoutFileSelect(event) {
+  const file = event.target.files[0];
+  if (file) {
+    readWorkoutFile(file);
+    event.target.value = '';
+  }
+}
+
+function handlePastedWorkoutImport() {
+  const textarea = document.getElementById('importJsonTextarea');
+  const val = textarea.value.trim();
+  if (!val) {
+    alert("Please paste a Garmin JSON payload or Intervals.icu workout text, or choose a .fit file above.");
+    return;
+  }
+  if (importWorkoutAny(val)) {
+    textarea.value = '';
+    closeImportWorkoutModal();
+  }
+}
+
+function setupJsonDropZone() {
+  const dropZone = document.getElementById('jsonDropZone');
+  if (!dropZone) return;
+
+  ['dragenter', 'dragover'].forEach(name => {
+    dropZone.addEventListener(name, (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(name => {
+    dropZone.addEventListener(name, (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+    });
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      readWorkoutFile(file);
+    }
+  });
+}
+
 document.getElementById('importGarminBtn').addEventListener('click', handleImportToGarmin);
+document.getElementById('importIntervalsBtn').addEventListener('click', handleImportToIntervals);
+
+setupJsonDropZone();
 
 if (!loadFromLocalStorage()) {
   renderPresetsBar();
   renderSteps();
 }
+
+switchFormat('garmin');
 </script>
 </body>
 </html>
